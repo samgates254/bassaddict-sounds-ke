@@ -1,108 +1,100 @@
-# Bassaddict Sounds KE — Backend
-
-**PHASE 0 — ARCHITECTURE & SCAFFOLDING**
+# Bassaddict Sounds KE
 
 Premium car audio systems and professional installations.
 
-**Brand:** BASSADDICT SOUNDS KE  
 **Tagline:** ADDICTED TO BASS. DRIVEN BY SOUND.
 
-This repository is the Django backend for the Bassaddict Sounds KE
-website. It is a catalog, enquiry, and account API. It is not a large
-e-commerce platform. Version one has no online payment.
+**Shop:** Ground Floor, New Loitoktok House, Luthuli Avenue, Nairobi, Kenya  
+**Phone / WhatsApp:** 0794069405 (`https://wa.me/254794069405`)  
+**Email:** bassaddictsounds@gmail.com
 
-## Current phase
+There is no online payment, cart, or checkout. A customer looks at a product, sees the public price, and sends an enquiry. The owner answers from Django Admin or WhatsApp.
 
-Phase 0 establishes project layout, settings, documentation, and empty
-domain apps. It does **not** include models, serializers, views, JWT
-login, pricing logic, or API endpoints.
+```
+bassaddict-sounds-ke/
+├── backend/     Django API and Django Admin
+├── frontend/    Next.js storefront
+├── docs/        pointers — API docs live in backend/docs
+└── README.md
+```
 
-Do not run `migrate` until a custom user model exists in `apps.accounts`
-and `AUTH_USER_MODEL` is set. That belongs to a later phase.
+## Customer flow
 
-## Stack
+1. Browse products, services, or the build form.
+2. Public prices come from the catalog. A signed-in customer may also see **Your Bassaddict price** from their own account. Another customer's price is never shown.
+3. Sign in and send an enquiry (`PRODUCT`, `INSTALLATION`, `DELIVERY`, `CUSTOM_BUILD`, or `GENERAL`).
+4. Continue on WhatsApp if they want. The site only opens `wa.me`. It does not call the WhatsApp Business API.
 
-- Python
-- Django
-- Django REST Framework
-- PostgreSQL (production)
-- SQLite (default development database)
-- JWT (`djangorestframework-simplejwt`)
-- django-cors-headers
+Account pages: overview, read-only profile, private prices, own enquiries. Logout is a POST action.
 
-## Architecture overview
+## Owner workflow
 
-| App | Responsibility |
-| --- | --- |
-| `apps.core` | Business information and protected developer attribution |
-| `apps.accounts` | Users, roles, customer profiles |
-| `apps.catalog` | Products, images, public prices, customer-specific prices |
-| `apps.enquiries` | Quotes, product/install/delivery/custom-build requests |
-| `apps.services` | Workshop service offerings |
+Django Admin at `/admin/` is the only back office.
 
-Settings live in `config/settings/` (`base`, `development`, `production`).
+The owner manages categories, products, image URLs, customer prices, services, enquiries, customers, and customer profiles. Business name, tagline, phone, WhatsApp, email, and address live on the business settings record.
 
-Django Admin (`/admin/`) is the first administrative interface.
+Developer attribution stays locked to a superuser or a user with `core.change_developer_attribution`. An owner cannot change it.
 
-See `docs/architecture.md` and `docs/business-rules.md`.
+Do not invent product prices or specifications in the database. If a spec is unknown, leave it blank. Supplied equipment photographs live in `frontend/public/images/`. A filename identifies an asset and is not a price. See [frontend/public/images/README.md](frontend/public/images/README.md). Image URLs entered in Admin override those local files. Public prices still come from the catalog API.
 
-## Setup direction
+## Developer credit
+
+Visible in the site footer, separate from the shop number:
+
+- Designed & Developed by Sam Gates
+- Developer Courtesy
+- WhatsApp +254111374435
+- sangates.dev@gmail.com
+- samgates.developer@gmail.com
+
+The business WhatsApp is **+254794069405**. Do not swap the two numbers.
+
+## Backend
 
 ```bash
+cd backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
 ```
 
-Edit `.env`. Leave `SECRET_KEY=change-me` only on a local machine.
+API base: `http://127.0.0.1:8000/api/v1`  
+Contract: [backend/docs/api.md](backend/docs/api.md)
 
-## Development command placeholders
+Local settings: `config.settings.development` (SQLite).  
+Production settings: `config.settings.production` (PostgreSQL, real `SECRET_KEY`, `ALLOWED_HOSTS`). See `backend/.env.example`. Never commit `.env`.
+
+## Frontend
 
 ```bash
-# Run the development server (after Phase 1+ dependencies are in place)
-python manage.py runserver
-
-# Django system check (safe in Phase 0)
-python manage.py check
-
-# Do not run migrate in Phase 0
-# python manage.py migrate
-
-# Tests (placeholders only in Phase 0)
-python manage.py test
+cd frontend
+cp .env.example .env.local
+npm install
+npm run dev
 ```
 
-`DJANGO_SETTINGS_MODULE` defaults to `config.settings.development` in
-`manage.py`.
+`NEXT_PUBLIC_API_URL` must point at `/api/v1`.  
+`NEXT_PUBLIC_SITE_URL` is optional and only for canonical links, Open Graph URLs, and the sitemap. Leave it unset until the public domain exists.
 
-## Environment variables required
+Tokens are httpOnly cookies (`bass_access`, `bass_refresh`). They are not in `localStorage`.
 
-| Variable | Purpose |
-| --- | --- |
-| `DJANGO_SETTINGS_MODULE` | `config.settings.development` or `config.settings.production` |
-| `SECRET_KEY` | Django secret. Placeholder `change-me` is rejected in production |
-| `DEBUG` | `True` / `False` |
-| `ALLOWED_HOSTS` | Comma-separated hosts |
-| `DB_ENGINE` | `sqlite` (development default) or `postgresql` |
-| `DB_NAME` | Database name (required in production) |
-| `DB_USER` | PostgreSQL user |
-| `DB_PASSWORD` | PostgreSQL password |
-| `DB_HOST` | PostgreSQL host |
-| `DB_PORT` | PostgreSQL port, default `5432` |
-| `CORS_ALLOWED_ORIGINS` | Comma-separated frontend origins |
-| `CSRF_TRUSTED_ORIGINS` | Comma-separated trusted origins |
-| `SECURE_SSL_REDIRECT` | Production TLS redirect, default `True` |
+## Deployment direction
 
-Copy `.env.example`. Never commit `.env` or a real secret.
+Not deployed from this repository automatically.
 
-## Roles (planned)
+- Backend: `DJANGO_SETTINGS_MODULE=config.settings.production`, PostgreSQL, `migrate`, then the WSGI app. Set `CORS_ALLOWED_ORIGINS` and `CSRF_TRUSTED_ORIGINS` to the real storefront origin.
+- Frontend: `npm run build`, then `npm run start` (or the host's Node adapter). Set `NEXT_PUBLIC_API_URL` to the public API and, when the domain is known, `NEXT_PUBLIC_SITE_URL`.
 
-Customer, owner, developer — implemented later with Django auth and
-permissions.
+## Checks
 
-## What this phase does not include
-
-Models, API endpoints, JWT views, customer pricing logic, enquiry
-workflow, WhatsApp URL generation, admin model registrations, and
-database migrations with business models.
+```bash
+backend/.venv/bin/python backend/manage.py check
+backend/.venv/bin/python backend/manage.py test
+backend/.venv/bin/python backend/manage.py makemigrations --check
+cd frontend && npx tsc --noEmit && npm run build
+node --experimental-strip-types --test frontend/lib/check.test.ts
+```

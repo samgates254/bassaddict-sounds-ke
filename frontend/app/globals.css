@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body {
+  background: #090a0c;
+  color: #f4f1ea;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+::selection {
+  background: #e23d2b;
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid #e23d2b;
+  outline-offset: 3px;
+}
+
+.site {
+  margin-inline: auto;
+  width: min(1120px, calc(100% - 2rem));
+}
+
+.label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9aa8b5;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  border: 1px solid #2c323a;
+  background: #090a0c;
+  color: #f4f1ea;
+  padding: 0.75rem 0.85rem;
+  border-radius: 2px;
+}
+
+.field textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 2px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.btn-ember {
+  background: #e23d2b;
+  color: white;
+}
+
+.btn-ember:hover {
+  background: #c43224;
+}
+
+.btn-line {
+  border: 1px solid #2c323a;
+  color: #f4f1ea;
+}
+
+.btn-line:hover {
+  border-color: #9aa8b5;
+}
+
+.btn-wa {
+  background: #163028;
+  color: #d7f5e8;
+  border: 1px solid #245744;
+}
+
+.btn-wa:hover {
+  border-color: #3d8f72;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.photo-in {
+  animation: photo-in 180ms ease-out;
+}
+
+@keyframes photo-in {
+  from {
+    opacity: 0.72;
+  }
+  to {
+    opacity: 1;
+  }
+}
