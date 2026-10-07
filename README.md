@@ -41,11 +41,13 @@ Do not invent product prices or specifications in the database. If a spec is unk
 
 Visible in the site footer, separate from the shop number:
 
-- Designed & Developed by Sam Gates
+- Designed & Developed by Sam Gates and Ken Kimwe
 - Developer Courtesy
-- WhatsApp +254111374435
+- WhatsApp +254111374435 (Sam Gates)
+- WhatsApp +254796088951 (Ken Kimwe)
 - sangates.dev@gmail.com
 - samgates.developer@gmail.com
+- kimwe.king@gmail.com
 
 The business WhatsApp is **+254794069405**. Do not swap the two numbers.
 
