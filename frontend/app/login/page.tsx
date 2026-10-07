@@ -21,17 +21,17 @@ export default async function LoginPage({
   const nextPath = safeNextPath(nextValue);
 
   return (
-    <div className="site max-w-md py-12">
-      <div className="border border-line bg-panel p-6 sm:p-8">
+    <div className="site grid items-end gap-14 py-16 md:grid-cols-12 md:py-28">
+      <div className="md:col-span-5">
         <p className="label">Customer account</p>
-        <h1 className="mt-2 font-display text-5xl tracking-wide">Sign in</h1>
-        <p className="mt-3 text-mute">Use the email and password for your Bassaddict account.</p>
-        <div className="mt-8">
-          <LoginForm nextPath={nextPath} />
-        </div>
-        <p className="mt-6 text-sm text-mute">
+        <h1 className="poster mt-4 font-display text-6xl sm:text-8xl">Sign in.</h1>
+        <p className="mt-6 max-w-xs text-mute">Use the email and password for your Bassaddict account.</p>
+      </div>
+      <div className="md:col-span-6 md:col-start-7">
+        <LoginForm nextPath={nextPath} />
+        <p className="mt-8 text-sm text-mute">
           No account yet?{" "}
-          <Link className="text-paper underline" href="/register">
+          <Link className="text-paper underline decoration-white/30 underline-offset-4" href="/register">
             Register
           </Link>
         </p>

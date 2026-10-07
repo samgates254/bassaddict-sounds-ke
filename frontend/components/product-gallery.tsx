@@ -50,7 +50,7 @@ export function ProductGallery({ images, name }: { images: ProductImage[]; name:
         key={image.image_url}
         src={image.image_url}
         alt={image.alt_text || name}
-        className="photo-in aspect-[4/3] w-full border border-line object-cover"
+        className="photo-in aspect-[4/5] w-full bg-[#101214] object-cover sm:aspect-[5/4]"
         decoding="async"
       />
       {images.length > 1 ? (
@@ -64,7 +64,7 @@ export function ProductGallery({ images, name }: { images: ProductImage[]; name:
                 onClick={() => show(itemIndex)}
                 aria-pressed={selected}
                 aria-current={selected ? "true" : undefined}
-                className={`h-16 w-20 shrink-0 border-2 ${selected ? "border-paper" : "border-line"}`}
+                className={`h-20 w-16 shrink-0 border-b-2 ${selected ? "border-ember" : "border-transparent opacity-70"}`}
                 aria-label={selected ? `Photo ${itemIndex + 1}, selected` : `Show photo ${itemIndex + 1}`}
               >
                 <img src={item.image_url} alt="" className="h-full w-full object-cover" decoding="async" />

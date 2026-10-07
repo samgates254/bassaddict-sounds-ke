@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Oswald, Source_Sans_3 } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -8,16 +8,16 @@ import { siteOrigin } from "@/lib/seo";
 
 import "./globals.css";
 
-const display = Oswald({
+const display = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const body = Source_Sans_3({
+const body = Inter({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["400", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const dynamic = "force-dynamic";

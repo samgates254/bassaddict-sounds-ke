@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { getBusiness } from "@/lib/api/business";
@@ -14,35 +15,40 @@ export default async function AboutPage() {
   const { business } = await getBusiness();
 
   return (
-    <div className="site max-w-3xl py-10">
-      <p className="label">About</p>
-      <h1 className="mt-2 font-display text-5xl tracking-wide">{business.business_name}</h1>
-      <p className="mt-4 font-display text-2xl tracking-wide text-steel">{business.tagline}</p>
-      <div className="mt-6 grid gap-4 text-lg text-mute">
-        <p>
-          Bassaddict Sounds KE is a professional car audio and sound solutions company
-          focused on powerful sound, quality products, and professional installation.
-        </p>
-        <p>
-          The work covers audio systems, subwoofers, amplifiers, speakers, radios and
-          displays, dashcams, lighting, installation, and custom setups. What is listed
-          on the site is what the shop has published. If a specification is missing, it
-          has not been entered.
-        </p>
-        <p>
-          Nothing is paid on this website. You look at a product, see the public price,
-          and enquire. Some customers also have a private price on their own account.
-          The workshop replies from Luthuli Avenue.
-        </p>
-        <p>The shop is at {business.address}.</p>
+    <div className="grid lg:grid-cols-12">
+      <div className="px-5 py-16 sm:px-8 lg:col-span-6 lg:py-24 lg:pl-[max(1rem,calc((100vw-1240px)/2))] lg:pr-16">
+        <p className="label">The workshop</p>
+        <h1 className="poster mt-4 font-display text-5xl sm:text-7xl">{business.business_name}</h1>
+        <p className="mt-8 font-display text-xl tracking-[0.12em] text-ember">{business.tagline}</p>
+        <div className="mt-10 grid max-w-xl gap-6 text-lg leading-8 text-mute">
+          <p>
+            Bassaddict Sounds KE is a professional car audio workshop. The work is powerful sound, quality equipment, and an install that belongs in the car.
+          </p>
+          <p>
+            Systems, subwoofers, amplifiers, speakers, radios, displays, dashcams, lighting, and custom setups. What is listed is what the shop has published. A missing specification has not been entered.
+          </p>
+          <p>
+            Nothing is paid on this website. You see the public price and enquire. Some customers also have a private price on their own account.
+          </p>
+          <p className="text-paper">{business.address}</p>
+        </div>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Link className="btn btn-ember" href="/products">
+            Explore products
+          </Link>
+          <Link className="btn btn-line" href="/contact">
+            Contact
+          </Link>
+        </div>
       </div>
-      <div className="mt-8 flex flex-wrap gap-3">
-        <Link className="btn btn-ember" href="/products">
-          Explore products
-        </Link>
-        <Link className="btn btn-line" href="/contact">
-          Contact
-        </Link>
+      <div className="relative min-h-[80vw] lg:col-span-6 lg:min-h-[100svh]">
+        <Image
+          src="/images/gallery/pioneer-ts-w30040d4.jpg"
+          alt="Magnet label reads TS-W30040D4, Champion series PRO, 2400W MAX, 800W NOM, 4.0 DVC."
+          fill
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          className="object-cover object-center"
+        />
       </div>
     </div>
   );

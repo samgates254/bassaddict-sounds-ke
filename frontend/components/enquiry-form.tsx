@@ -36,8 +36,8 @@ export function EnquiryForm({
 
   if (!signedIn) {
     return (
-      <div className="border border-line bg-panel p-5">
-        <h2 className="font-display text-3xl tracking-wide">Request this from the shop</h2>
+      <div>
+        <h2 className="poster font-display text-4xl sm:text-5xl">Request this from the shop</h2>
         <p className="mt-3 text-mute">
           Sign in to send an enquiry. Bassaddict confirms price and installation directly.
           There is no online payment.
@@ -51,8 +51,8 @@ export function EnquiryForm({
 
   if (state.ok) {
     return (
-      <div className="border border-line bg-panel p-5">
-        <h2 className="font-display text-3xl tracking-wide">Enquiry sent</h2>
+      <div>
+        <h2 className="poster font-display text-4xl sm:text-5xl">Enquiry sent</h2>
         <p className="mt-3 text-mute">
           The workshop has it as a new enquiry. You can also continue the conversation on
           WhatsApp.
@@ -72,8 +72,8 @@ export function EnquiryForm({
   }
 
   return (
-    <form action={action} className="grid gap-4 border border-line bg-panel p-5">
-      <h2 className="font-display text-3xl tracking-wide">
+    <form action={action} className="grid gap-5">
+      <h2 className="poster font-display text-4xl sm:text-5xl">
         {productName ? `Request ${productName}` : "New enquiry"}
       </h2>
       {state.error ? (

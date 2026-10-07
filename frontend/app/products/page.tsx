@@ -30,14 +30,14 @@ export default async function ProductsPage({
   const [products, categories] = await Promise.all([getProducts(filters), getCategories()]);
 
   return (
-    <div className="site py-10">
+    <div className="site py-16 md:py-24">
       <p className="label">Catalog</p>
-      <h1 className="mt-2 font-display text-5xl tracking-wide">Products</h1>
-      <p className="mt-3 max-w-2xl text-mute">
-        Active products from the shop. Prices shown here are public prices.
+      <h1 className="poster mt-4 font-display text-6xl sm:text-8xl">The showroom</h1>
+      <p className="mt-6 max-w-md text-lg text-mute">
+        Equipment published by Bassaddict. The prices here are public prices.
       </p>
 
-      <form className="mt-8 grid gap-3 border border-line bg-panel p-4 md:grid-cols-5" method="get">
+      <form className="mt-14 grid gap-x-6 gap-y-4 border-t border-white/10 pt-8 sm:grid-cols-2 lg:grid-cols-5" method="get">
         <FormField label="Category">
           <select name="category" defaultValue={filters.category}>
             <option value="">All</option>
@@ -70,7 +70,7 @@ export default async function ProductsPage({
             ))}
           </select>
         </FormField>
-        <div className="flex items-end gap-2">
+        <div className="flex flex-wrap items-end gap-2 pb-1 sm:col-span-2 lg:col-span-1 lg:flex-nowrap">
           <Button type="submit">Filter</Button>
           <Button variant="line" href="/products">
             Clear
@@ -78,19 +78,21 @@ export default async function ProductsPage({
         </div>
       </form>
 
-      <div className="mt-8">
+      <div className="mt-16">
         {!products.ok ? (
           <ErrorState title="Unable to load products right now.">
             <p>Please check your connection and try again.</p>
           </ErrorState>
         ) : products.data.length === 0 ? (
-          <EmptyState title="No products match.">
-            <p>Try another filter, or check back after the shop adds stock.</p>
+          <EmptyState title="The floor is clear.">
+            <p>Nothing matches. The shop has not published a product for this view, or the filter is too tight.</p>
           </EmptyState>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {products.data.map((product) => (
-              <ProductCard key={product.slug} product={product} />
+          <div className="grid items-start gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+            {products.data.map((product, index) => (
+              <div key={product.slug} className={index % 5 === 0 ? "sm:col-span-2 lg:col-span-2" : undefined}>
+                <ProductCard product={product} large={index % 5 === 0} />
+              </div>
             ))}
           </div>
         )}

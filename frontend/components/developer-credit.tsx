@@ -35,9 +35,16 @@ export function DeveloperCredit() {
             height={36}
             className="h-8 w-auto max-w-[7.5rem] object-contain opacity-80"
           />
-        ) : null}
+        ) : (
+          <span
+            className="grid size-8 shrink-0 place-items-center border border-line font-display text-[0.65rem] tracking-widest text-steel"
+            aria-hidden="true"
+          >
+            SG
+          </span>
+        )}
         <p>
-          {DEVELOPER.credit}
+          <span className="text-paper">{DEVELOPER.credit}</span>
           <span className="mx-2 text-line">/</span>
           {DEVELOPER.courtesy}
         </p>

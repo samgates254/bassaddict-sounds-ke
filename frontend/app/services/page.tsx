@@ -1,11 +1,13 @@
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+
 import { Button } from "@/components/button";
 import { EmptyState } from "@/components/empty-state";
 import { ErrorState } from "@/components/error-state";
-import { WhatsAppButton } from "@/components/whatsapp-button";
 import { getBusiness } from "@/lib/api/business";
 import { getServices } from "@/lib/api/services";
 import { pageMetadata } from "@/lib/seo";
-import { serviceEnquiryMessage } from "@/lib/whatsapp";
+import { serviceEnquiryMessage, whatsappHref } from "@/lib/whatsapp";
 
 export const metadata = pageMetadata({
   title: "Services",
@@ -23,14 +25,26 @@ export default async function ServicesPage() {
     : [];
 
   return (
-    <div className="site py-10">
-      <p className="label">Workshop</p>
-      <h1 className="mt-2 font-display text-5xl tracking-wide">Services</h1>
-      <p className="mt-3 max-w-2xl text-mute">
-        Work the shop is offering now. This is an enquiry, not a booking checkout.
-        Ask before you bring the car in.
-      </p>
-      <div className="mt-8">
+    <div>
+      <div className="site grid items-end gap-8 py-16 md:grid-cols-12 md:py-24">
+        <div className="md:col-span-8">
+          <p className="label">Craft</p>
+          <h1 className="poster mt-4 font-display text-6xl sm:text-8xl">Services</h1>
+        </div>
+        <p className="max-w-sm text-lg text-mute md:col-span-4">
+          Work the shop is offering now. An enquiry, not a booking. Ask before the car comes in.
+        </p>
+      </div>
+      <div className="relative h-[46vw] min-h-[16rem] max-h-[28rem]">
+        <Image
+          src="/images/gallery/kuerl-panel.jpg"
+          alt="Panel reads REMOTE, LOW LEVEL, HIGH LEVEL, POWER, and FUSE."
+          fill
+          sizes="100vw"
+          className="object-cover object-[50%_60%]"
+        />
+      </div>
+      <div className="site py-16 md:py-24">
         {!services.ok ? (
           <ErrorState title="Unable to load services right now.">
             <p>Please check your connection and try again.</p>
@@ -38,42 +52,38 @@ export default async function ServicesPage() {
         ) : ordered.length === 0 ? (
           <EmptyState title="No services are published yet.">
             <p>
-              The owner adds them in Django Admin. Until then, this page does not invent
-              a price list or a booking menu. You can still ask the workshop directly.
+              The owner adds them in Django Admin. Until then, this page does not invent a menu. You can still ask the workshop directly.
             </p>
           </EmptyState>
         ) : (
-          <ul className="divide-y divide-line border-y border-line">
-            {ordered.map((service) => (
-              <li key={service.slug} className="grid gap-4 py-6 md:grid-cols-[1fr_auto] md:items-start">
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-baseline gap-3">
-                    <h2 className="font-display text-3xl tracking-wide">{service.name}</h2>
-                    {service.featured ? (
-                      <p className="text-xs font-semibold uppercase tracking-[0.14em]">Featured</p>
-                    ) : null}
-                  </div>
-                  <p className="mt-2 max-w-2xl break-words text-mute">
-                    {service.description || "Ask the workshop what this includes."}
-                  </p>
+          <ol>
+            {ordered.map((service, index) => (
+              <li key={service.slug} className="grid gap-6 border-t border-white/10 py-10 md:grid-cols-12 md:items-start">
+                <p className="font-display text-sm text-ember md:col-span-2">{String(index + 1).padStart(2, "0")}</p>
+                <div className="min-w-0 md:col-span-7">
+                  <h2 className="font-display text-3xl font-medium tracking-tight sm:text-5xl">{service.name}</h2>
+                  {service.featured ? <p className="mt-3 text-[0.68rem] uppercase tracking-[0.18em] text-paper">Featured</p> : null}
+                  <p className="mt-4 max-w-xl text-mute">{service.description || "Ask the workshop what this includes."}</p>
                 </div>
-                <WhatsAppButton
-                  className="shrink-0"
-                  number={businessResult.business.whatsapp_number}
-                  message={serviceEnquiryMessage(service.name)}
+                <a
+                  className="group inline-flex items-center gap-2 text-[0.68rem] uppercase tracking-[0.18em] text-paper md:col-span-3 md:justify-end"
+                  href={whatsappHref(businessResult.business.whatsapp_number, serviceEnquiryMessage(service.name))}
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   Ask on WhatsApp
-                </WhatsAppButton>
+                  <ArrowRight aria-hidden="true" className="size-4 transition group-hover:translate-x-1" />
+                </a>
               </li>
             ))}
-          </ul>
+          </ol>
         )}
-      </div>
-      <div className="mt-8 flex flex-wrap gap-3">
-        <Button href="/build">Build my sound system</Button>
-        <Button variant="line" href="/contact">
-          Contact
-        </Button>
+        <div className="mt-14 flex flex-wrap gap-3">
+          <Button href="/build">Build my sound system</Button>
+          <Button variant="line" href="/contact">
+            Contact
+          </Button>
+        </div>
       </div>
     </div>
   );

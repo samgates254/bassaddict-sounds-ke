@@ -4,7 +4,7 @@ export function LoadingState({
   title?: string;
 }) {
   return (
-    <div className="border border-line bg-panel px-5 py-8" role="status">
+    <div className="max-w-xl border-l border-white/15 py-2 pl-6" role="status">
       <p className="label">Loading</p>
       <p className="mt-3 font-display text-3xl tracking-wide">{title}</p>
     </div>

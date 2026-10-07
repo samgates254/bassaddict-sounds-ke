@@ -14,17 +14,20 @@ export default async function BuildPage() {
   const [me, businessResult] = await Promise.all([getMe(), getBusiness()]);
 
   return (
-    <div className="site py-10">
-      <p className="label">Custom build</p>
-      <h1 className="mt-2 max-w-3xl font-display text-5xl leading-none tracking-wide">
-        Build my sound system
-      </h1>
-      <p className="mt-4 max-w-2xl text-mute">
-        Tell the workshop the car, the budget, and what you want from the system: deep
-        bass, volume, a clean balance, a full upgrade, or a competition setup. This is
-        a custom-build enquiry. There is no automatic recommendation and no payment.
-      </p>
-      <div className="mt-8 max-w-3xl">
+    <div className="site grid gap-16 py-16 md:py-24 lg:grid-cols-12">
+      <div className="lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
+        <p className="label">Custom build</p>
+        <h1 className="poster mt-5 font-display text-[clamp(3.2rem,6vw,5.6rem)]">
+          Tell us what you're driving.
+        </h1>
+        <p className="mt-8 max-w-sm font-display text-2xl font-medium tracking-tight sm:text-3xl">
+          We'll help you build the sound.
+        </p>
+        <p className="mt-6 max-w-sm text-mute">
+          The car, the budget, and what you want from the system. This is a consultation. There is no automatic recommendation and no payment.
+        </p>
+      </div>
+      <div className="lg:col-span-6 lg:col-start-7">
         <BuildForm
           signedIn={me.ok}
           whatsappNumber={businessResult.business.whatsapp_number}

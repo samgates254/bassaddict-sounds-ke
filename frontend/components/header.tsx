@@ -1,7 +1,6 @@
 import Link from "next/link";
+import { Menu, MessageCircle } from "lucide-react";
 
-import { Button } from "@/components/button";
-import { Container } from "@/components/container";
 import { Mark } from "@/components/mark";
 import { Navigation } from "@/components/navigation";
 import { WhatsAppButton } from "@/components/whatsapp-button";
@@ -11,54 +10,48 @@ import { generalEnquiryMessage } from "@/lib/whatsapp";
 
 export function Header({ business }: { business: BusinessSettings }) {
   return (
-    <header className="border-b border-line bg-ink">
-      <div className="border-b border-line/80">
-        <Container className="flex flex-wrap items-center justify-between gap-2 py-2 text-xs text-mute">
-          <p className="min-w-0">Ground floor workshop · Luthuli Avenue, Nairobi</p>
-          <a className="hover:text-paper" href={telHref(business.phone)}>
-            {business.phone}
-          </a>
-        </Container>
-      </div>
-      <Container className="flex items-center justify-between gap-3 py-4">
-        <Link href="/" className="flex min-w-0 items-center gap-3">
-          <Mark />
-          <span className="min-w-0 font-display text-base leading-none tracking-[0.08em] sm:text-lg sm:tracking-[0.12em]">
-            BASSADDICT
-            <span className="mt-1 block text-[0.65rem] tracking-[0.18em] text-steel sm:tracking-[0.22em]">
-              SOUNDS KE
-            </span>
-          </span>
+    <header className="sticky top-0 z-40 bg-ink/88 backdrop-blur-md">
+      <div className="site flex items-center justify-between gap-6 py-3.5">
+        <Link href="/" className="shrink-0 py-0.5">
+          <Mark className="h-10 w-auto sm:h-12" priority />
         </Link>
         <Navigation
           ariaLabel="Primary"
-          className="hidden items-center gap-5 text-sm text-mute lg:flex"
-          linkClassName="hover:text-paper"
+          className="hidden items-center gap-5 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-steel xl:gap-6 lg:flex"
+          linkClassName="border-b border-transparent pb-1 transition-colors hover:text-paper"
+          activeClassName="border-ember text-paper"
         />
-        <div className="flex items-center gap-2">
-          <Button href="/account" variant="line" className="hidden sm:inline-flex">
+        <div className="flex shrink-0 items-center gap-4">
+          <Link href="/account" className="hidden text-[0.66rem] uppercase tracking-[0.16em] text-steel hover:text-paper sm:inline">
             Account
-          </Button>
-          <WhatsAppButton number={business.whatsapp_number} message={generalEnquiryMessage()}>
-            WhatsApp
+          </Link>
+          <WhatsAppButton
+            className="!min-h-10 !px-3"
+            number={business.whatsapp_number}
+            message={generalEnquiryMessage()}
+          >
+            <MessageCircle aria-hidden="true" className="size-4" />
+            <span className="sr-only sm:not-sr-only">WhatsApp</span>
           </WhatsAppButton>
         </div>
-      </Container>
-      <details className="border-t border-line lg:hidden">
-        <summary className="site cursor-pointer list-none py-3 text-sm uppercase tracking-[0.14em] text-steel">
+      </div>
+      <details className="border-t border-white/5 lg:hidden">
+        <summary className="site flex min-h-12 cursor-pointer items-center justify-between text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-steel">
           Menu
+          <Menu aria-hidden="true" className="size-5" />
         </summary>
         <Navigation
           ariaLabel="Mobile"
-          className="site grid gap-1 pb-4"
-          linkClassName="py-2 text-paper"
+          className="site grid gap-1 pb-8 pt-3"
+          linkClassName="block py-2 font-display text-4xl font-medium tracking-tight text-paper"
+          activeClassName="text-ember"
         >
-          <Link href="/account" className="py-2 text-paper">
+          <Link href="/account" className="block py-2 font-display text-4xl font-medium tracking-tight text-paper">
             Account
           </Link>
-          <Link href="/login" className="py-2 text-paper">
-            Sign in
-          </Link>
+          <a className="block py-2 text-sm tracking-[0.14em] text-steel" href={telHref(business.phone)}>
+            {business.phone}
+          </a>
         </Navigation>
       </details>
     </header>

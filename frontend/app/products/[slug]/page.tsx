@@ -49,7 +49,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
   if (!productResult.ok) {
     if (productResult.status === 404) notFound();
     return (
-      <div className="site py-12">
+      <div className="site py-16">
         <ErrorState title="Unable to load this product." heading="h1">
           <p>Please check your connection and try again.</p>
         </ErrorState>
@@ -64,55 +64,59 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
   const title = [product.brand, product.name].filter(Boolean).join(" ");
 
   return (
-    <div className="site grid gap-10 py-10 lg:grid-cols-[1.1fr_0.9fr]">
-      <ProductGallery images={images} name={product.name} />
-      <div>
-        <p className="label">{product.brand || product.category.name}</p>
-        <h1 className="mt-2 break-words font-display text-5xl leading-none tracking-wide">
-          {product.name}
-        </h1>
-        {product.model_number ? <p className="mt-3 text-mute">{product.model_number}</p> : null}
-        <p className="mt-6 text-sm uppercase tracking-[0.14em] text-steel">Public price</p>
-        <p className="num font-display text-4xl">{publicPriceLabel(product)}</p>
-        <p className="mt-2 text-sm text-steel">
-          {product.price_type.replaceAll("_", " ")} · {stockLabel(product.stock_status)}
-          {product.featured ? " · Featured" : ""}
-        </p>
-        {mine ? (
-          <div className="mt-5 border border-ember/60 bg-panel p-4">
-            <p className="label text-ember">Your Bassaddict price</p>
-            <p className="num mt-2 font-display text-3xl">{formatKes(mine.price)}</p>
-            {mine.note ? <p className="mt-2 text-sm text-mute">{mine.note}</p> : null}
-            <p className="mt-2 text-xs text-mute">This price is only on your account.</p>
-          </div>
-        ) : null}
-        <div className="mt-6 flex flex-wrap gap-3">
-          <WhatsAppButton
-            number={businessResult.business.whatsapp_number}
-            message={productEnquiryMessage(title)}
-          >
-            Ask on WhatsApp
-          </WhatsAppButton>
-          <Button variant="line" href={`/products/${product.slug}#request`}>
-            Request this product
-          </Button>
+    <div>
+      <div className="site grid gap-12 py-12 lg:grid-cols-12 lg:gap-16 lg:py-20">
+        <div className="lg:col-span-7">
+          <ProductGallery images={images} name={product.name} />
         </div>
-        {product.description ? (
-          <p className="mt-8 max-w-xl whitespace-pre-wrap text-mute">{product.description}</p>
-        ) : (
-          <p className="mt-8 text-mute">No description has been published yet.</p>
-        )}
-        <Specs value={product.specifications} />
+        <div className="lg:col-span-5 lg:pt-4">
+          <p className="label">{product.brand || product.category.name}</p>
+          <h1 className="poster mt-4 break-words font-display text-5xl sm:text-6xl">{product.name}</h1>
+          {product.model_number ? <p className="mt-4 text-mute">{product.model_number}</p> : null}
+          <p className="mt-10 text-[0.68rem] uppercase tracking-[0.2em] text-steel">Public price</p>
+          <p className="num mt-2 font-display text-5xl font-medium tracking-tight text-paper">{publicPriceLabel(product)}</p>
+          <p className="mt-3 text-sm text-steel">
+            {product.price_type.replaceAll("_", " ")} · {stockLabel(product.stock_status)}
+            {product.featured ? " · Featured" : ""}
+          </p>
+          {mine ? (
+            <div className="mt-8 border-l border-ember pl-5">
+              <p className="label text-ember">Your Bassaddict price</p>
+              <p className="num mt-2 font-display text-4xl">{formatKes(mine.price)}</p>
+              {mine.note ? <p className="mt-2 text-sm text-mute">{mine.note}</p> : null}
+              <p className="mt-2 text-xs text-mute">This price is only on your account.</p>
+            </div>
+          ) : null}
+          <div className="mt-10 flex flex-wrap gap-3">
+            <WhatsAppButton
+              number={businessResult.business.whatsapp_number}
+              message={productEnquiryMessage(title)}
+            >
+              Ask on WhatsApp
+            </WhatsAppButton>
+            <Button variant="line" href={`/products/${product.slug}#request`}>
+              Request this product
+            </Button>
+          </div>
+          {product.description ? (
+            <p className="mt-12 max-w-md whitespace-pre-wrap text-lg leading-8 text-mute">{product.description}</p>
+          ) : (
+            <p className="mt-12 text-mute">No description has been published yet.</p>
+          )}
+          <Specs value={product.specifications} />
+        </div>
       </div>
-      <div className="lg:col-span-2" id="request">
-        <EnquiryForm
-          signedIn={me.ok}
-          whatsappNumber={businessResult.business.whatsapp_number}
-          productSlug={product.slug}
-          productName={product.name}
-          lockType="PRODUCT"
-          nextPath={`/products/${product.slug}`}
-        />
+      <div className="site border-t border-white/10 py-16 lg:grid lg:grid-cols-12" id="request">
+        <div className="lg:col-span-7 lg:col-start-6">
+          <EnquiryForm
+            signedIn={me.ok}
+            whatsappNumber={businessResult.business.whatsapp_number}
+            productSlug={product.slug}
+            productName={product.name}
+            lockType="PRODUCT"
+            nextPath={`/products/${product.slug}`}
+          />
+        </div>
       </div>
     </div>
   );
@@ -124,22 +128,22 @@ function Specs({ value }: { value: unknown }) {
     (typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 0)
   ) {
     return (
-      <p className="mt-6 text-sm text-mute">No specifications have been published for this product yet.</p>
+      <p className="mt-10 text-sm text-mute">No specifications have been published for this product yet.</p>
     );
   }
   if (typeof value === "object" && !Array.isArray(value)) {
     return (
-      <dl className="mt-6 divide-y divide-line border-y border-line">
+      <dl className="mt-12">
         {Object.entries(value).map(([key, item]) => (
-          <div key={key} className="grid gap-1 py-3 sm:grid-cols-[10rem_1fr]">
-            <dt className="text-steel">{key}</dt>
-            <dd className="min-w-0 break-words">{formatSpec(item)}</dd>
+          <div key={key} className="grid gap-1 border-t border-white/10 py-4 sm:grid-cols-[9rem_1fr]">
+            <dt className="text-[0.68rem] uppercase tracking-[0.16em] text-steel">{key}</dt>
+            <dd className="min-w-0 break-words font-display text-lg">{formatSpec(item)}</dd>
           </div>
         ))}
       </dl>
     );
   }
-  return <p className="mt-6 whitespace-pre-wrap text-sm text-mute">{formatSpec(value)}</p>;
+  return <p className="mt-10 whitespace-pre-wrap text-sm text-mute">{formatSpec(value)}</p>;
 }
 
 function formatSpec(value: unknown) {

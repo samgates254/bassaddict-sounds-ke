@@ -11,6 +11,8 @@ frontend/public/images/
 └── ads/        developer courtesy graphic
 ```
 
+`brand/bassaddict-logo.png` is the supplied Bassaddict mark. The header uses that file. A filename is still not a price.
+
 ## Product files
 
 A product image is an asset identifier. It points at a product slug. The slug points at the Django product. The price comes from that product.

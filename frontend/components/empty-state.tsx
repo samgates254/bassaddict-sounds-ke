@@ -11,8 +11,8 @@ export function EmptyState({
 }) {
   const Heading = heading;
   return (
-    <div className="border border-line bg-panel px-5 py-8">
-      <Heading className="font-display text-3xl tracking-wide">{title}</Heading>
+    <div className="max-w-xl border-l border-white/15 pl-6 py-2">
+      <Heading className="font-display text-3xl font-medium tracking-tight">{title}</Heading>
       {children ? <div className="mt-3 max-w-xl text-mute">{children}</div> : null}
     </div>
   );

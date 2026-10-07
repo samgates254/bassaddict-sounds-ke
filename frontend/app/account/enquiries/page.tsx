@@ -16,7 +16,7 @@ export default async function EnquiriesPage() {
   return (
     <div className="grid gap-10 lg:grid-cols-[1fr_22rem]">
       <div>
-        <h1 className="font-display text-5xl tracking-wide">My enquiries</h1>
+        <h1 className="font-display text-5xl font-medium tracking-tight">My enquiries</h1>
         <p className="mt-3 text-mute">Only enquiries sent from this account.</p>
         <div className="mt-6">
           {!enquiries.ok ? (
@@ -30,7 +30,7 @@ export default async function EnquiriesPage() {
           ) : (
             <ul className="grid gap-4">
               {enquiries.data.map((enquiry) => (
-                <li key={enquiry.id} className="border border-line bg-panel p-5">
+                <li key={enquiry.id} className="border-t border-white/10 py-6">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <h2 className="font-display text-2xl tracking-wide">
                       {enquiryTypeLabel(enquiry.enquiry_type)}

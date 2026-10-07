@@ -16,7 +16,7 @@ export default async function ProfilePage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="font-display text-5xl tracking-wide">Profile</h1>
+      <h1 className="font-display text-5xl font-medium tracking-tight">Profile</h1>
       <p className="mt-3 text-mute">
         This is read-only. Profile editing is not available until a later API phase.
       </p>
@@ -36,7 +36,7 @@ function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="grid gap-1 py-4 sm:grid-cols-[10rem_1fr]">
       <dt className="label">{label}</dt>
-      <dd>{value}</dd>
+      <dd className="min-w-0 break-words">{value}</dd>
     </div>
   );
 }

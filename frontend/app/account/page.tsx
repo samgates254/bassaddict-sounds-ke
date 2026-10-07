@@ -17,7 +17,7 @@ export default async function AccountPage() {
 
   return (
     <div>
-      <h1 className="font-display text-5xl tracking-wide">{displayName(me.data)}</h1>
+      <h1 className="break-words font-display text-5xl font-medium tracking-tight">{displayName(me.data)}</h1>
       <p className="mt-2 text-mute">Customer account. Shop management stays in Django Admin.</p>
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         <Summary label="Special prices" value={prices.ok ? String(prices.data.length) : "—"} />
@@ -44,7 +44,7 @@ export default async function AccountPage() {
       {!latest ? (
         <p className="mt-3 text-mute">You have not sent an enquiry yet.</p>
       ) : (
-        <article className="mt-4 border border-line bg-panel p-5">
+        <article className="mt-4 border-t border-white/10 pt-5">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h3 className="font-display text-2xl tracking-wide">
               {enquiryTypeLabel(latest.enquiry_type)}
@@ -71,9 +71,9 @@ export default async function AccountPage() {
 
 function Summary({ label, value }: { label: string; value: string }) {
   return (
-    <div className="border border-line bg-panel p-4">
+    <div className="border-t border-white/10 pt-4">
       <p className="label">{label}</p>
-      <p className="mt-2 font-display text-3xl tracking-wide">{value}</p>
+      <p className="mt-2 break-words font-display text-3xl tracking-wide">{value}</p>
     </div>
   );
 }

@@ -23,7 +23,7 @@ export default async function PricesPage() {
 
   return (
     <div>
-      <h1 className="font-display text-5xl tracking-wide">My prices</h1>
+      <h1 className="font-display text-5xl font-medium tracking-tight">My prices</h1>
       <p className="mt-3 max-w-2xl text-mute">
         These negotiated prices belong to this account only. The public catalog still
         shows the shop price.
@@ -39,7 +39,7 @@ export default async function PricesPage() {
           {prices.data.map((price) => {
             const product = bySlug.get(price.product);
             return (
-              <li key={price.product} className="border border-line bg-panel p-5">
+              <li key={price.product} className="border-t border-white/10 py-8">
                 <p className="label">{price.model_number || "Product"}</p>
                 <h2 className="mt-2 font-display text-3xl tracking-wide">{price.product_name}</h2>
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">

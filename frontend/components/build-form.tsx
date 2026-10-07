@@ -27,8 +27,8 @@ export function BuildForm({
 
   if (state.ok) {
     return (
-      <div className="border border-line bg-panel p-6">
-        <h2 className="font-display text-4xl tracking-wide">Request received</h2>
+      <div>
+        <h2 className="poster font-display text-5xl">Request received</h2>
         <p className="mt-3 max-w-xl text-mute">
           This is with Bassaddict as a custom-build enquiry. The shop will follow up.
           You can continue on WhatsApp with the same details.
@@ -50,7 +50,7 @@ export function BuildForm({
   return (
     <form action={action} className="grid gap-5">
       {!signedIn ? (
-        <div className="border border-ember/50 bg-panel p-4 text-sm">
+        <div className="border-l border-ember pl-4 text-sm">
           <p>
             Sign in before sending. The workshop account is a customer account, and the
             enquiry is stored against you so the reply stays yours.
@@ -69,7 +69,7 @@ export function BuildForm({
       <fieldset className="grid gap-3">
         <legend className="label">What are you looking for?</legend>
         {GOALS.map((goal) => (
-          <label key={goal} className="flex items-center gap-3 border border-line px-3 py-3">
+          <label key={goal} className="flex min-h-12 cursor-pointer items-center gap-3 border-b border-white/10 py-3">
             <input type="radio" name="goal" value={goal} />
             <span>{goal}</span>
           </label>

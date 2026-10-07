@@ -5,21 +5,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#090A0C",
-        panel: "#12151A",
-        panel2: "#181C22",
-        line: "#2C323A",
-        paper: "#F4F1EA",
-        mute: "#A39E93",
-        steel: "#9AA8B5",
-        ember: "#E23D2B",
+        ink: "#08090A",
+        panel: "#111315",
+        panel2: "#191C1F",
+        line: "#2A2E32",
+        paper: "#F5F2EA",
+        mute: "#AAA69E",
+        steel: "#A7B0B8",
+        ember: "#E34832",
       },
       fontFamily: {
-        display: ["var(--font-display)", "Arial Narrow", "sans-serif"],
+        display: ["var(--font-display)", "Arial", "sans-serif"],
         sans: ["var(--font-body)", "system-ui", "sans-serif"],
       },
       maxWidth: {
-        site: "1120px",
+        site: "1240px",
       },
     },
   },
