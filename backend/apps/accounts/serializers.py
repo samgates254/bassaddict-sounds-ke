@@ -69,8 +69,10 @@ class RegisterSerializer(serializers.Serializer):
     def create(self, validated_data):
         validated_data.pop("password_confirm")
         password = validated_data.pop("password")
-        # Privilege fields are not accepted. Force a normal customer.
+        email = validated_data.pop("email")
+
         return User.objects.create_user(
+            email=email,
             password=password,
             role=UserRole.CUSTOMER,
             is_staff=False,

@@ -8,12 +8,23 @@ import { loginAction, registerAction, type AuthState } from "@/lib/auth/actions"
 
 const initial: AuthState = { error: "", fieldErrors: {} };
 
-export function LoginForm({ nextPath }: { nextPath: string }) {
+export function LoginForm({
+  nextPath,
+  registered = false,
+}: {
+  nextPath: string;
+  registered?: boolean;
+}) {
   const [state, action, pending] = useActionState(loginAction, initial);
 
   return (
-    <form action={action} className="grid gap-4" noValidate>
+    <form action={action} className="glass-panel grid gap-5 p-6 sm:p-9" noValidate>
       <input type="hidden" name="next" value={nextPath} />
+      {registered ? (
+        <p className="rounded-2xl border border-emerald-200/20 bg-emerald-300/[0.06] px-4 py-3 text-sm text-emerald-100" role="status">
+          Your account has been created. Sign in with your email and password to continue.
+        </p>
+      ) : null}
       {state.error ? (
         <p className="text-sm text-ember" role="alert">
           {state.error}
@@ -48,7 +59,7 @@ export function RegisterForm() {
   const [state, action, pending] = useActionState(registerAction, initial);
 
   return (
-    <form action={action} className="grid gap-4" noValidate>
+    <form action={action} className="glass-panel grid gap-5 p-6 sm:p-9" noValidate>
       {state.error ? (
         <p className="text-sm text-ember" role="alert">
           {state.error}

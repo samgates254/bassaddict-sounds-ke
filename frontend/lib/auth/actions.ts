@@ -28,7 +28,10 @@ export async function loginAction(_prev: AuthState, formData: FormData): Promise
   const result = await apiPost("/auth/login/", { email, password });
   if (!result.ok || !result.data || typeof result.data !== "object") {
     return {
-      error: detailFromApi(result.data, "Unable to sign in right now."),
+      error:
+        result.status === 0
+          ? "The sign-in service is unavailable. Please try again shortly."
+          : detailFromApi(result.data, "Unable to sign in right now."),
       fieldErrors: fieldErrorsFromApi(result.data),
     };
   }
@@ -64,25 +67,15 @@ export async function registerAction(_prev: AuthState, formData: FormData): Prom
   });
   if (!result.ok) {
     return {
-      error: detailFromApi(result.data, "Unable to create the account."),
+      error:
+        result.status === 0
+          ? "The account service is unavailable. Please try again shortly."
+          : detailFromApi(result.data, "Unable to create the account."),
       fieldErrors: fieldErrorsFromApi(result.data),
     };
   }
 
-  const login = await apiPost("/auth/login/", {
-    email: input.email,
-    password: input.password,
-  });
-  if (login.ok && login.data && typeof login.data === "object") {
-    const tokens = login.data as { access?: string; refresh?: string };
-    if (tokens.access && tokens.refresh) {
-      const jar = await cookies();
-      jar.set(ACCESS_COOKIE, tokens.access, accessCookieOptions);
-      jar.set(REFRESH_COOKIE, tokens.refresh, refreshCookieOptions);
-      redirect("/account");
-    }
-  }
-  redirect("/login");
+  redirect("/login?registered=1");
 }
 
 export async function logoutAction() {

@@ -58,6 +58,7 @@ class AuthApiTests(APITestCase):
 
     def test_login_refresh_and_me(self):
         User.objects.create_user(email="amina@example.com", password=self.password)
+
         wrong = self.client.post(
             reverse("auth-login"),
             {"email": "amina@example.com", "password": "wrong-password"},

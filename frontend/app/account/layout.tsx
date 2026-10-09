@@ -20,13 +20,13 @@ export default async function AccountLayout({ children }: { children: React.Reac
           <p className="mt-3 break-words font-display text-3xl font-medium tracking-tight sm:text-4xl">{me.data.email}</p>
         </div>
         <form action={logoutAction}>
-          <button className="text-[0.68rem] uppercase tracking-[0.18em] text-steel hover:text-paper" type="submit">
+          <button className="btn btn-line min-h-10 px-5 py-2 text-[0.62rem]" type="submit">
             Log out
           </button>
         </form>
       </div>
       <AccountNav />
-      <div className="mt-12">{children}</div>
+      <div className="glass-panel mt-8 p-5 sm:mt-10 sm:p-8 lg:p-10">{children}</div>
     </div>
   );
 }

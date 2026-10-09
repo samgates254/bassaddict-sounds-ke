@@ -28,11 +28,11 @@ export default async function EnquiriesPage() {
               <p>Send one from a product, the build form, or the form on this page.</p>
             </EmptyState>
           ) : (
-            <ul className="grid gap-4">
+            <ul className="grid gap-3">
               {enquiries.data.map((enquiry) => (
-                <li key={enquiry.id} className="border-t border-white/10 py-6">
+              <li key={enquiry.id} className="glass-panel p-6 sm:p-8">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h2 className="font-display text-2xl tracking-wide">
+                    <h2 className="font-display text-2xl font-semibold tracking-tight">
                       {enquiryTypeLabel(enquiry.enquiry_type)}
                     </h2>
                     <p className="text-sm text-steel">{statusLabel(enquiry.status)}</p>
@@ -50,7 +50,7 @@ export default async function EnquiriesPage() {
                   {enquiry.location ? <p className="text-sm">Location: {enquiry.location}</p> : null}
                   <p className="mt-3 whitespace-pre-wrap">{enquiry.message}</p>
                   {enquiry.owner_response ? (
-                    <p className="mt-4 border-t border-line pt-3 text-sm">
+                    <p className="mt-4 rounded-2xl border border-[#A8FF00]/10 bg-black/40 p-4 text-sm">
                       <span className="label">Workshop reply</span>
                       <span className="mt-2 block whitespace-pre-wrap">{enquiry.owner_response}</span>
                     </p>

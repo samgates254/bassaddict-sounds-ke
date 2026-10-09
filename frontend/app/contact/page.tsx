@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 
+import { TiltCard } from "@/components/tilt-card";
 import { getBusiness } from "@/lib/api/business";
 import { telHref } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
@@ -28,7 +29,7 @@ export default async function ContactPage() {
     <div className="site grid gap-16 py-16 md:grid-cols-12 md:py-24">
       <div className="md:col-span-5">
         <p className="label">Nairobi</p>
-        <h1 className="poster mt-4 font-display text-6xl sm:text-7xl">Come in. Or call.</h1>
+        <h1 className="poster mt-4 font-display text-6xl sm:text-7xl lg:text-[5.5rem]">Come in.<br />Or call.</h1>
         <address className="mt-10 not-italic">
           <p className="font-display text-2xl font-medium tracking-tight">Ground Floor, New Loitoktok House</p>
           <p className="mt-2 text-mute">Luthuli Avenue</p>
@@ -39,23 +40,23 @@ export default async function ContactPage() {
           Ask about a product, an install, or a custom system. There is no checkout on this site. Opening hours are not listed here.
         </p>
       </div>
-      <ul className="md:col-span-7">
+      <ul className="grid gap-3 md:col-span-7">
         {actions.map((action) => (
-          <li key={action.kicker} className="border-t border-white/10">
+          <TiltCard as="li" key={action.kicker} className="glass-panel glass-panel-hover group">
             <a
-              className="group grid grid-cols-[1fr_auto] items-end gap-4 py-7"
+              className="grid grid-cols-[1fr_auto] items-end gap-4 p-6 sm:p-8"
               href={action.href}
               {...(action.external ? { target: "_blank", rel: "noreferrer" } : {})}
             >
               <span className="min-w-0">
                 <span className="label">{action.kicker}</span>
-                <span className="mt-2 block break-all font-display text-3xl font-medium leading-none tracking-tight sm:text-4xl">
+                <span className="mt-3 block break-all font-display text-3xl font-semibold leading-none tracking-tight sm:text-4xl">
                   {action.title}
                 </span>
               </span>
-              <ArrowUpRight aria-hidden="true" className="mb-2 size-6 text-steel transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ember" />
+              <ArrowUpRight aria-hidden="true" className="mb-2 size-6 text-[#A8FF00] transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#c2ff52]" />
             </a>
-          </li>
+          </TiltCard>
         ))}
       </ul>
     </div>

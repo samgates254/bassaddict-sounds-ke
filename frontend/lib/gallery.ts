@@ -88,7 +88,130 @@ const photos: Omit<ShopPhoto, "alt">[] = [
   },
 ];
 
-export const SHOP_PHOTOS: ShopPhoto[] = photos.map((photo) => ({
+const recentPhotos: Omit<ShopPhoto, "alt">[] = [
+  {
+    src: "/images/gallery/workshop-audio-01.jpg",
+    frame: "mid",
+    caption: "Supplied photo of a loose loudspeaker driver on display.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-02.jpg",
+    frame: "sm",
+    caption: "Supplied photo of an NR professional loudspeaker driver and packaging.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-03.jpg",
+    frame: "sm",
+    caption: "Supplied photo of a CF18801 loudspeaker driver on its box.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-04.jpg",
+    frame: "wide",
+    caption: "Supplied photo of stacked black loudspeaker cabinets.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-05.jpg",
+    frame: "tall",
+    caption: "Supplied photo of floor-standing loudspeaker cabinets in a showroom.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-06.jpg",
+    frame: "sm",
+    caption: "Supplied close-up photo of a large loudspeaker driver.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-07.jpg",
+    frame: "sm",
+    caption: "Supplied photo of a JBL portable speaker.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-08.jpg",
+    frame: "sm",
+    caption: "Supplied close-up photo of the back of a loudspeaker driver.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-09.jpg",
+    frame: "mid",
+    caption: "Supplied photo of a professional loudspeaker driver on display.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-10.jpg",
+    frame: "sm",
+    caption: "Supplied photo of a loudspeaker driver in a shop.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-11.jpg",
+    frame: "mid",
+    caption: "Supplied photo of a large loudspeaker driver at the shop.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-12.jpg",
+    frame: "sm",
+    caption: "Supplied close-up photo of a professional loudspeaker driver.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-13.jpg",
+    frame: "sm",
+    caption: "Supplied photo of a loudspeaker driver viewed from the rear.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-14.jpg",
+    frame: "mid",
+    caption: "NR product image labelled 18WF835 speaker.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-15.jpg",
+    frame: "wide",
+    caption: "Supplied photo of a floor-standing loudspeaker cabinet.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-16.jpg",
+    frame: "sm",
+    caption: "Supplied close-up photo of the rear of a loudspeaker driver.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-17.jpg",
+    frame: "sm",
+    caption: "Supplied photo of a professional woofer driver.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-18.jpg",
+    frame: "mid",
+    caption: "Supplied photo of a loudspeaker driver on a counter.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-19.jpg",
+    frame: "sm",
+    caption: "Supplied close-up photo of the back of a woofer driver.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-20.jpg",
+    frame: "mid",
+    caption: "Supplied photo of a black loudspeaker cabinet.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-21.jpg",
+    frame: "tall",
+    caption: "Supplied photo of a multi-speaker home audio system.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-22.jpg",
+    frame: "wide",
+    caption: "Supplied photo of JBL speakers displayed in a showroom.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-23.jpg",
+    frame: "wide",
+    caption: "Supplied photo of a JBL speaker display.",
+  },
+  {
+    src: "/images/gallery/workshop-audio-24.jpg",
+    frame: "sm",
+    caption: "Supplied close-up photo of a black loudspeaker cabinet.",
+  },
+];
+
+export const SHOP_PHOTOS: ShopPhoto[] = [...photos, ...recentPhotos].map((photo) => ({
   ...photo,
   alt: photo.caption,
 }));

@@ -11,9 +11,10 @@ export function EmptyState({
 }) {
   const Heading = heading;
   return (
-    <div className="max-w-xl border-l border-white/15 pl-6 py-2">
-      <Heading className="font-display text-3xl font-medium tracking-tight">{title}</Heading>
-      {children ? <div className="mt-3 max-w-xl text-mute">{children}</div> : null}
+    <div className="glass-panel max-w-2xl px-7 py-8 sm:px-9 sm:py-10">
+      <span aria-hidden="true" className="mb-6 block h-px w-12 bg-gradient-to-r from-[#8CFF00] to-[#d5ff8f]" />
+      <Heading className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">{title}</Heading>
+      {children ? <div className="mt-3 max-w-xl leading-7 text-mute">{children}</div> : null}
     </div>
   );
 }

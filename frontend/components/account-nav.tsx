@@ -14,7 +14,7 @@ export function AccountNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="mt-10 flex gap-7 overflow-x-auto border-b border-white/10" aria-label="Account">
+    <nav className="mt-10 flex gap-2 overflow-x-auto rounded-full border border-[#A8FF00]/15 bg-black/40 p-1.5 backdrop-blur-xl" aria-label="Account">
       {LINKS.map((link) => {
         const active = pathname === link.href;
         return (
@@ -22,8 +22,8 @@ export function AccountNav() {
             key={link.href}
             href={link.href}
             aria-current={active ? "page" : undefined}
-            className={`shrink-0 border-b-2 pb-3 text-sm ${
-              active ? "border-ember text-paper" : "border-transparent text-mute hover:text-paper"
+            className={`shrink-0 rounded-full px-4 py-2.5 text-sm transition ${
+              active ? "bg-white/10 text-paper shadow-inner shadow-white/5" : "text-mute hover:bg-white/[0.05] hover:text-paper"
             }`}
           >
             {link.label}

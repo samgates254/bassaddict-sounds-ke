@@ -36,7 +36,7 @@ export function EnquiryForm({
 
   if (!signedIn) {
     return (
-      <div>
+      <div className="glass-panel p-6 sm:p-9">
         <h2 className="poster font-display text-4xl sm:text-5xl">Request this from the shop</h2>
         <p className="mt-3 text-mute">
           Sign in to send an enquiry. Bassaddict confirms price and installation directly.
@@ -51,7 +51,7 @@ export function EnquiryForm({
 
   if (state.ok) {
     return (
-      <div>
+      <div className="glass-panel p-6 sm:p-9">
         <h2 className="poster font-display text-4xl sm:text-5xl">Enquiry sent</h2>
         <p className="mt-3 text-mute">
           The workshop has it as a new enquiry. You can also continue the conversation on
@@ -72,7 +72,7 @@ export function EnquiryForm({
   }
 
   return (
-    <form action={action} className="grid gap-5">
+    <form action={action} className="glass-panel grid gap-5 p-6 sm:p-9">
       <h2 className="poster font-display text-4xl sm:text-5xl">
         {productName ? `Request ${productName}` : "New enquiry"}
       </h2>

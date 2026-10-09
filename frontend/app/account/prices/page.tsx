@@ -35,22 +35,22 @@ export default async function PricesPage() {
           </EmptyState>
         </div>
       ) : (
-        <ul className="mt-8 grid gap-4">
+        <ul className="mt-8 grid gap-3">
           {prices.data.map((price) => {
             const product = bySlug.get(price.product);
             return (
-              <li key={price.product} className="border-t border-white/10 py-8">
+              <li key={price.product} className="glass-panel glass-panel-hover p-6 sm:p-8">
                 <p className="label">{price.model_number || "Product"}</p>
-                <h2 className="mt-2 font-display text-3xl tracking-wide">{price.product_name}</h2>
+                <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight">{price.product_name}</h2>
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                  <div>
+                  <div className="rounded-2xl border border-[#A8FF00]/10 bg-black/40 p-4">
                     <p className="text-xs uppercase tracking-[0.14em] text-steel">Public price</p>
                     <p className="num mt-1 text-xl">
                       {product ? publicPriceLabel(product) : "See product"}
                     </p>
                   </div>
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.14em] text-ember">
+                  <div className="rounded-2xl border border-[#A8FF00]/15 bg-[#A8FF00]/[0.05] p-4">
+                    <p className="text-xs uppercase tracking-[0.14em] text-[#A8FF00]">
                       Your Bassaddict price
                     </p>
                     <p className="num mt-1 font-display text-3xl">{formatKes(price.price)}</p>

@@ -9,6 +9,14 @@ import { pageMetadata } from "@/lib/seo";
 const ASK =
   "Hello Bassaddict Sounds KE,\nCould you send photos of a recent installation?\nThank you.";
 
+const FRAME_CLASSES: Record<string, string> = {
+  hero: "md:col-span-8 md:row-span-6",
+  tall: "md:col-span-4 md:row-span-6",
+  wide: "min-h-64 md:col-span-8 md:row-span-4",
+  mid: "md:col-span-6 md:row-span-4",
+  sm: "md:col-span-4 md:row-span-4",
+};
+
 export const metadata = pageMetadata({
   title: "Gallery",
   path: "/gallery",
@@ -37,9 +45,9 @@ export default async function GalleryPage() {
           </EmptyState>
         </div>
       ) : (
-        <ul className="lookbook px-2 sm:px-3">
+        <ul className="grid gap-3 px-2 sm:px-3 md:grid-flow-dense md:auto-rows-[7.5rem] md:grid-cols-12">
           {SHOP_PHOTOS.map((photo) => (
-            <li key={photo.src} className={`frame-${photo.frame} group relative min-w-0 overflow-hidden bg-panel`}>
+            <li key={photo.src} className={`glass-panel group relative min-h-[22rem] min-w-0 overflow-hidden md:min-h-0 ${FRAME_CLASSES[photo.frame] || ""}`}>
               <Image
                 src={photo.src}
                 alt={photo.alt}
@@ -47,8 +55,8 @@ export default async function GalleryPage() {
                 sizes="(min-width: 1024px) 60vw, 100vw"
                 className="object-cover transition duration-700 group-hover:scale-[1.03]"
               />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/55 to-transparent p-4 pt-16 sm:p-5">
-                <p className="line-clamp-3 max-w-lg text-sm leading-5 text-paper" title={photo.caption}>
+              <div className="pointer-events-none absolute inset-x-3 bottom-3 rounded-2xl border border-white/10 bg-black/35 p-4 pt-8 backdrop-blur-xl sm:inset-x-4 sm:bottom-4">
+                <p className="line-clamp-3 max-w-lg text-sm leading-5 text-white/85" title={photo.caption}>
                   {photo.caption}
                 </p>
               </div>

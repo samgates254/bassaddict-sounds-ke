@@ -1,6 +1,8 @@
 import { getApiUrl } from "@/lib/config";
 import { readAccessToken } from "@/lib/auth/session";
 
+const API_REQUEST_TIMEOUT_MS = 5_000;
+
 export type ApiResult<T> =
   | { ok: true; data: T }
   | { ok: false; status: number; message: string };
@@ -29,6 +31,7 @@ export async function apiGet<T>(path: string, auth = false): Promise<ApiResult<T
     const response = await fetch(`${getApiUrl()}${path}`, {
       headers,
       cache: "no-store",
+      signal: AbortSignal.timeout(API_REQUEST_TIMEOUT_MS),
     });
     if (!response.ok) {
       return { ok: false, status: response.status, message: await readMessage(response) };
@@ -51,6 +54,7 @@ export async function apiPost(path: string, body: unknown, token?: string | null
       headers,
       body: JSON.stringify(body),
       cache: "no-store",
+      signal: AbortSignal.timeout(API_REQUEST_TIMEOUT_MS),
     });
     const data = await response.json().catch(() => null);
     return { ok: response.ok, status: response.status, data };

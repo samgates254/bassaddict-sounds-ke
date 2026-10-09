@@ -69,12 +69,12 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
         <div className="lg:col-span-7">
           <ProductGallery images={images} name={product.name} />
         </div>
-        <div className="lg:col-span-5 lg:pt-4">
+        <div className="glass-panel lg:col-span-5 lg:mt-0 lg:p-8">
           <p className="label">{product.brand || product.category.name}</p>
           <h1 className="poster mt-4 break-words font-display text-5xl sm:text-6xl">{product.name}</h1>
           {product.model_number ? <p className="mt-4 text-mute">{product.model_number}</p> : null}
           <p className="mt-10 text-[0.68rem] uppercase tracking-[0.2em] text-steel">Public price</p>
-          <p className="num mt-2 font-display text-5xl font-medium tracking-tight text-paper">{publicPriceLabel(product)}</p>
+          <p className="num mt-2 font-display text-5xl font-semibold tracking-tight text-paper">{publicPriceLabel(product)}</p>
           <p className="mt-3 text-sm text-steel">
             {product.price_type.replaceAll("_", " ")} · {stockLabel(product.stock_status)}
             {product.featured ? " · Featured" : ""}
@@ -106,7 +106,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
           <Specs value={product.specifications} />
         </div>
       </div>
-      <div className="site border-t border-white/10 py-16 lg:grid lg:grid-cols-12" id="request">
+      <div className="site py-16 lg:grid lg:grid-cols-12" id="request">
         <div className="lg:col-span-7 lg:col-start-6">
           <EnquiryForm
             signedIn={me.ok}

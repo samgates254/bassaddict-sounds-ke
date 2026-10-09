@@ -33,7 +33,7 @@ export function ProductGallery({ images, name }: { images: ProductImage[]; name:
     <div
       tabIndex={images.length > 1 ? 0 : undefined}
       aria-label={images.length > 1 ? "Product photos" : undefined}
-      className="min-w-0"
+      className="glass-panel min-w-0 overflow-hidden p-2.5 sm:p-3"
       onKeyDown={(event) => {
         if (images.length < 2) return;
         if (event.key === "ArrowRight") {
@@ -50,11 +50,11 @@ export function ProductGallery({ images, name }: { images: ProductImage[]; name:
         key={image.image_url}
         src={image.image_url}
         alt={image.alt_text || name}
-        className="photo-in aspect-[4/5] w-full bg-[#101214] object-cover sm:aspect-[5/4]"
+        className="aspect-[4/5] w-full rounded-[20px] border border-white/10 bg-[#10101a] object-cover sm:aspect-[5/4]"
         decoding="async"
       />
       {images.length > 1 ? (
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-1" role="group" aria-label="Product photos">
+        <div className="mt-3 flex gap-2 overflow-x-auto px-1 pb-1" role="group" aria-label="Product photos">
           {images.map((item, itemIndex) => {
             const selected = itemIndex === index;
             return (
@@ -64,7 +64,7 @@ export function ProductGallery({ images, name }: { images: ProductImage[]; name:
                 onClick={() => show(itemIndex)}
                 aria-pressed={selected}
                 aria-current={selected ? "true" : undefined}
-                className={`h-20 w-16 shrink-0 border-b-2 ${selected ? "border-ember" : "border-transparent opacity-70"}`}
+                className={`h-20 w-16 shrink-0 overflow-hidden rounded-xl border ${selected ? "border-[#A8FF00] shadow-[0_0_18px_rgba(168,255,0,0.3)]" : "border-[#A8FF00]/15 opacity-65"}`}
                 aria-label={selected ? `Photo ${itemIndex + 1}, selected` : `Show photo ${itemIndex + 1}`}
               >
                 <img src={item.image_url} alt="" className="h-full w-full object-cover" decoding="async" />

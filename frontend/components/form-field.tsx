@@ -13,7 +13,7 @@ export function FormField({
 }) {
   return (
     <label className={className ? `field ${className}` : "field"}>
-      <span className="label">{label}</span>
+      <span className="label pl-1">{label}</span>
       {children}
       {error ? (
         <span className="text-sm text-ember" role="alert">

@@ -19,7 +19,7 @@ export default async function AccountPage() {
     <div>
       <h1 className="break-words font-display text-5xl font-medium tracking-tight">{displayName(me.data)}</h1>
       <p className="mt-2 text-mute">Customer account. Shop management stays in Django Admin.</p>
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
+      <div className="mt-8 grid gap-3 sm:grid-cols-3">
         <Summary label="Special prices" value={prices.ok ? String(prices.data.length) : "—"} />
         <Summary label="Enquiries" value={enquiries.ok ? String(enquiries.data.length) : "—"} />
         <Summary label="Phone" value={me.data.phone || "Not set"} />
@@ -40,11 +40,11 @@ export default async function AccountPage() {
           Profile
         </Link>
       </div>
-      <h2 className="mt-10 font-display text-3xl tracking-wide">Latest enquiry</h2>
+      <h2 className="mt-12 font-display text-3xl font-semibold tracking-tight">Latest enquiry</h2>
       {!latest ? (
         <p className="mt-3 text-mute">You have not sent an enquiry yet.</p>
       ) : (
-        <article className="mt-4 border-t border-white/10 pt-5">
+        <article className="glass-panel mt-4 p-6">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h3 className="font-display text-2xl tracking-wide">
               {enquiryTypeLabel(latest.enquiry_type)}
@@ -56,9 +56,9 @@ export default async function AccountPage() {
         </article>
       )}
       {recent.length > 1 ? (
-        <ul className="mt-4 divide-y divide-line border-y border-line">
+        <ul className="mt-3 grid gap-2">
           {recent.slice(1).map((enquiry) => (
-            <li key={enquiry.id} className="flex items-baseline justify-between gap-4 py-3">
+            <li key={enquiry.id} className="glass-panel flex items-baseline justify-between gap-4 px-5 py-4">
               <span>{enquiryTypeLabel(enquiry.enquiry_type)}</span>
               <span className="text-sm text-steel">{statusLabel(enquiry.status)}</span>
             </li>
@@ -71,9 +71,9 @@ export default async function AccountPage() {
 
 function Summary({ label, value }: { label: string; value: string }) {
   return (
-    <div className="border-t border-white/10 pt-4">
+    <div className="glass-panel p-5 sm:p-6">
       <p className="label">{label}</p>
-      <p className="mt-2 break-words font-display text-3xl tracking-wide">{value}</p>
+      <p className="mt-3 break-words font-display text-3xl font-semibold tracking-tight">{value}</p>
     </div>
   );
 }

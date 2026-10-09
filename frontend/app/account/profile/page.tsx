@@ -20,7 +20,7 @@ export default async function ProfilePage() {
       <p className="mt-3 text-mute">
         This is read-only. Profile editing is not available until a later API phase.
       </p>
-      <dl className="mt-8 divide-y divide-line border-y border-line">
+      <dl className="glass-panel mt-8 divide-y divide-white/[0.08] px-6 sm:px-8">
         <Row label="Name" value={displayName(user)} />
         <Row label="Email" value={user.email} />
         <Row label="Phone" value={user.phone || "Not set"} />
@@ -34,7 +34,7 @@ export default async function ProfilePage() {
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
-    <div className="grid gap-1 py-4 sm:grid-cols-[10rem_1fr]">
+    <div className="grid gap-1 py-5 sm:grid-cols-[10rem_1fr]">
       <dt className="label">{label}</dt>
       <dd className="min-w-0 break-words">{value}</dd>
     </div>

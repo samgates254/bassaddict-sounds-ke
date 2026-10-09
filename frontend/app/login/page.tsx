@@ -19,6 +19,7 @@ export default async function LoginPage({
   const params = await searchParams;
   const nextValue = Array.isArray(params.next) ? params.next[0] : params.next;
   const nextPath = safeNextPath(nextValue);
+  const registeredValue = Array.isArray(params.registered) ? params.registered[0] : params.registered;
 
   return (
     <div className="site grid items-end gap-14 py-16 md:grid-cols-12 md:py-28">
@@ -28,7 +29,7 @@ export default async function LoginPage({
         <p className="mt-6 max-w-xs text-mute">Use the email and password for your Bassaddict account.</p>
       </div>
       <div className="md:col-span-6 md:col-start-7">
-        <LoginForm nextPath={nextPath} />
+        <LoginForm nextPath={nextPath} registered={registeredValue === "1"} />
         <p className="mt-8 text-sm text-mute">
           No account yet?{" "}
           <Link className="text-paper underline decoration-white/30 underline-offset-4" href="/register">

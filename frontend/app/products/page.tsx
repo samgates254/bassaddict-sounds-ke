@@ -37,7 +37,7 @@ export default async function ProductsPage({
         Equipment published by Bassaddict. The prices here are public prices.
       </p>
 
-      <form className="mt-14 grid gap-x-6 gap-y-4 border-t border-white/10 pt-8 sm:grid-cols-2 lg:grid-cols-5" method="get">
+      <form className="glass-panel mt-14 grid gap-x-5 gap-y-5 p-5 sm:grid-cols-2 sm:p-7 lg:grid-cols-5" method="get">
         <FormField label="Category">
           <select name="category" defaultValue={filters.category}>
             <option value="">All</option>
@@ -88,7 +88,7 @@ export default async function ProductsPage({
             <p>Nothing matches. The shop has not published a product for this view, or the filter is too tight.</p>
           </EmptyState>
         ) : (
-          <div className="grid items-start gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid items-start gap-x-7 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {products.data.map((product, index) => (
               <div key={product.slug} className={index % 5 === 0 ? "sm:col-span-2 lg:col-span-2" : undefined}>
                 <ProductCard product={product} large={index % 5 === 0} />
