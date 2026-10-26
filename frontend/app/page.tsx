@@ -1,19 +1,30 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import { ArrowDown, ArrowRight, AudioLines, Headphones, MapPin } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  AudioLines,
+  MapPin,
+  MessageCircle,
+  ShieldCheck,
+  Wrench,
+  Volume2,
+  Sparkles,
+  Radio,
+  Sliders,
+} from "lucide-react";
 
-import { Button } from "@/components/button";
 import { BrandWall } from "@/components/brand-wall";
+import { Button } from "@/components/button";
 import { EmptyState } from "@/components/empty-state";
 import { ErrorState } from "@/components/error-state";
-import { HeroPhotoBackground } from "@/components/hero-photo-background";
+import { HeroVideo } from "@/components/hero-video";
 import { ProductCard } from "@/components/product-card";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { getBusiness } from "@/lib/api/business";
-import { getProducts } from "@/lib/api/products";
+import { getCategories, getProducts } from "@/lib/api/products";
 import { getServices } from "@/lib/api/services";
-import { pageMetadata } from "@/lib/seo";
 import { generalEnquiryMessage } from "@/lib/whatsapp";
 
 type WaveStyle = CSSProperties & {
@@ -21,162 +32,213 @@ type WaveStyle = CSSProperties & {
   "--bar-delay": string;
 };
 
-type ParticleStyle = CSSProperties & {
-  "--particle-x": string;
-  "--particle-y": string;
-  "--particle-size": string;
-};
-
-export const metadata = pageMetadata({
-  title: "Bassaddict Sounds KE | Premium Car Audio & Professional Installations",
-  absoluteTitle: true,
-  path: "/",
-  description:
-    "Premium car audio systems and professional installations. Speakers, amplifiers, subwoofers, and installs from Bassaddict Sounds KE on Luthuli Avenue, Nairobi.",
-});
+const waveBars = Array.from({ length: 48 }, (_, i) => i);
 
 export default async function HomePage() {
-  const [products, services, businessResult] = await Promise.all([
-    getProducts(),
+  const [productsResult, servicesResult, categoriesResult, businessResult] = await Promise.all([
+    getProducts({ featured: "true" }),
     getServices(),
+    getCategories(),
     getBusiness(),
   ]);
+
   const business = businessResult.business;
-  const featured = products.ok ? products.data.filter((item) => item.featured).slice(0, 3) : [];
-  const shown = featured.length ? featured : products.ok ? products.data.slice(0, 3) : [];
-  const waveBars = Array.from({ length: 48 }, (_, index) => index);
-  const particles = Array.from({ length: 56 }, (_, index) => index);
+  const whatsappNumber = business.whatsapp_number || "0794069405";
+  const categories = categoriesResult.ok ? categoriesResult.data : [];
+  const products = productsResult.ok ? productsResult.data : [];
+  const services = servicesResult.ok ? servicesResult.data : [];
 
   return (
-    <div>
-      <section className="relative isolate flex min-h-[calc(100svh-4.25rem)] items-center overflow-hidden border-b border-[#A8FF00]/15 bg-[#070A07]">
-        <HeroPhotoBackground />
-        <div aria-hidden="true" className="absolute -left-32 -top-40 size-[32rem] rounded-full bg-[#A8FF00]/15 blur-[120px]" />
-        <div aria-hidden="true" className="absolute -right-32 bottom-[-12rem] size-[36rem] rounded-full bg-[#A8FF00]/10 blur-[150px]" />
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_22%_12%,rgba(168,255,0,0.12),transparent_34%),radial-gradient(circle_at_78%_85%,rgba(140,255,0,0.08),transparent_42%)]" />
-        <div aria-hidden="true" className="absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_82%,transparent)]">
-          {particles.map((particle) => (
-            <span
-              key={particle}
-              className="absolute left-[var(--particle-x)] top-[var(--particle-y)] size-[var(--particle-size)] animate-hero-particle rounded-full bg-[#c2ff52] opacity-0 shadow-[0_0_12px_rgba(168,255,0,0.85)]"
-              style={{
-                "--particle-x": `${(particle * 47 + 9) % 100}%`,
-                "--particle-y": `${(particle * 71 + 17) % 100}%`,
-                "--particle-size": `${1 + (particle % 3)}px`,
-                animationDelay: `${(particle % 13) * -0.42}s`,
-                animationDuration: `${5 + (particle % 7)}s`,
-              } as ParticleStyle}
-            />
-          ))}
-        </div>
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 [perspective:1000px] [transform-style:preserve-3d]">
-          <div className="absolute right-[5%] top-1/2 aspect-square w-[min(48vw,34rem)] -translate-y-1/2 rotate-[-22deg] rounded-full border border-[#A8FF00]/15 bg-[radial-gradient(circle,transparent_0_35%,rgba(168,255,0,0.06)_35.2%_35.6%,transparent_35.8%_49%,rgba(168,255,0,0.08)_49.2%_49.5%,transparent_49.8%),radial-gradient(circle,rgba(168,255,0,0.14),rgba(7,10,7,0.03)_58%,transparent_70%)] shadow-[inset_0_0_90px_rgba(168,255,0,0.12),0_0_100px_rgba(168,255,0,0.1)] [transform:translateY(-50%)_rotateX(68deg)_rotateZ(-22deg)] max-md:right-[-25%] max-md:w-[88vw]" />
-          <div className="absolute right-[19%] top-[17%] grid aspect-square w-[clamp(9rem,19vw,16rem)] animate-hero-float place-items-center rounded-[2rem] border border-[#A8FF00]/15 bg-black/40 text-[#c2ff52]/85 shadow-[inset_0_1px_rgba(255,255,255,0.14),0_28px_80px_rgba(0,0,0,0.42)] backdrop-blur-xl [transform:rotateY(-18deg)_rotateX(10deg)_rotateZ(8deg)] max-md:right-[18%] max-md:top-[20%]">
-            <Headphones className="size-24 sm:size-32 lg:size-40" strokeWidth={1} />
-          </div>
-          <div className="absolute right-[4%] top-[57%] grid aspect-square w-[clamp(6.5rem,13vw,10rem)] animate-hero-float-delayed place-items-center rounded-full border border-[#A8FF00]/30 bg-[radial-gradient(circle,rgba(168,255,0,0.19),rgba(168,255,0,0.025)_72%)] text-[#c2ff52] drop-shadow-[0_0_28px_rgba(168,255,0,0.3)] max-md:right-[2%] max-md:top-[61%]">
-            <AudioLines className="size-20 sm:size-28" strokeWidth={1} />
-          </div>
-          <div className="absolute right-[5%] top-[27%] flex h-32 animate-hero-float-delayed items-center gap-2 rounded-2xl border border-[#A8FF00]/15 bg-black/40 px-5 shadow-[0_20px_60px_rgba(0,0,0,0.32)] backdrop-blur-xl [transform:rotateY(-18deg)_rotateZ(7deg)] max-md:right-[-4%] max-md:scale-[.78]">
-            {[38, 70, 48, 94, 62, 82, 44].map((height, bar) => (
-              <span key={bar} className="w-2 origin-center animate-hero-pulse rounded-full bg-gradient-to-t from-[#8CFF00] to-[#d5ff8f] shadow-[0_0_16px_rgba(168,255,0,0.35)]" style={{ height: `${height}%`, animationDelay: `${bar * -0.18}s` }} />
-            ))}
-          </div>
-          <span className="absolute right-[17%] top-1/2 aspect-square w-[min(43vw,30rem)] -translate-y-1/2 rotate-[34deg] rounded-full border border-[#A8FF00]/15 [transform:translateY(-50%)_rotateX(68deg)_rotateZ(34deg)] max-md:right-[-8%] max-md:w-[72vw]" />
-          <span className="absolute right-[14%] top-1/2 aspect-square w-[min(38vw,26rem)] -translate-y-1/2 rotate-[-28deg] rounded-full border border-[#A8FF00]/15 [transform:translateY(-50%)_rotateX(68deg)_rotateZ(-28deg)] max-md:right-[-2%] max-md:w-[64vw]" />
-        </div>
-        <div className="site relative z-10 grid items-center gap-8 py-16 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.8fr)] lg:py-24">
-          <div className="max-w-3xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-[#A8FF00]/15 bg-black/40 px-4 py-2 text-[0.66rem] font-semibold tracking-[0.22em] text-white/80 backdrop-blur-xl">
-              <span className="size-2 rounded-full bg-[#A8FF00] shadow-[0_0_12px_#A8FF00]" />
-              NAIROBI · CAR AUDIO · BUILT FOR THE ROAD
-            </p>
-            <h1 className="poster mt-7 grid gap-[0.08em] font-display text-[clamp(3.4rem,8vw,7.6rem)] leading-[.92] tracking-[-.065em] [text-wrap:balance]">
-              <span>Feel The Bass.</span>
-              <span className="w-fit bg-gradient-to-r from-white via-[#c2ff52] to-[#A8FF00] bg-clip-text text-transparent">Own The Sound.</span>
-            </h1>
-            <p className="mt-7 max-w-md text-base leading-7 text-white/70 sm:text-lg">
-              Premium car audio systems & professional installations. Turn every drive into your own frequency.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button href="/products">
-                Explore products
-                <ArrowRight aria-hidden="true" className="size-4" />
-              </Button>
-              <Button variant="line" href="/build">
-                Build my sound system
-              </Button>
-            </div>
-            <div className="mt-10 flex items-center gap-4 text-xs font-medium uppercase tracking-[0.16em] text-white/55">
-              <MapPin aria-hidden="true" className="size-4 text-[#A8FF00]" />
-              Luthuli Avenue · Nairobi
-              <span aria-hidden="true" className="h-px w-10 bg-[#A8FF00]/40" />
-              <span>Est. for your drive</span>
-            </div>
-          </div>
-          <a href="#showroom" className="group hidden items-center gap-3 justify-self-end self-end pb-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/75 transition hover:text-white lg:flex">
-            <span className="grid size-11 place-items-center rounded-full border border-white/30 transition group-hover:border-ember group-hover:bg-ember">
-              <ArrowDown aria-hidden="true" className="size-4 transition group-hover:translate-y-0.5" />
-            </span>
-            Explore the sound
-          </a>
-        </div>
-      </section>
+    <div className="flex flex-col">
+      {/* A. Cinematic Video Hero */}
+      <HeroVideo whatsappNumber={whatsappNumber} />
 
-      <section className="border-b border-[#A8FF00]/15 bg-black/40 backdrop-blur-xl">
-        <div className="site flex flex-col gap-6 py-7 sm:flex-row sm:items-center sm:justify-between">
+      {/* Visualizer Frequency Bar */}
+      <section className="border-b border-[#A8FF00]/15 bg-black/60 backdrop-blur-xl">
+        <div className="site flex flex-col gap-6 py-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
-            <span className="grid size-11 shrink-0 place-items-center rounded-full border border-[#A8FF00]/15 bg-black/40 text-[#c2ff52] shadow-[0_0_30px_rgba(168,255,0,0.15)] backdrop-blur-xl">
+            <span className="grid size-11 shrink-0 place-items-center rounded-full border border-[#A8FF00]/25 bg-[#070A07] text-[#c2ff52] shadow-[0_0_25px_rgba(168,255,0,0.2)]">
               <AudioLines aria-hidden="true" className="size-5" />
             </span>
             <div>
-              <p className="text-sm font-semibold text-paper">Feel every frequency</p>
-              <p className="mt-1 text-xs text-mute">Thoughtfully chosen gear. Clean, professional installs.</p>
+              <p className="text-sm font-semibold text-white">Feel Every Frequency</p>
+              <p className="text-xs text-stone-400">
+                Acoustic cabinet design, clean high-efficiency speakers, and ground-shaking bass.
+              </p>
             </div>
           </div>
-          <div className="sound-wave group inline-flex h-8 w-fit items-center gap-[3px] text-[#A8FF00]" aria-label="Soundwave visualizer" role="img">
+          <div
+            className="sound-wave group inline-flex h-8 w-fit items-center gap-[3px] text-[#A8FF00]"
+            aria-label="Soundwave visualizer"
+            role="img"
+          >
             {waveBars.map((bar) => (
               <span
                 key={bar}
                 className="h-[var(--bar-height)] w-[3px] min-h-1 rounded-full bg-current transition-transform group-hover:animate-wave-bars"
-                style={{
-                  "--bar-height": `${18 + ((bar * 37 + 13) % 78)}%`,
-                  "--bar-delay": `${(bar % 9) * 45}ms`,
-                } as WaveStyle}
+                style={
+                  {
+                    "--bar-height": `${18 + ((bar * 37 + 13) % 78)}%`,
+                    "--bar-delay": `${(bar % 9) * 45}ms`,
+                  } as WaveStyle
+                }
               />
             ))}
           </div>
         </div>
       </section>
 
+      {/* Brand Wall */}
       <BrandWall />
 
-      <section id="showroom" className="site scroll-mt-24 py-24 md:py-32">
+      {/* B. Shop by Category */}
+      <section className="site py-20 sm:py-28">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <p className="label">Find your frequency</p>
-            <h2 className="poster mt-4 font-display text-5xl sm:text-7xl">The showroom</h2>
+            <p className="label">Sound Architecture</p>
+            <h2 className="poster mt-3 font-display text-4xl sm:text-6xl text-white">
+              Shop by Audio Category
+            </h2>
           </div>
-          <Link href="/products" className="hidden items-center gap-2 text-[0.68rem] uppercase tracking-[0.18em] text-steel hover:text-paper sm:flex">
-            All products
-            <ArrowRight aria-hidden="true" className="size-4" />
+          <Link
+            href="/products"
+            className="hidden items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#A8FF00] hover:underline sm:flex"
+          >
+            All Categories
+            <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         </div>
-        <div aria-hidden="true" className="lime-rule mt-8" />
-        <div className="mt-12">
-          {!products.ok ? (
-            <ErrorState title="Unable to load products right now.">
-              <p>Please check your connection and try again.</p>
-            </ErrorState>
-          ) : shown.length === 0 ? (
-            <EmptyState title="Nothing is on the floor yet.">
-              <p>Active products appear here once the shop publishes them. Prices are never invented on this page.</p>
+
+        <div className="lime-rule mt-6" />
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Category 1: Speakers */}
+          <Link
+            href="/products?category=speakers"
+            className="group glass-panel glass-panel-hover relative overflow-hidden p-6 flex flex-col justify-between min-h-[260px]"
+          >
+            <div className="relative z-10">
+              <span className="grid size-12 place-items-center rounded-2xl border border-[#A8FF00]/25 bg-[#070A07] text-[#A8FF00] group-hover:bg-[#A8FF00] group-hover:text-[#070A07] transition duration-300">
+                <Volume2 className="size-6" aria-hidden="true" />
+              </span>
+              <h3 className="mt-6 font-display text-2xl font-bold text-white group-hover:text-[#A8FF00] transition">
+                Speakers &amp; Coaxials
+              </h3>
+              <p className="mt-2 text-xs text-stone-400 leading-relaxed">
+                2-way &amp; 3-way high efficiency coaxial drivers, component tweeters, and mid-range speakers.
+              </p>
+            </div>
+            <div className="relative z-10 mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs font-semibold uppercase tracking-wider text-[#A8FF00]">
+              <span>Explore Speakers</span>
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            </div>
+          </Link>
+
+          {/* Category 2: Subwoofers */}
+          <Link
+            href="/products?category=subwoofers"
+            className="group glass-panel glass-panel-hover relative overflow-hidden p-6 flex flex-col justify-between min-h-[260px]"
+          >
+            <div className="relative z-10">
+              <span className="grid size-12 place-items-center rounded-2xl border border-[#A8FF00]/25 bg-[#070A07] text-[#A8FF00] group-hover:bg-[#A8FF00] group-hover:text-[#070A07] transition duration-300">
+                <Radio className="size-6" aria-hidden="true" />
+              </span>
+              <h3 className="mt-6 font-display text-2xl font-bold text-white group-hover:text-[#A8FF00] transition">
+                Subwoofers &amp; Bass
+              </h3>
+              <p className="mt-2 text-xs text-stone-400 leading-relaxed">
+                Active underseat enclosures, competition 12&quot; subs, Champion series, and custom ported boxes.
+              </p>
+            </div>
+            <div className="relative z-10 mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs font-semibold uppercase tracking-wider text-[#A8FF00]">
+              <span>Explore Bass Gear</span>
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            </div>
+          </Link>
+
+          {/* Category 3: Amplifiers */}
+          <Link
+            href="/products?category=amplifiers"
+            className="group glass-panel glass-panel-hover relative overflow-hidden p-6 flex flex-col justify-between min-h-[260px]"
+          >
+            <div className="relative z-10">
+              <span className="grid size-12 place-items-center rounded-2xl border border-[#A8FF00]/25 bg-[#070A07] text-[#A8FF00] group-hover:bg-[#A8FF00] group-hover:text-[#070A07] transition duration-300">
+                <Sliders className="size-6" aria-hidden="true" />
+              </span>
+              <h3 className="mt-6 font-display text-2xl font-bold text-white group-hover:text-[#A8FF00] transition">
+                Power Amplifiers
+              </h3>
+              <p className="mt-2 text-xs text-stone-400 leading-relaxed">
+                Class-D monoblock sub amps, 4-channel surround power, DSP processors, and wiring kits.
+              </p>
+            </div>
+            <div className="relative z-10 mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs font-semibold uppercase tracking-wider text-[#A8FF00]">
+              <span>Explore Amplifiers</span>
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            </div>
+          </Link>
+
+          {/* Category 4: Displays & Head Units */}
+          <Link
+            href="/products?category=monitors"
+            className="group glass-panel glass-panel-hover relative overflow-hidden p-6 flex flex-col justify-between min-h-[260px]"
+          >
+            <div className="relative z-10">
+              <span className="grid size-12 place-items-center rounded-2xl border border-[#A8FF00]/25 bg-[#070A07] text-[#A8FF00] group-hover:bg-[#A8FF00] group-hover:text-[#070A07] transition duration-300">
+                <Sparkles className="size-6" aria-hidden="true" />
+              </span>
+              <h3 className="mt-6 font-display text-2xl font-bold text-white group-hover:text-[#A8FF00] transition">
+                Displays &amp; In-Dash
+              </h3>
+              <p className="mt-2 text-xs text-stone-400 leading-relaxed">
+                7-inch &amp; 9-inch HD TFT/LED monitors, Android touchscreens, reverse camera integrations.
+              </p>
+            </div>
+            <div className="relative z-10 mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs font-semibold uppercase tracking-wider text-[#A8FF00]">
+              <span>Explore Displays</span>
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* C. The Showroom (Featured Products) */}
+      <section id="showroom" className="site scroll-mt-24 py-16 sm:py-24">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="label">Luthuli Avenue Stock</p>
+            <h2 className="poster mt-3 font-display text-4xl sm:text-6xl text-white">
+              Featured Showroom Equipment
+            </h2>
+            <p className="mt-2 text-sm text-stone-400 max-w-xl">
+              Audition and purchase top-tier car audio equipment in stock today at our Nairobi showroom.
+            </p>
+          </div>
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#A8FF00] hover:underline"
+          >
+            View Complete Collection ({products.length})
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </Link>
+        </div>
+
+        <div className="lime-rule mt-6" />
+
+        <div className="mt-10">
+          {products.length === 0 ? (
+            <EmptyState title="Nothing is on the showroom floor right now.">
+              <p>Active products appear here once published. Prices are never invented on this page.</p>
             </EmptyState>
           ) : (
-            <div className="grid items-start gap-x-10 gap-y-16 lg:grid-cols-12">
-              {shown.map((product, index) => (
-                <div key={product.slug} className={index === 0 ? "lg:col-span-7" : "lg:col-span-5"}>
-                  <ProductCard product={product} large={index === 0} />
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {products.map((product, idx) => (
+                <div key={product.slug} className={idx === 0 ? "sm:col-span-2 lg:col-span-2" : ""}>
+                  <ProductCard
+                    product={product}
+                    large={idx === 0}
+                    whatsappNumber={whatsappNumber}
+                  />
                 </div>
               ))}
             </div>
@@ -184,86 +246,222 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section>
-        <div className="relative h-[70vw] min-h-[22rem] max-h-[46rem] overflow-hidden border-y border-[#A8FF00]/15">
-          <Image
-            src="/images/gallery/pioneer-ts-w30040d4.jpg"
-            alt="Magnet label reads TS-W30040D4, Champion series PRO, 2400W MAX, 800W NOM, 4.0 DVC."
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#070A07]/35 via-transparent to-[#070A07]/20" />
-        </div>
-        <div className="site flex flex-col gap-8 py-12 sm:flex-row sm:items-end sm:justify-between">
-          <p className="max-w-md font-display text-3xl font-medium tracking-tight sm:text-4xl">
-            Shop photographs. Not a priced catalog.
-          </p>
-          <Button variant="line" href="/gallery">
-            Open the gallery
-          </Button>
-        </div>
-      </section>
-
-      <section className="site py-24 md:py-32">
-        <p className="label">Workshop</p>
-        <h2 className="poster mt-4 max-w-3xl font-display text-5xl sm:text-7xl">What the shop is offering.</h2>
-        {!services.ok ? (
-          <div className="mt-12">
-            <ErrorState title="Unable to load services right now.">
-              <p>Please check your connection and try again.</p>
-            </ErrorState>
+      {/* E. Brand / Equipment Spotlight */}
+      <section className="relative overflow-hidden border-y border-[#A8FF00]/15 bg-[#0a0e0a] py-20 sm:py-28">
+        <div className="site grid items-center gap-12 lg:grid-cols-12">
+          <div className="relative aspect-video overflow-hidden rounded-[28px] border border-[#A8FF00]/25 shadow-2xl lg:col-span-6">
+            <Image
+              src="/images/gallery/pioneer-champion-pro.jpg"
+              alt="Pioneer Champion Series PRO Audio Equipment"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+            <span className="absolute bottom-6 left-6 rounded-full border border-[#A8FF00]/30 bg-black/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#A8FF00] backdrop-blur-xl">
+              Equipment Spotlight
+            </span>
           </div>
-        ) : services.data.length === 0 ? (
-          <p className="mt-8 max-w-lg text-lg text-mute">No services are published yet. Ask the workshop directly.</p>
-        ) : (
-          <ul className="mt-14 divide-y divide-[#A8FF00]/15 border-y border-[#A8FF00]/15">
-            {services.data.slice(0, 6).map((service, index) => (
-              <li key={service.slug}>
-                <Link href="/services" className="group grid items-baseline gap-4 py-7 sm:grid-cols-[4rem_1fr_auto]">
-                  <span className="font-display text-sm text-ember">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="font-display text-2xl font-medium tracking-tight sm:text-4xl">{service.name}</span>
-                  <ArrowRight aria-hidden="true" className="size-5 text-steel transition group-hover:translate-x-1 group-hover:text-ember" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+
+          <div className="lg:col-span-6">
+            <p className="label">Flagship Audio Benchmark</p>
+            <h2 className="poster mt-3 font-display text-4xl sm:text-5xl text-white">
+              Pioneer Champion Series PRO
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-stone-300">
+              Engineered for maximum acoustic output without thermal distortion. Dual voice coils, reinforced Twaron cones, and massive ferrite magnets built to deliver unrelenting low frequencies in saloon cars and SUVs alike.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button href="/products" variant="ember">
+                Shop Pioneer Gear
+              </Button>
+              <WhatsAppButton
+                number={whatsappNumber}
+                message="Hello Bassaddict, I would like to enquire about Pioneer Champion Series subwoofers and amplifiers available at your showroom."
+              >
+                Inquire on WhatsApp
+              </WhatsAppButton>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-[#A8FF00]/15 bg-black/30">
-        <div aria-hidden="true" className="absolute -left-56 top-1/2 size-[30rem] -translate-y-1/2 rounded-full bg-[#A8FF00]/[0.06] blur-[120px]" />
-        <div className="site grid items-end gap-12 py-24 md:grid-cols-12 md:py-32">
-          <div className="md:col-span-8">
-            <p className="label">Custom work</p>
-            <h2 className="poster mt-5 font-display text-[clamp(3rem,6vw,6rem)]">
+      {/* F. Why Shop With Bassaddict Sounds KE */}
+      <section className="site py-20 sm:py-28">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="label">The Bassaddict Difference</p>
+          <h2 className="poster mt-3 font-display text-4xl sm:text-6xl text-white">
+            Why Audio Enthusiasts Trust Us
+          </h2>
+          <p className="mt-4 text-sm text-stone-400">
+            Real workshop advantages on Luthuli Avenue, Nairobi. No counterfeits, no shortcuts.
+          </p>
+        </div>
+
+        <div className="lime-rule mt-8" />
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="glass-panel p-6">
+            <span className="grid size-12 place-items-center rounded-2xl border border-[#A8FF00]/25 bg-[#070A07] text-[#A8FF00]">
+              <MapPin className="size-6" aria-hidden="true" />
+            </span>
+            <h3 className="mt-5 font-display text-xl font-bold text-white">Luthuli Avenue Showroom</h3>
+            <p className="mt-2 text-xs leading-relaxed text-stone-400">
+              Convenient central Nairobi location at Ground Floor, New Loitoktok House. Walk in, audition equipment on our test bench, and pick up orders in person.
+            </p>
+          </div>
+
+          <div className="glass-panel p-6">
+            <span className="grid size-12 place-items-center rounded-2xl border border-[#A8FF00]/25 bg-[#070A07] text-[#A8FF00]">
+              <Volume2 className="size-6" aria-hidden="true" />
+            </span>
+            <h3 className="mt-5 font-display text-xl font-bold text-white">Audition Before Install</h3>
+            <p className="mt-2 text-xs leading-relaxed text-stone-400">
+              Never buy sound blind. Test frequency balance, punch, and clarity in our demonstration area before any installation into your car boot or doors.
+            </p>
+          </div>
+
+          <div className="glass-panel p-6">
+            <span className="grid size-12 place-items-center rounded-2xl border border-[#A8FF00]/25 bg-[#070A07] text-[#A8FF00]">
+              <Wrench className="size-6" aria-hidden="true" />
+            </span>
+            <h3 className="mt-5 font-display text-xl font-bold text-white">Master Fitment &amp; Wiring</h3>
+            <p className="mt-2 text-xs leading-relaxed text-stone-400">
+              Certified auto-electricians using pure copper power cables, inline ANL fuse protection, and acoustic sound dampening to eliminate rattles.
+            </p>
+          </div>
+
+          <div className="glass-panel p-6">
+            <span className="grid size-12 place-items-center rounded-2xl border border-[#A8FF00]/25 bg-[#070A07] text-[#A8FF00]">
+              <ShieldCheck className="size-6" aria-hidden="true" />
+            </span>
+            <h3 className="mt-5 font-display text-xl font-bold text-white">100% Genuine Audio</h3>
+            <p className="mt-2 text-xs leading-relaxed text-stone-400">
+              Authorized brand hardware from Pioneer, KUERL, JBL, Hertz, and Skar Audio. Authentic serials and genuine manufacturer performance specs.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Workshop Services Section */}
+      <section className="relative border-y border-[#A8FF00]/15 bg-black/40 py-20 sm:py-28">
+        <div className="site">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="label">Workshop Expertise</p>
+              <h2 className="poster mt-3 font-display text-4xl sm:text-6xl text-white">
+                Professional Audio Services
+              </h2>
+            </div>
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#A8FF00] hover:underline"
+            >
+              All Workshop Services
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.slice(0, 3).map((service, idx) => (
+              <div key={service.slug} className="glass-panel p-6 flex flex-col justify-between">
+                <div>
+                  <span className="font-display text-xs font-semibold text-[#A8FF00]">
+                    0{idx + 1}
+                  </span>
+                  <h3 className="mt-3 font-display text-2xl font-bold text-white">
+                    {service.name}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-stone-400">
+                    {service.description}
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-white/10">
+                  <Link
+                    href="/services"
+                    className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-stone-300 hover:text-[#A8FF00]"
+                  >
+                    Service Details &rarr;
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Custom Build Banner */}
+      <section className="relative overflow-hidden py-24 sm:py-32">
+        <div className="site grid items-center gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <p className="label">Custom Vehicle Fabrication</p>
+            <h2 className="poster mt-4 font-display text-5xl sm:text-7xl text-white">
               Tell us what
               <br />
-              you're driving.
+              you&apos;re driving.
             </h2>
-            <p className="mt-8 max-w-md font-display text-2xl font-medium tracking-tight text-paper sm:text-3xl">
-              We'll help you build the sound.
+            <p className="mt-6 max-w-xl font-display text-2xl text-stone-300">
+              We&apos;ll help you design and build the ultimate custom sound system tailored for your car&apos;s cabin acoustics and your budget.
             </p>
           </div>
-          <div className="md:col-span-4 md:pb-3">
-            <p className="max-w-xs text-mute">
-              The car, the budget, and what you want from the system. Bassaddict plans the conversation. Nothing is charged here.
-            </p>
-            <Button className="mt-8" href="/build">
-              Start the brief
+          <div className="lg:col-span-4 lg:text-right">
+            <Button href="/build" variant="ember" className="gap-2.5 px-8 text-sm">
+              Start Your Build Brief
+              <ArrowRight className="size-4" aria-hidden="true" />
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="site grid gap-10 py-24 md:grid-cols-12 md:py-28">
-        <div className="md:col-span-5">
-          <p className="label">Luthuli Avenue</p>
-          <h2 className="mt-4 font-display text-4xl font-medium tracking-tight sm:text-5xl">Talk to Bassaddict.</h2>
-          <p className="mt-5 max-w-sm text-mute">{business.address}</p>
-          <WhatsAppButton className="mt-8" number={business.whatsapp_number} message={generalEnquiryMessage()}>
-            WhatsApp {business.phone}
-          </WhatsAppButton>
+      {/* G & H. Final Consultation & Showroom Visit */}
+      <section className="border-t border-[#A8FF00]/15 bg-[#0a0e0a] py-20 sm:py-28">
+        <div className="site grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <p className="label">Visit the Workshop</p>
+            <h2 className="poster mt-3 font-display text-4xl sm:text-5xl text-white">
+              Talk to Bassaddict Sounds KE
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-stone-300 max-w-md">
+              Need assistance selecting the right speaker size, amplifier impedance, or underseat active bass enclosure? Connect directly with our team.
+            </p>
+            <p className="mt-6 text-sm font-medium text-white">
+              {business.address}
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <WhatsAppButton
+                number={whatsappNumber}
+                message={generalEnquiryMessage()}
+              >
+                Chat on WhatsApp {business.phone}
+              </WhatsAppButton>
+              <Button href="/contact" variant="line">
+                View Contact Info
+              </Button>
+            </div>
+          </div>
+
+          <div className="lg:col-span-6 flex flex-col justify-center">
+            <div className="glass-panel p-8">
+              <h3 className="font-display text-2xl font-bold text-white">Showroom Hours &amp; Inquiries</h3>
+              <p className="mt-2 text-xs text-stone-400">
+                Ground Floor, New Loitoktok House, Luthuli Avenue, Nairobi.
+              </p>
+              <div className="mt-6 space-y-3 text-xs text-stone-300 border-t border-white/10 pt-4">
+                <div className="flex justify-between">
+                  <span>Monday — Saturday:</span>
+                  <span className="font-semibold text-white">8:30 AM — 6:30 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Sunday &amp; Public Holidays:</span>
+                  <span className="text-stone-400">By WhatsApp Appointment</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Direct Phone / WhatsApp:</span>
+                  <span className="font-semibold text-[#A8FF00]">{business.phone}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>

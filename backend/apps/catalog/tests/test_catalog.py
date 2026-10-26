@@ -121,3 +121,40 @@ class CatalogTests(TestCase):
         )
         with self.assertRaises(ValidationError):
             negative.full_clean()
+
+from django.core.management import call_command
+from io import StringIO
+
+
+class SeedCatalogCommandTests(TestCase):
+    def test_seed_catalog_populates_and_preserves_custom_data(self):
+        out = StringIO()
+        call_command("seed_catalog", stdout=out)
+        self.assertIn("Catalog seed completed successfully!", out.getvalue())
+
+        # Verify initial population
+        prod = Product.objects.get(slug="pioneer-ts-6900pro")
+        self.assertEqual(prod.public_price, Decimal("14500.00"))
+
+        # Business user changes price in admin
+        prod.public_price = Decimal("17500.00")
+        prod.stock_status = StockStatus.LOW_STOCK
+        prod.save()
+
+        # Re-run seed in safe mode (default)
+        out2 = StringIO()
+        call_command("seed_catalog", stdout=out2)
+        prod.refresh_from_db()
+
+        # Price and stock must be PRESERVED
+        self.assertEqual(prod.public_price, Decimal("17500.00"))
+        self.assertEqual(prod.stock_status, StockStatus.LOW_STOCK)
+        self.assertIn("Preserved existing product", out2.getvalue())
+
+        # Re-run with --overwrite
+        out3 = StringIO()
+        call_command("seed_catalog", overwrite=True, stdout=out3)
+        prod.refresh_from_db()
+        self.assertEqual(prod.public_price, Decimal("14500.00"))
+        self.assertEqual(prod.stock_status, StockStatus.IN_STOCK)
+        self.assertIn("Overwrote product", out3.getvalue())

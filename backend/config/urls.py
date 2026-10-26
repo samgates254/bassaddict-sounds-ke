@@ -5,12 +5,14 @@ Django Admin remains at /admin/. The public API is mounted at /api/v1/.
 
 from django.contrib import admin
 from django.urls import include, path
+from apps.core.views import HealthCheckView
 
 admin.site.site_header = "Bassaddict Sounds KE"
 admin.site.site_title = "Bassaddict Admin"
 admin.site.index_title = "Workshop"
 
 urlpatterns = [
+    path("health/", HealthCheckView.as_view(), name="root-health"),
     path("admin/", admin.site.urls),
     path("api/v1/auth/", include("apps.accounts.urls")),
     path("api/v1/", include("apps.catalog.urls")),

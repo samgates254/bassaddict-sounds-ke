@@ -1,11 +1,14 @@
 import type { BusinessSettings } from "@/lib/api/types";
 
+/** The single canonical business WhatsApp contact number across the entire storefront. */
+export const CANONICAL_WHATSAPP_NUMBER = "0794069405";
+
 /** Confirmed shop identity, used only if the business API cannot be reached. */
 export const FALLBACK_BUSINESS: BusinessSettings = {
   business_name: "Bassaddict Sounds KE",
   tagline: "ADDICTED TO BASS. DRIVEN BY SOUND.",
-  phone: "0794069405",
-  whatsapp_number: "0794069405",
+  phone: CANONICAL_WHATSAPP_NUMBER,
+  whatsapp_number: CANONICAL_WHATSAPP_NUMBER,
   email: "bassaddictsounds@gmail.com",
   address: "Ground Floor, New Loitoktok House, Luthuli Avenue, Nairobi, Kenya",
 };

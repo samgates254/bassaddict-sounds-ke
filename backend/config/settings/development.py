@@ -11,7 +11,7 @@ from .base import BASE_DIR, env_bool
 
 DEBUG = env_bool("DEBUG", default=True)
 
-SECRET_KEY = os.getenv("SECRET_KEY", "change-me")
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-bassaddict-sounds-ke-dev-secret-key-32chars-min-sha256")
 
 engine = os.getenv("DB_ENGINE", "sqlite").strip().lower()
 
