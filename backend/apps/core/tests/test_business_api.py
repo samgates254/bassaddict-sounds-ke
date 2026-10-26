@@ -1,3 +1,4 @@
+from unittest import mock
 from django.core.cache import cache
 from django.urls import reverse
 from rest_framework import status
@@ -29,3 +30,23 @@ class BusinessApiTests(APITestCase):
         self.assertNotIn("developer_url", response.data)
         self.assertNotIn("Sam Gates", str(response.data))
         self.assertNotIn("sam@example.com", str(response.data))
+
+    def test_health_check_returns_ok_and_database_status(self):
+        response = self.client.get(reverse("health"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["status"], "ok")
+        self.assertEqual(response.data["database"], "connected")
+        self.assertEqual(response.data["service"], "bassaddict-api")
+
+        root_response = self.client.get(reverse("root-health"))
+        self.assertEqual(root_response.status_code, status.HTTP_200_OK)
+        self.assertEqual(root_response.data["status"], "ok")
+
+    @mock.patch("apps.core.views.connection.cursor")
+    def test_health_check_returns_503_when_database_fails(self, mock_cursor):
+        mock_cursor.side_effect = Exception("DB connection timeout")
+        response = self.client.get(reverse("health"))
+        self.assertEqual(response.status_code, status.HTTP_503_SERVICE_UNAVAILABLE)
+        self.assertEqual(response.data["status"], "degraded")
+        self.assertEqual(response.data["database"], "disconnected")
+        self.assertEqual(response.data["service"], "bassaddict-api")

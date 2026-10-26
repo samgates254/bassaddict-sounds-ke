@@ -136,3 +136,50 @@ export function generalEnquiryMessage() {
     "I'd like to enquire about your car audio services.",
   ].join("\n");
 }
+
+
+export function cartEnquiryMessage(
+  items: { name: string; quantity: number; price?: string | null; slug?: string }[],
+  origin = ""
+) {
+  // Defensively filter valid items with positive quantity
+  const validItems = (items || []).filter(
+    (item) => item && typeof item.name === "string" && Number(item.quantity) > 0
+  );
+
+  if (validItems.length === 0) {
+    return generalEnquiryMessage();
+  }
+
+  let total = 0;
+  let hasPrice = false;
+
+  const lines = [
+    "Hello Bassaddict Sounds KE,",
+    "I would like to request an equipment quote and check showroom availability for:",
+    "",
+  ];
+
+  validItems.forEach((item, idx) => {
+    const qty = Math.max(1, Math.floor(Number(item.quantity) || 1));
+    const priceNum = item.price ? Number(item.price) : NaN;
+    let priceText = "Price on request";
+    if (!Number.isNaN(priceNum) && priceNum > 0) {
+      priceText = `KSh ${new Intl.NumberFormat("en-KE").format(priceNum)}`;
+      total += priceNum * qty;
+      hasPrice = true;
+    }
+    const itemLink = item.slug && origin ? ` (${origin}/products/${item.slug})` : "";
+    lines.push(`${idx + 1}. ${qty}x ${item.name} — ${priceText}${itemLink}`);
+  });
+
+  lines.push("");
+  if (hasPrice) {
+    lines.push(`Estimated Total: KSh ${new Intl.NumberFormat("en-KE").format(total)}`);
+  }
+  lines.push("Please confirm availability, installation options, and collection/delivery in Nairobi.");
+  lines.push("(Showroom consultation & quote request; not a prepaid online order).");
+  lines.push("Thank you.");
+
+  return lines.join("\n");
+}

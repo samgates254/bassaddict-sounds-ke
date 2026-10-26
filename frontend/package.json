@@ -5,7 +5,8 @@
     "dev": "next dev --hostname 0.0.0.0 --port 8080",
     "build": "next build",
     "start": "next start --hostname 0.0.0.0 --port 8080",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test lib/check.test.ts"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

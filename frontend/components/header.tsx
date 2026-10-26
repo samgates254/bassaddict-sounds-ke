@@ -1,59 +1,204 @@
-import Link from "next/link";
-import { Menu, MessageCircle } from "lucide-react";
+"use client";
 
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, MessageCircle, ShoppingBag, X, Phone } from "lucide-react";
 import { Mark } from "@/components/mark";
-import { Navigation } from "@/components/navigation";
-import { WhatsAppButton } from "@/components/whatsapp-button";
+import { useCart } from "@/context/cart-context";
 import type { BusinessSettings } from "@/lib/api/types";
 import { telHref } from "@/lib/format";
-import { generalEnquiryMessage } from "@/lib/whatsapp";
+import { generalEnquiryMessage, whatsappHref } from "@/lib/whatsapp";
+import { NAV } from "@/lib/brand";
 
 export function Header({ business }: { business: BusinessSettings }) {
+  const { itemCount, openCart } = useCart();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const whatsappLink = whatsappHref(business.whatsapp_number, generalEnquiryMessage());
+
   return (
-    <header className="sticky top-0 z-40 border-b border-[#A8FF00]/15 bg-[#070A07]/80 shadow-[0_10px_40px_rgba(0,0,0,0.32)] backdrop-blur-2xl">
-      <div className="site flex min-h-20 items-center justify-between gap-6 py-3">
-        <Link href="/" className="shrink-0 py-0.5">
+    <header className="sticky top-0 z-40 border-b border-[#A8FF00]/15 bg-[#070A07]/85 shadow-[0_10px_40px_rgba(0,0,0,0.4)] backdrop-blur-2xl">
+      <div className="site flex min-h-20 items-center justify-between gap-4 py-3">
+        {/* Brand Logo */}
+        <Link href="/" className="shrink-0 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#A8FF00]">
           <Mark className="h-10 w-auto sm:h-12" priority />
         </Link>
-        <Navigation
-          ariaLabel="Primary"
-          className="hidden items-center gap-2 text-[0.68rem] font-medium text-steel xl:gap-3 lg:flex"
-          linkClassName="relative rounded-full px-4 py-2.5 transition-colors hover:bg-[#A8FF00]/10 hover:text-[#c2ff52]"
-          activeClassName="bg-[#A8FF00]/10 text-[#c2ff52]"
-        />
-        <div className="flex shrink-0 items-center gap-4">
-          <Link href="/account" className="hidden rounded-full px-3 py-2 text-[0.64rem] uppercase tracking-[0.16em] text-steel transition hover:bg-[#A8FF00]/10 hover:text-[#c2ff52] sm:inline">
+
+        {/* Desktop Navigation */}
+        <nav aria-label="Primary" className="hidden items-center gap-1 xl:gap-2 lg:flex">
+          {NAV.map((item) => {
+            const active =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`relative rounded-full px-3.5 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.16em] transition-colors ${
+                  active
+                    ? "bg-[#A8FF00]/15 text-[#c2ff52]"
+                    : "text-stone-300 hover:bg-[#A8FF00]/10 hover:text-[#c2ff52]"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Action Controls */}
+        <div className="flex shrink-0 items-center gap-2.5 sm:gap-3.5">
+          {/* Account */}
+          <Link
+            href="/account"
+            className="hidden rounded-full border border-white/10 px-3.5 py-2 text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-stone-300 transition hover:border-[#A8FF00]/40 hover:text-white md:inline"
+          >
             Account
           </Link>
-          <WhatsAppButton
-            className="!min-h-10 !px-3"
-            number={business.whatsapp_number}
-            message={generalEnquiryMessage()}
+
+          {/* Cart Icon Button with Badge */}
+          <button
+            type="button"
+            onClick={openCart}
+            aria-label={`Open equipment cart with ${itemCount} items`}
+            className="group relative flex size-10 items-center justify-center rounded-full border border-[#A8FF00]/25 bg-black/40 text-stone-200 transition hover:border-[#A8FF00] hover:bg-[#A8FF00]/10 hover:text-[#A8FF00] sm:size-11"
           >
-            <MessageCircle aria-hidden="true" className="size-4" />
-            <span className="sr-only sm:not-sr-only">WhatsApp</span>
-          </WhatsAppButton>
+            <ShoppingBag className="size-4 sm:size-5 transition-transform group-hover:scale-110" aria-hidden="true" />
+            {itemCount > 0 && (
+              <span className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-[#A8FF00] text-[0.65rem] font-bold text-[#070A07] shadow-[0_0_12px_rgba(168,255,0,0.8)]">
+                {itemCount}
+              </span>
+            )}
+          </button>
+
+          {/* WhatsApp Action */}
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Direct WhatsApp assistance"
+            className="btn btn-wa !min-h-10 !px-3.5 hidden sm:inline-flex text-[0.68rem]"
+          >
+            <MessageCircle className="size-4" aria-hidden="true" />
+            <span>WhatsApp</span>
+          </a>
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Open navigation menu"
+            className="grid size-10 place-items-center rounded-full border border-white/15 bg-black/40 text-stone-300 hover:text-white lg:hidden"
+          >
+            <Menu className="size-5" aria-hidden="true" />
+          </button>
         </div>
       </div>
-      <details className="border-t border-[#A8FF00]/15 lg:hidden">
-        <summary className="site flex min-h-12 cursor-pointer items-center justify-between text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-steel">
-          Menu
-          <Menu aria-hidden="true" className="size-5" />
-        </summary>
-        <Navigation
-          ariaLabel="Mobile"
-          className="site grid gap-1 rounded-b-[24px] border-x border-b border-[#A8FF00]/15 bg-black/40 px-6 pb-8 pt-3 backdrop-blur-2xl"
-          linkClassName="block rounded-2xl px-4 py-2 font-display text-3xl font-medium tracking-tight text-paper transition hover:bg-[#A8FF00]/10 hover:text-[#c2ff52]"
-          activeClassName="text-ember"
+
+      {/* Mobile Slide-Over Menu */}
+      {mobileMenuOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation"
+          className="fixed inset-0 z-50 lg:hidden"
         >
-          <Link href="/account" className="block py-2 font-display text-4xl font-medium tracking-tight text-paper">
-            Account
-          </Link>
-          <a className="block py-2 text-sm tracking-[0.14em] text-steel" href={telHref(business.phone)}>
-            {business.phone}
-          </a>
-        </Navigation>
-      </details>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/80 backdrop-blur-md"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Menu Drawer */}
+          <div className="fixed inset-y-0 right-0 z-10 flex w-full max-w-sm flex-col border-l border-[#A8FF00]/20 bg-[#070A07] p-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-[#A8FF00]/15 pb-4">
+              <Mark className="h-8 w-auto" />
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close navigation menu"
+                className="rounded-full p-2 text-stone-400 hover:bg-white/10 hover:text-white"
+              >
+                <X className="size-5" aria-hidden="true" />
+              </button>
+            </div>
+
+            <nav aria-label="Mobile" className="mt-6 flex flex-1 flex-col gap-1 overflow-y-auto">
+              {NAV.map((item) => {
+                const active =
+                  item.href === "/"
+                    ? pathname === "/"
+                    : pathname === item.href || pathname.startsWith(`${item.href}/`);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`rounded-xl px-4 py-3 font-display text-2xl font-medium tracking-tight transition ${
+                      active
+                        ? "bg-[#A8FF00]/15 text-[#A8FF00]"
+                        : "text-stone-200 hover:bg-white/5 hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+
+              <div className="mt-4 border-t border-white/10 pt-4">
+                <Link
+                  href="/cart"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between rounded-xl px-4 py-3 font-display text-2xl font-medium text-stone-200 hover:bg-white/5 hover:text-white"
+                >
+                  <span className="flex items-center gap-3">
+                    <ShoppingBag className="size-5 text-[#A8FF00]" aria-hidden="true" />
+                    Equipment Cart
+                  </span>
+                  {itemCount > 0 && (
+                    <span className="rounded-full bg-[#A8FF00] px-2.5 py-0.5 text-xs font-bold text-[#070A07]">
+                      {itemCount}
+                    </span>
+                  )}
+                </Link>
+
+                <Link
+                  href="/account"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block rounded-xl px-4 py-3 font-display text-2xl font-medium text-stone-200 hover:bg-white/5 hover:text-white"
+                >
+                  My Account
+                </Link>
+              </div>
+            </nav>
+
+            <div className="border-t border-[#A8FF00]/15 pt-5 space-y-3">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-wa w-full gap-2 text-center"
+              >
+                <MessageCircle className="size-4" aria-hidden="true" />
+                WhatsApp {business.phone}
+              </a>
+
+              <a
+                href={telHref(business.phone)}
+                className="flex items-center justify-center gap-2 rounded-full border border-white/10 py-3 text-xs tracking-wider text-stone-300 hover:text-white"
+              >
+                <Phone className="size-3.5" aria-hidden="true" />
+                Call {business.phone}
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
