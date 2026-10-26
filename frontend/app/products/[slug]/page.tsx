@@ -15,6 +15,8 @@ import { getMyPrices, getProduct, getProducts } from "@/lib/api/products";
 import { formatKes, publicPriceLabel, stockLabel } from "@/lib/format";
 import { catalogImages } from "@/lib/product-assets";
 import { pageMetadata } from "@/lib/seo";
+import { SOCIAL_PLATFORMS } from "@/lib/social";
+import { SocialIcon } from "@/components/social-icons";
 
 type Params = { slug: string };
 
@@ -110,6 +112,39 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
             <div className="flex items-center gap-2.5 text-xs text-stone-300">
               <MapPin className="size-4 text-[#A8FF00] shrink-0" aria-hidden="true" />
               <span>Audition in Showroom Before Install</span>
+            </div>
+          </div>
+
+          {/* Lightweight Social Channel Discovery */}
+          <div className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[#A8FF00]">
+                  Watch Installations Live
+                </p>
+                <p className="mt-0.5 text-xs text-stone-300">
+                  See bench test auditions &amp; vehicle builds on our official channels.
+                </p>
+              </div>
+              <div className="flex shrink-0 items-center gap-2">
+                {SOCIAL_PLATFORMS.map((platform) => (
+                  <a
+                    key={platform.id}
+                    href={platform.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={`${platform.platform} (${platform.handle})`}
+                    aria-label={`Watch on ${platform.platform}`}
+                    className="group flex size-8 items-center justify-center rounded-full border border-white/10 bg-[#070A07] transition hover:border-[#A8FF00]/60 hover:bg-[#A8FF00]/15 hover:scale-110 motion-reduce:hover:scale-100"
+                  >
+                    <SocialIcon
+                      id={platform.id}
+                      className="size-3.5 transition-colors group-hover:text-white"
+                      style={{ color: platform.brandColor }}
+                    />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>

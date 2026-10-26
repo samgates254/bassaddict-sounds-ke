@@ -21,6 +21,7 @@ import { EmptyState } from "@/components/empty-state";
 import { ErrorState } from "@/components/error-state";
 import { HeroVideo } from "@/components/hero-video";
 import { ProductCard } from "@/components/product-card";
+import { SocialSection } from "@/components/social-section";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { getBusiness } from "@/lib/api/business";
 import { getCategories, getProducts } from "@/lib/api/products";
@@ -464,6 +465,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Stay Connected With Bassaddict - Official Social Media */}
+      <SocialSection />
     </div>
   );
 }

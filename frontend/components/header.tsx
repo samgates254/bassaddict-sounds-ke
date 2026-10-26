@@ -10,6 +10,8 @@ import type { BusinessSettings } from "@/lib/api/types";
 import { telHref } from "@/lib/format";
 import { generalEnquiryMessage, whatsappHref } from "@/lib/whatsapp";
 import { NAV } from "@/lib/brand";
+import { SOCIAL_PLATFORMS } from "@/lib/social";
+import { SocialIcon } from "@/components/social-icons";
 
 export function Header({ business }: { business: BusinessSettings }) {
   const { itemCount, openCart } = useCart();
@@ -52,6 +54,26 @@ export function Header({ business }: { business: BusinessSettings }) {
 
         {/* Action Controls */}
         <div className="flex shrink-0 items-center gap-2.5 sm:gap-3.5">
+          {/* Desktop Compact Social Channels */}
+          <div className="hidden lg:flex items-center gap-1.5 border-r border-white/10 pr-2.5">
+            {SOCIAL_PLATFORMS.map((s) => (
+              <a
+                key={s.id}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`Follow BASSADICT on ${s.platform} (${s.handle})`}
+                aria-label={`Official ${s.platform} page`}
+                className="group/social flex size-8 items-center justify-center rounded-full border border-white/10 bg-black/40 text-stone-400 transition hover:border-[#A8FF00]/50 hover:bg-[#A8FF00]/10 hover:text-white"
+              >
+                <SocialIcon
+                  id={s.id}
+                  className="size-3.5 transition-transform duration-200 group-hover/social:scale-110 motion-reduce:group-hover/social:scale-100"
+                />
+              </a>
+            ))}
+          </div>
+
           {/* Account */}
           <Link
             href="/account"
@@ -174,6 +196,31 @@ export function Header({ business }: { business: BusinessSettings }) {
                 >
                   My Account
                 </Link>
+              </div>
+
+              {/* Mobile Drawer Social Channels */}
+              <div className="mt-4 border-t border-white/10 pt-4">
+                <p className="px-4 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[#A8FF00]">
+                  Follow BASSADICT
+                </p>
+                <div className="mt-2.5 grid grid-cols-2 gap-2 px-1">
+                  {SOCIAL_PLATFORMS.map((platform) => (
+                    <a
+                      key={platform.id}
+                      href={platform.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-black/40 p-2.5 text-xs font-semibold text-stone-200 transition hover:border-[#A8FF00]/60 hover:bg-[#A8FF00]/15 hover:text-[#A8FF00]"
+                      aria-label={`${platform.platform} (${platform.handle})`}
+                    >
+                      <span style={{ color: platform.brandColor }}>
+                        <SocialIcon id={platform.id} className="size-4 shrink-0" />
+                      </span>
+                      <span className="truncate">{platform.platform}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </nav>
 
