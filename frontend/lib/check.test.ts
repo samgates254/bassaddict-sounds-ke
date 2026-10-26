@@ -172,3 +172,50 @@ test("fallback catalog has 67 unique products with existing image assets and 8 c
     assert.ok(fs.existsSync(fullPath), `Image file must exist: ${fullPath}`);
   }
 });
+
+import { OFFICIAL_SOCIAL_LINKS, SOCIAL_PLATFORMS } from "./social.ts";
+
+test("official social links are preserved exactly as required", () => {
+  assert.equal(
+    OFFICIAL_SOCIAL_LINKS.instagram,
+    "https://www.instagram.com/bastenthiongo?exln=MWVmMWdiMHByNDV6bQ=="
+  );
+  assert.equal(
+    OFFICIAL_SOCIAL_LINKS.tiktok,
+    "https://www.tiktok.com/@bassaddictsounds1?_r=1&_t=ZS-9AsI5qvfBvI"
+  );
+  assert.equal(
+    OFFICIAL_SOCIAL_LINKS.youtube,
+    "https://youtube.com/@bassaddictsounds?si=m601wzLdqxFSiqpJ"
+  );
+  assert.equal(
+    OFFICIAL_SOCIAL_LINKS.facebook,
+    "https://www.facebook.com/share/1LFDK2r76A/"
+  );
+
+  assert.equal(SOCIAL_PLATFORMS.length, 4);
+
+  const instagram = SOCIAL_PLATFORMS.find((s) => s.id === "instagram");
+  assert.ok(instagram);
+  assert.equal(instagram.callToAction, "Follow Our Journey");
+  assert.equal(instagram.headline, "INSTAGRAM");
+  assert.equal(instagram.url, OFFICIAL_SOCIAL_LINKS.instagram);
+
+  const tiktok = SOCIAL_PLATFORMS.find((s) => s.id === "tiktok");
+  assert.ok(tiktok);
+  assert.equal(tiktok.callToAction, "Watch Our Latest Videos");
+  assert.equal(tiktok.headline, "TIKTOK");
+  assert.equal(tiktok.url, OFFICIAL_SOCIAL_LINKS.tiktok);
+
+  const youtube = SOCIAL_PLATFORMS.find((s) => s.id === "youtube");
+  assert.ok(youtube);
+  assert.equal(youtube.callToAction, "Explore Our Videos");
+  assert.equal(youtube.headline, "YOUTUBE");
+  assert.equal(youtube.url, OFFICIAL_SOCIAL_LINKS.youtube);
+
+  const facebook = SOCIAL_PLATFORMS.find((s) => s.id === "facebook");
+  assert.ok(facebook);
+  assert.equal(facebook.callToAction, "Connect With Us");
+  assert.equal(facebook.headline, "FACEBOOK");
+  assert.equal(facebook.url, OFFICIAL_SOCIAL_LINKS.facebook);
+});
