@@ -50,7 +50,7 @@ export function ProductGallery({ images, name }: { images: ProductImage[]; name:
         key={image.image_url}
         src={image.image_url}
         alt={image.alt_text || name}
-        className="aspect-[4/5] w-full rounded-[20px] border border-white/10 bg-[#10101a] object-cover sm:aspect-[5/4]"
+        className="aspect-[4/5] w-full rounded-[20px] border border-white/10 bg-[#0e0e18] object-contain p-4 sm:aspect-[5/4]"
         decoding="async"
       />
       {images.length > 1 ? (
@@ -67,7 +67,7 @@ export function ProductGallery({ images, name }: { images: ProductImage[]; name:
                 className={`h-20 w-16 shrink-0 overflow-hidden rounded-xl border ${selected ? "border-[#A8FF00] shadow-[0_0_18px_rgba(168,255,0,0.3)]" : "border-[#A8FF00]/15 opacity-65"}`}
                 aria-label={selected ? `Photo ${itemIndex + 1}, selected` : `Show photo ${itemIndex + 1}`}
               >
-                <img src={item.image_url} alt="" className="h-full w-full object-cover" decoding="async" />
+                <img src={item.image_url} alt="" className="h-full w-full object-contain p-1 bg-[#0e0e18]" decoding="async" />
               </button>
             );
           })}

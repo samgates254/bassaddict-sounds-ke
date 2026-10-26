@@ -67,7 +67,7 @@ export function ProductCard({
               <img
                 src={image.image_url}
                 alt={image.alt_text || title}
-                className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.06]"
+                className="h-full w-full object-contain p-2 transition duration-700 group-hover:scale-[1.04]"
                 decoding="async"
               />
             ) : (

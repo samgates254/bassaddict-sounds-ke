@@ -140,5 +140,35 @@ test("stockLabel handles all backend StockStatus enum values", () => {
   assert.equal(stockLabel("LOW_STOCK"), "Low stock");
   assert.equal(stockLabel("OUT_OF_STOCK"), "Out of stock");
   assert.equal(stockLabel("ON_ORDER"), "On order");
+  assert.equal(stockLabel("CHECK"), "Check availability");
+  assert.equal(stockLabel("check"), "Check availability");
   assert.equal(stockLabel("UNKNOWN_STATUS"), "UNKNOWN_STATUS");
+});
+
+import { FALLBACK_PRODUCTS, FALLBACK_CATEGORIES } from "./fallback-catalog.ts";
+import fs from "node:fs";
+import path from "node:path";
+
+test("fallback catalog has 67 unique products with existing image assets and 8 categories", () => {
+  assert.equal(FALLBACK_CATEGORIES.length, 8);
+  assert.equal(FALLBACK_PRODUCTS.length, 67);
+
+  const slugs = new Set<string>();
+  const publicDir = path.resolve(import.meta.dirname, "../public");
+
+  for (const p of FALLBACK_PRODUCTS) {
+    assert.ok(p.slug, "Product must have slug");
+    assert.ok(!slugs.has(p.slug), `Duplicate slug: ${p.slug}`);
+    slugs.add(p.slug);
+
+    assert.ok(p.name, "Product must have name");
+    assert.ok(p.category, "Product must have category");
+
+    // Verify image resolves to an existing file in public
+    const primary = p.primary_image ?? p.images[0];
+    assert.ok(primary, `Product ${p.slug} must have an image`);
+    const relPath = primary.image_url.startsWith("/") ? primary.image_url.slice(1) : primary.image_url;
+    const fullPath = path.join(publicDir, relPath);
+    assert.ok(fs.existsSync(fullPath), `Image file must exist: ${fullPath}`);
+  }
 });

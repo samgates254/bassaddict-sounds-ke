@@ -240,6 +240,23 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 }
 
 function Specs({ value }: { value: unknown }) {
+  if (Array.isArray(value) && value.length > 0) {
+    return (
+      <dl className="mt-4 divide-y divide-white/10 rounded-xl border border-white/10 bg-black/30 p-4 text-xs">
+        {value.map((item, idx) => {
+          if (item && typeof item === "object" && "label" in item && "value" in item) {
+            return (
+              <div key={idx} className="grid grid-cols-2 py-2.5">
+                <dt className="text-stone-400 font-medium">{String(item.label)}</dt>
+                <dd className="text-right font-display text-white">{String(item.value)}</dd>
+              </div>
+            );
+          }
+          return null;
+        })}
+      </dl>
+    );
+  }
   if (
     value == null ||
     (typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 0)

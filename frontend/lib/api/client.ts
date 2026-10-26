@@ -4,7 +4,7 @@ import { readAccessToken } from "@/lib/auth/session";
 const API_REQUEST_TIMEOUT_MS = 5_000;
 
 export type ApiResult<T> =
-  | { ok: true; data: T }
+  | { ok: true; data: T; isFallback?: boolean }
   | { ok: false; status: number; message: string };
 
 async function readMessage(response: Response) {
