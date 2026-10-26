@@ -43,7 +43,7 @@ export type ProductListItem = {
   category: CategoryBrief;
   public_price: string | null;
   price_type: "FIXED" | "ON_REQUEST" | "CONTACT";
-  stock_status: "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK" | "ON_ORDER";
+  stock_status: "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK" | "ON_ORDER" | "CHECK";
   featured: boolean;
   primary_image: ProductImage | null;
 };

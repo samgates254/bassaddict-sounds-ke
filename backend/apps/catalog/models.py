@@ -20,6 +20,7 @@ class StockStatus(models.TextChoices):
     LOW_STOCK = "LOW_STOCK", "Low stock"
     OUT_OF_STOCK = "OUT_OF_STOCK", "Out of stock"
     ON_ORDER = "ON_ORDER", "On order"
+    CHECK = "CHECK", "Check availability"
 
 
 class Category(models.Model):

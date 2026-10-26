@@ -3,6 +3,8 @@ const STOCK: Record<string, string> = {
   LOW_STOCK: "Low stock",
   OUT_OF_STOCK: "Out of stock",
   ON_ORDER: "On order",
+  CHECK: "Check availability",
+  check: "Check availability",
 };
 
 const ENQUIRY_TYPE: Record<string, string> = {
@@ -33,11 +35,9 @@ export function formatKes(value: string | null | undefined) {
 
 export function publicPriceLabel(product: {
   public_price: string | null;
-  price_type: string;
+  price_type?: string;
 }) {
   if (product.public_price) return formatKes(product.public_price) ?? "Ask for price";
-  if (product.price_type === "ON_REQUEST") return "Price on request";
-  if (product.price_type === "CONTACT") return "Contact for price";
   return "Ask for price";
 }
 

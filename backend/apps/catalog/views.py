@@ -42,6 +42,29 @@ class ProductListView(generics.ListAPIView):
         featured = params.get("featured")
         if featured not in (None, ""):
             queryset = queryset.filter(featured=_as_bool(featured))
+        search = params.get("search")
+        if search:
+            from django.db.models import Q
+            q = search.strip()
+            queryset = queryset.filter(
+                Q(name__icontains=q)
+                | Q(brand__icontains=q)
+                | Q(model_number__icontains=q)
+                | Q(category__name__icontains=q)
+                | Q(description__icontains=q)
+            )
+        ordering = params.get("ordering") or params.get("sort")
+        if ordering:
+            if ordering == "price_asc":
+                queryset = queryset.order_by("public_price", "name")
+            elif ordering == "price_desc":
+                queryset = queryset.order_by("-public_price", "name")
+            elif ordering == "name_asc":
+                queryset = queryset.order_by("name")
+            elif ordering == "name_desc":
+                queryset = queryset.order_by("-name")
+            elif ordering == "featured":
+                queryset = queryset.order_by("-featured", "name")
         return queryset
 
 

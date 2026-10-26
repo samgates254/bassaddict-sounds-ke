@@ -29,21 +29,11 @@ The image filename is an asset identifier, NOT the product price.
 If the owner changes the price in Django Admin, the filename stays the same. Customer prices still come only from `GET /api/v1/me/prices/` and are not stored in this folder.
 
 Current map (`frontend/lib/product-assets.ts`):
+Contains 67 genuine product entries (5 initial Bassaddict products + 62 authentic crops imported from the verified asset register):
+- 5 Original catalog items: Pioneer TS-6900PRO, Pioneer TS-Z65F, KUERL 10-Inch Subwoofer, 9-Inch Monitor, 7-Inch Monitor
+- 62 Imported verified equipment items: Pioneer subwoofers & coaxials, Kenwood receivers & amplifiers, Sony speakers, Nakamichi coaxials, Boschmann amplifiers & equalizers, Audiobank 5000W amp, STV receivers, XLR/speakon cables, flexible LED displays, etc.
 
-| File | Slug |
-| --- | --- |
-| `pioneer-ts-6900pro.jpg` | `pioneer-ts-6900pro` |
-| `pioneer-ts-z65f.jpg` | `pioneer-ts-z65f` |
-| `monitor-7-inch.jpg` | `monitor-7-inch` |
-| `monitor-9-inch.jpg` | `monitor-9-inch` |
-| `kuerl-subwoofer.jpg` | `kuerl-subwoofer` |
-
-To add a random file:
-
-1. Save it as `frontend/public/images/products/483721.jpg`.
-2. Add `{ file: "483721.jpg", slug: "pioneer-ts-6900pro" }` in `frontend/lib/product-assets.ts`.
-3. Create or rename the product in Django Admin so its slug matches.
-
+Images are also mirrored in `frontend/public/products/` for direct resolution.
 Admin image URLs override these local files. An empty catalog image falls back to the local file when the slug matches. The public price is still the API field.
 
 These gallery files are not mapped to one product, because one picture shows more than one model or is not a catalog item:

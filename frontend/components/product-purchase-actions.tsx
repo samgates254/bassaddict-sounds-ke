@@ -8,6 +8,8 @@ import { useCart } from "@/context/cart-context";
 import { whatsappHref, productEnquiryMessage } from "@/lib/whatsapp";
 import type { ProductDetail } from "@/lib/api/types";
 
+import { displayImage } from "@/lib/product-assets";
+
 export function ProductPurchaseActions({
   product,
   whatsappNumber = CANONICAL_WHATSAPP_NUMBER,
@@ -23,14 +25,14 @@ export function ProductPurchaseActions({
   const enquiryLink = whatsappHref(whatsappNumber, productEnquiryMessage(title));
 
   const handleAddToCart = () => {
-    const primaryImg = product.images.find((img) => img.is_primary) || product.images[0];
+    const img = displayImage(product);
     addItem(
       {
         slug: product.slug,
         name: product.name,
         brand: product.brand || product.category.name,
         price: product.public_price,
-        image_url: primaryImg ? primaryImg.image_url : null,
+        image_url: img ? img.image_url : null,
         model_number: product.model_number,
       },
       quantity
