@@ -15,13 +15,13 @@ const photos: Omit<ShopPhoto, "alt">[] = [
   {
     src: "/images/gallery/pioneer-ts-w30040d4.jpg",
     frame: "tall",
-    caption: "Magnet label reads TS-W30040D4, Champion series PRO, 2400W MAX, 800W NOM, 4.0 DVC.",
+    caption: "Magnet label reads TS-W3004D4, Champion Series PRO, 2400W MAX, 800W NOM, 4Ω DVC.",
   },
   {
     src: "/images/gallery/kuerl-subwoofer.jpg",
     frame: "wide",
     caption:
-      "Orange badge reads KUERL. Dust cap reads POWER SUPPLY DC 12V and WOOFER 10INCH 4OHM 150W RMS. Side reads HIGH PERFORMANCE SUBWOOFER.",
+      "Orange badge reads KUERL. Dust cap reads POWER SUPPLY DC 12V and WOOFER 8INCH 4OHM 150W RMS. Side reads HIGH PERFORMANCE SUBWOOFER.",
   },
   {
     src: "/images/gallery/pioneer-gm-d9701-d9705.jpg",
