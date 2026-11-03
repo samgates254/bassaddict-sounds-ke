@@ -1,4 +1,4 @@
-import type { Category, ProductDetail, ProductListItem } from "@/lib/api/types";
+import type { Category, ProductDetail, ProductListItem } from "./api/types.ts";
 
 export const FALLBACK_CATEGORIES: Category[] = [
   {
