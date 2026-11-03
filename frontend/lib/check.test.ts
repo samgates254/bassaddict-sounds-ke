@@ -219,3 +219,166 @@ test("official social links are preserved exactly as required", () => {
   assert.equal(facebook.headline, "FACEBOOK");
   assert.equal(facebook.url, OFFICIAL_SOCIAL_LINKS.facebook);
 });
+
+import sitemap, {
+  buildSitemapEntries,
+  isAllowedPublicUrl,
+  isValidProductSlug,
+  serializeSitemapXml,
+} from "../app/sitemap.ts";
+import robots from "../app/robots.ts";
+import { CANONICAL_SITE_URL } from "./seo.ts";
+
+function validateSitemapXmlStructure(xml: string): string[] {
+  const trimmed = xml.trim();
+  assert.ok(
+    trimmed.startsWith('<?xml version="1.0" encoding="UTF-8"?>'),
+    "Sitemap XML must start with standard XML declaration"
+  );
+  assert.match(
+    trimmed,
+    /<urlset\s+xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/,
+    "Sitemap must declare the official 0.9 sitemap namespace"
+  );
+  assert.ok(trimmed.endsWith("</urlset>"), "Sitemap must end with </urlset>");
+
+  // Extract inner content of <urlset>
+  const urlsetMatch = trimmed.match(
+    /<urlset\s+xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">([\s\S]*)<\/urlset>$/
+  );
+  assert.ok(urlsetMatch, "Must have valid <urlset> wrapper");
+  const inner = urlsetMatch[1].trim();
+  assert.ok(inner.length > 0, "<urlset> must not be empty");
+
+  // Match all <url>...</url> blocks
+  const urlBlocks = [...inner.matchAll(/<url>([\s\S]*?)<\/url>/g)];
+  assert.ok(urlBlocks.length > 0, "Sitemap must contain at least one <url> entry");
+
+  // Verify no stray characters or unclosed <url> tags exist outside <url>...</url> blocks
+  const stripped = inner.replace(/<url>[\s\S]*?<\/url>/g, "").trim();
+  assert.equal(stripped, "", "No malformed or unclosed tags allowed inside <urlset>");
+
+  const locs: string[] = [];
+  const seen = new Set<string>();
+
+  for (let i = 0; i < urlBlocks.length; i++) {
+    const block = urlBlocks[i][1];
+    const locMatches = [...block.matchAll(/<loc>([\s\S]*?)<\/loc>/g)];
+    assert.equal(
+      locMatches.length,
+      1,
+      `<url> entry #${i + 1} must contain exactly one <loc> element`
+    );
+
+    const loc = locMatches[0][1].trim();
+    assert.ok(loc.length > 0, `<loc> in entry #${i + 1} must be non-empty`);
+    assert.ok(!loc.includes("undefined"), `<loc> must not contain "undefined": ${loc}`);
+    assert.ok(!loc.includes("null"), `<loc> must not contain "null": ${loc}`);
+    assert.ok(!/[<>"'\s]/.test(loc), `<loc> must not contain malformed XML or whitespace characters: ${loc}`);
+
+    let parsed: URL;
+    assert.doesNotThrow(() => {
+      parsed = new URL(loc);
+    }, `<loc> must be a valid absolute URL: ${loc}`);
+
+    assert.equal(parsed!.protocol, "https:", `URL must use HTTPS: ${loc}`);
+    assert.equal(parsed!.hostname, "bassaddict.co.ke", `URL must belong to bassaddict.co.ke: ${loc}`);
+    assert.equal(parsed!.origin, CANONICAL_SITE_URL, `URL must use canonical origin: ${loc}`);
+
+    // Disallowed private/admin/cart/checkout paths
+    for (const forbidden of ["/account", "/admin", "/cart", "/checkout", "/login", "/register"]) {
+      assert.ok(
+        parsed!.pathname !== forbidden && !parsed!.pathname.startsWith(`${forbidden}/`),
+        `Private/excluded route must not appear in sitemap: ${loc}`
+      );
+    }
+
+    assert.ok(!seen.has(loc), `Duplicate URL detected in sitemap: ${loc}`);
+    seen.add(loc);
+    locs.push(loc);
+  }
+
+  return locs;
+}
+
+test("sitemap generates valid entries and XML for all public pages and 67 products", () => {
+  const entries = sitemap();
+  assert.equal(entries.length, 74, "Expected 7 core public pages + 67 product detail pages = 74 URLs");
+
+  for (const entry of entries) {
+    assert.ok(entry.url && typeof entry.url === "string" && entry.url.trim().length > 0);
+    assert.ok(isAllowedPublicUrl(entry.url), `Invalid URL in sitemap: ${entry.url}`);
+  }
+
+  const xml = serializeSitemapXml(entries);
+  const locs = validateSitemapXmlStructure(xml);
+  assert.equal(locs.length, 74);
+
+  // Confirm required public pages are present
+  const requiredUrls = [
+    "https://bassaddict.co.ke",
+    "https://bassaddict.co.ke/products",
+    "https://bassaddict.co.ke/services",
+    "https://bassaddict.co.ke/build",
+    "https://bassaddict.co.ke/gallery",
+    "https://bassaddict.co.ke/about",
+    "https://bassaddict.co.ke/contact",
+  ];
+  for (const reqUrl of requiredUrls) {
+    assert.ok(locs.includes(reqUrl), `Missing required public page in sitemap: ${reqUrl}`);
+  }
+
+  // Confirm all 67 fallback products are present
+  for (const product of FALLBACK_PRODUCTS) {
+    const expectedProductUrl = `https://bassaddict.co.ke/products/${product.slug}`;
+    assert.ok(locs.includes(expectedProductUrl), `Missing product URL in sitemap: ${expectedProductUrl}`);
+  }
+
+  // If Next.js build artifact (.next/server/app/sitemap.xml.body) exists, validate its exact XML too
+  const builtSitemapPath = path.resolve(import.meta.dirname, "../.next/server/app/sitemap.xml.body");
+  if (fs.existsSync(builtSitemapPath)) {
+    const builtXml = fs.readFileSync(builtSitemapPath, "utf8");
+    const builtLocs = validateSitemapXmlStructure(builtXml);
+    assert.equal(builtLocs.length, 74);
+  }
+});
+
+test("sitemap filters out empty slugs, invalid records, duplicates, and disallowed paths", () => {
+  assert.equal(isValidProductSlug(""), false);
+  assert.equal(isValidProductSlug("   "), false);
+  assert.equal(isValidProductSlug(null), false);
+  assert.equal(isValidProductSlug(undefined), false);
+  assert.equal(isValidProductSlug("undefined"), false);
+  assert.equal(isValidProductSlug("null"), false);
+  assert.equal(isValidProductSlug("product-undefined-1"), false);
+  assert.equal(isValidProductSlug("../admin"), false);
+  assert.equal(isValidProductSlug("pioneer-ts-6900pro"), true);
+
+  const mixedRecords = [
+    { slug: "pioneer-ts-6900pro", name: "Pioneer TS-6900PRO" },
+    { slug: "pioneer-ts-6900pro", name: "Duplicate Pioneer TS-6900PRO" },
+    { slug: "", name: "Empty Slug Product" },
+    { slug: "   ", name: "Whitespace Slug Product" },
+    { slug: null, name: "Null Slug Product" },
+    { slug: undefined, name: "Undefined Slug Product" },
+    { slug: "undefined", name: "Literal Undefined Slug" },
+    { slug: "null", name: "Literal Null Slug" },
+    { slug: "valid-slug", name: "" }, // Empty product name
+    null,
+    undefined,
+  ];
+
+  const entries = buildSitemapEntries(mixedRecords);
+  // 7 static pages + 1 valid unique product = 8
+  assert.equal(entries.length, 8);
+  const urls = entries.map((e) => e.url);
+  assert.ok(urls.includes("https://bassaddict.co.ke/products/pioneer-ts-6900pro"));
+});
+
+test("robots.txt allows Googlebot on / and points to canonical sitemap.xml", () => {
+  const result = robots();
+  assert.equal(result.sitemap, "https://bassaddict.co.ke/sitemap.xml");
+  const rules = Array.isArray(result.rules) ? result.rules[0] : result.rules;
+  assert.equal(rules.userAgent, "*");
+  assert.equal(rules.allow, "/");
+});

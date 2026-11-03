@@ -1,15 +1,14 @@
 import type { MetadataRoute } from "next";
 
-import { siteOrigin } from "@/lib/seo";
+import { CANONICAL_SITE_URL } from "../lib/seo.ts";
 
 export default function robots(): MetadataRoute.Robots {
-  const origin = siteOrigin();
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/account", "/login", "/register"],
+      disallow: ["/account", "/admin", "/cart", "/checkout", "/login", "/register"],
     },
-    sitemap: origin ? new URL("/sitemap.xml", origin).toString() : undefined,
+    sitemap: `${CANONICAL_SITE_URL}/sitemap.xml`,
   };
 }

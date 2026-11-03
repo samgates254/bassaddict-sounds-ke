@@ -1,16 +1,25 @@
 import type { Metadata } from "next";
 
-/** Absolute site origin for canonical and Open Graph URLs. Unset until deploy. */
-export function siteOrigin(): URL | undefined {
+/** Canonical production site origin for Bassaddict Sounds KE. */
+export const CANONICAL_SITE_URL = "https://bassaddict.co.ke";
+
+/** Absolute site origin for canonical, Open Graph, and sitemap URLs. */
+export function siteOrigin(): URL {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (!raw) return undefined;
-  try {
-    const url = new URL(raw);
-    if (url.protocol !== "http:" && url.protocol !== "https:") return undefined;
-    return url;
-  } catch {
-    return undefined;
+  if (raw) {
+    try {
+      const url = new URL(raw);
+      if (url.protocol === "https:" && url.hostname === "bassaddict.co.ke") {
+        return new URL(CANONICAL_SITE_URL);
+      }
+      if (url.protocol === "https:") {
+        return new URL(url.origin);
+      }
+    } catch {
+      /* fall through to canonical default */
+    }
   }
+  return new URL(CANONICAL_SITE_URL);
 }
 
 export function pageMetadata(input: {
@@ -32,7 +41,7 @@ export function pageMetadata(input: {
   return {
     title: input.absoluteTitle ? { absolute: input.title } : input.title,
     description: input.description,
-    alternates: origin ? { canonical: input.path } : undefined,
+    alternates: { canonical: input.path },
     robots: input.index === false ? { index: false, follow: false } : undefined,
     openGraph: {
       title: socialTitle,
