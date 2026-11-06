@@ -45,7 +45,7 @@ export default function CartPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="label">Order &amp; Quote Staging</p>
-          <h1 className="poster mt-2 font-display text-5xl sm:text-7xl">Your Equipment Cart</h1>
+          <h1 className="poster mt-2 font-display text-5xl sm:text-7xl">Equipment Quotation List</h1>
         </div>
         {items.length > 0 && (
           <button
@@ -86,12 +86,12 @@ export default function CartPage() {
                 {items.map((item) => (
                   <li key={item.slug} className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="size-20 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#121612]">
+                      <div className="size-20 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#0B0F0B]">
                         {item.image_url ? (
                           <img
                             src={item.image_url}
                             alt={item.name}
-                            className="h-full w-full object-cover"
+                            className="h-full w-full object-contain p-1.5"
                           />
                         ) : (
                           <div className="grid h-full place-items-center text-xs font-semibold text-stone-500">
@@ -109,8 +109,8 @@ export default function CartPage() {
                         {item.model_number && (
                           <p className="text-xs text-stone-400">{item.model_number}</p>
                         )}
-                        <p className="mt-1 text-sm font-semibold text-stone-300">
-                          {item.price ? formatKes(item.price) : "Price on request"}
+                        <p className="mt-1 text-xs text-[#A8FF00] font-medium">
+                          Quotation Specimen
                         </p>
                       </div>
                     </div>
@@ -139,8 +139,8 @@ export default function CartPage() {
                       </div>
 
                       <div className="text-right">
-                        <span className="font-display text-lg font-bold text-[#A8FF00]">
-                          {item.price ? formatKes(String(Number(item.price) * item.quantity)) : "On request"}
+                        <span className="inline-flex items-center rounded-full border border-[#A8FF00]/30 bg-[#A8FF00]/10 px-2.5 py-1 text-xs font-semibold text-[#A8FF00]">
+                          Qty: {item.quantity}
                         </span>
                       </div>
 
@@ -175,25 +175,24 @@ export default function CartPage() {
 
               <div className="mt-6 space-y-4 text-sm">
                 <div className="flex justify-between text-stone-400">
-                  <span>Selected items ({itemCount})</span>
+                  <span>Selected Equipment Units</span>
                   <span className="text-white font-medium">
-                    KSh {new Intl.NumberFormat("en-KE").format(totalPrice)}
+                    {itemCount} {itemCount === 1 ? "unit" : "units"}
                   </span>
                 </div>
                 <div className="flex justify-between text-stone-400">
-                  <span>Installation &amp; Tuning</span>
-                  <span className="text-stone-300">Quote via WhatsApp</span>
+                  <span>Equipment Product Lines</span>
+                  <span className="text-white font-medium">{items.length} lines</span>
                 </div>
-                {hasUnpricedItems && (
-                  <p className="text-xs text-amber-300/80">
-                    * Includes items with pricing provided on consultation.
-                  </p>
-                )}
+                <div className="flex justify-between text-stone-400">
+                  <span>Workshop Fitting &amp; Tuning</span>
+                  <span className="text-[#A8FF00] font-medium">Custom Quoted</span>
+                </div>
                 <div className="lime-rule pt-2" />
                 <div className="flex items-baseline justify-between pt-2">
-                  <span className="font-display text-base font-semibold text-white">Estimated Subtotal</span>
-                  <span className="font-display text-2xl font-bold text-[#A8FF00]">
-                    KSh {new Intl.NumberFormat("en-KE").format(totalPrice)}
+                  <span className="font-display text-base font-semibold text-white">Quotation Mode</span>
+                  <span className="font-display text-sm font-bold uppercase tracking-wider text-[#A8FF00]">
+                    Direct WhatsApp Quote
                   </span>
                 </div>
               </div>

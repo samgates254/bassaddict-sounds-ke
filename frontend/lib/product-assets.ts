@@ -84,6 +84,21 @@ export const PRODUCT_ASSETS: readonly { file: string; slug: string }[] = [
   { file: "speaker-cable-gauge.jpg", slug: "speaker-cable-gauge" },
   { file: "stv-box-8gb.jpg", slug: "stv-box-8gb" },
   { file: "stv-box-red.jpg", slug: "stv-box-red" },
+  { file: "hifonics-bxipro20.jpg", slug: "hifonics-bxipro-20" },
+  { file: "audiobank-tab3dx.jpg", slug: "audiobank-tab-3dx-crossover" },
+  { file: "pioneer-ts-6975v3.jpg", slug: "pioneer-ts-6975-v3" },
+  { file: "pioneer-ts-r1051s.jpg", slug: "pioneer-ts-r1051s" },
+  { file: "kenwood-kfc-s1666.jpg", slug: "kenwood-kfc-s1666" },
+  { file: "kenwood-kfc-t40a.jpg", slug: "kenwood-kfc-t40a" },
+  { file: "nrd-audio-nrd-t350.jpg", slug: "nrd-audio-nrd-t350" },
+  { file: "nrd-audio-nrd-s20.jpg", slug: "nrd-audio-nrd-s20" },
+  { file: "pioneer-pro-red-bullet.jpg", slug: "pioneer-pro-red-bullet" },
+  { file: "misound-pro-650m.jpg", slug: "misound-pro-650m-midrange" },
+  { file: "pioneer-mvh-s325bt.jpg", slug: "pioneer-mvh-s325bt" },
+  { file: "nakamichi-nq711b.jpg", slug: "nakamichi-nq711b" },
+  { file: "nakamichi-n-t20.jpg", slug: "nakamichi-n-t20" },
+  { file: "pioneer-gm-d-mono.jpg", slug: "pioneer-gm-d-mono-amplifier" },
+  { file: "bassaddict-power-distribution-block.jpg", slug: "bassaddict-power-distribution-block" },
 ];
 
 const bySlug = new Map(PRODUCT_ASSETS.map((asset) => [asset.slug, asset.file]));

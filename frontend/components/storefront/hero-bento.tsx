@@ -159,7 +159,7 @@ export function HeroBento({ className = "" }: { className?: string }) {
   };
 
   const consultWhatsAppHref = createWhatsAppHref(
-    `Hello BASSADICT SOUNDS KE, I am viewing the storefront hero and would like to inquire about ${specimen.name} (Ref: ${specimen.slug}, KSh ${specimen.price.toLocaleString()}) available at Ground Floor New Loitoktok House.`
+    `Hello BASSADICT SOUNDS KE, I am viewing the storefront hero and would like to inquire about ${specimen.name} (Ref: ${specimen.slug}) available at Ground Floor New Loitoktok House.`
   );
 
   return (
@@ -333,8 +333,8 @@ export function HeroBento({ className = "" }: { className?: string }) {
                         <CheckCircle2 className="size-3" />
                         <span>{specimen.status}</span>
                       </div>
-                      <div className="mt-1 font-impact text-xl sm:text-2xl font-bold text-white tracking-tight">
-                        KSh {specimen.price.toLocaleString()}
+                      <div className="mt-1 font-mono text-xs font-bold uppercase tracking-wider text-[#A8FF00]">
+                        Price on Enquiry
                       </div>
                     </div>
                   </div>
@@ -409,7 +409,7 @@ export function HeroBento({ className = "" }: { className?: string }) {
                       }`}
                     >
                       <ShoppingCart className="size-3.5" />
-                      <span>{addedItem ? "Added!" : "Add to Cart"}</span>
+                      <span>{addedItem ? "In Quote" : "Add to Quote"}</span>
                     </button>
 
                     <a

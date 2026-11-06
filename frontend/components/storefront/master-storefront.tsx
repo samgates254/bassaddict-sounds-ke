@@ -93,7 +93,7 @@ export function MasterStorefront({
   const [vehicleMake, setVehicleMake] = useState<string>("Toyota Fielder");
   const [soundGoal, setSoundGoal] = useState<string>("Deep Ground-Shaking Bass (SPL)");
   const [enclosureType, setEnclosureType] = useState<string>("Custom Ported MDF Box (Boot)");
-  const [budgetTier, setBudgetTier] = useState<string>("KSh 30,000 — 60,000");
+  const [budgetTier, setBudgetTier] = useState<string>("Stage 2: Balanced SQ & SPL");
 
   const generalWhatsapp = whatsappHref(whatsappNumber, generalEnquiryMessage());
 
@@ -355,7 +355,7 @@ export function MasterStorefront({
                           setQuickViewQuantity(1);
                         }
                       }}
-                      className="relative aspect-square w-full rounded-xl overflow-hidden bg-black/60 mb-4 cursor-pointer"
+                      className="relative aspect-square w-full rounded-xl overflow-hidden bg-[#0B0F0B] mb-4 cursor-pointer"
                     >
                       <Image
                         src={prod.primary_image?.image_url || "/images/products/pioneer-ts-w3254.jpg"}
@@ -394,16 +394,16 @@ export function MasterStorefront({
                     </p>
                   </div>
 
-                  {/* Price & Action Buttons */}
+                  {/* Pricing Status & Action Buttons */}
                   <div className="mt-5 pt-4 border-t border-white/10 flex flex-col gap-2.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-stone-400">Price</span>
-                      <span className="text-base font-extrabold text-white">
-                        {publicPriceLabel(prod)}
+                      <span className="text-xs text-stone-400">Pricing</span>
+                      <span className="inline-flex items-center rounded-full border border-[#A8FF00]/30 bg-[#A8FF00]/10 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-[#A8FF00]">
+                        Price on Inquiry
                       </span>
                     </div>
 
-                    {/* Dual Action: Add to Cart + WhatsApp Order */}
+                    {/* Dual Action: Add to Quote + WhatsApp Enquiry */}
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         type="button"
@@ -411,7 +411,7 @@ export function MasterStorefront({
                         className="flex items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-black/40 py-2.5 text-xs font-bold text-white hover:border-[#A8FF00] hover:text-[#A8FF00] transition"
                       >
                         <ShoppingBag className="size-3.5" />
-                        <span>Add Cart</span>
+                        <span>Add Quote</span>
                       </button>
 
                       <a
@@ -421,7 +421,7 @@ export function MasterStorefront({
                         className="flex items-center justify-center gap-1.5 rounded-lg bg-[#A8FF00] py-2.5 text-xs font-bold uppercase text-[#070A07] hover:bg-[#b8ff26] transition"
                       >
                         <MessageCircle className="size-3.5" />
-                        <span>Order</span>
+                        <span>Enquire</span>
                       </a>
                     </div>
 
@@ -517,7 +517,7 @@ export function MasterStorefront({
             {/* Step 4: Budget Tier */}
             <div className="flex flex-col gap-2">
               <label htmlFor="budget-tier" className="text-xs font-bold uppercase tracking-wider text-stone-300">
-                4. Approximate Budget Bracket
+                4. System Build Level / Stage
               </label>
               <select
                 id="budget-tier"
@@ -525,10 +525,10 @@ export function MasterStorefront({
                 onChange={(e) => setBudgetTier(e.target.value)}
                 className="rounded-xl border border-white/20 bg-black/60 px-4 py-3 text-sm text-white focus:border-[#A8FF00] focus:outline-none"
               >
-                <option value="KSh 15,000 — 30,000">Entry / Active Sub: KSh 15,000 — 30,000</option>
-                <option value="KSh 30,000 — 60,000">Balanced Stage: KSh 30,000 — 60,000</option>
-                <option value="KSh 60,000 — 120,000">High-Output Pro Build: KSh 60,000 — 120,000</option>
-                <option value="KSh 120,000+">Competition Show Build: KSh 120,000+</option>
+                <option value="Stage 1: Daily Driver Audio Upgrade">Stage 1: Daily Driver Audio Upgrade</option>
+                <option value="Stage 2: Balanced SQ & SPL">Stage 2: Balanced SQ &amp; SPL</option>
+                <option value="Stage 3: High-Output Pro Audio (SPL)">Stage 3: High-Output Pro Audio (SPL)</option>
+                <option value="Stage 4: Custom Competition Show Build">Stage 4: Custom Competition Show Build</option>
               </select>
             </div>
           </div>
@@ -777,7 +777,7 @@ export function MasterStorefront({
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 {/* Product Image */}
-                <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-black/60 border border-white/10 p-4">
+                <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#0B0F0B] border border-white/10 p-4">
                   <Image
                     src={selectedProduct.primary_image?.image_url || "/images/products/pioneer-ts-w3254.jpg"}
                     alt={selectedProduct.name}
@@ -804,11 +804,11 @@ export function MasterStorefront({
                       {selectedProduct.model_number ? `Model: ${selectedProduct.model_number}` : ""}
                     </p>
 
-                    <div className="mt-4 flex items-baseline gap-3">
-                      <span className="text-2xl font-black text-white">
-                        {publicPriceLabel(selectedProduct)}
+                    <div className="mt-4 flex items-center gap-3">
+                      <span className="inline-flex items-center rounded-full border border-[#A8FF00]/40 bg-[#A8FF00]/10 px-3 py-1 text-sm font-semibold uppercase tracking-wider text-[#A8FF00]">
+                        Price on Inquiry
                       </span>
-                      <span className="rounded bg-[#A8FF00]/15 px-2.5 py-0.5 text-xs font-bold text-[#A8FF00]">
+                      <span className="rounded bg-white/10 px-2.5 py-1 text-xs font-bold text-stone-300">
                         {stockLabel(selectedProduct.stock_status)}
                       </span>
                     </div>
@@ -855,7 +855,7 @@ export function MasterStorefront({
                       className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#A8FF00] py-3 text-xs font-black uppercase tracking-wider text-[#070A07] hover:bg-[#b8ff26] transition"
                     >
                       <ShoppingBag className="size-4" />
-                      <span>Add to Cart ({quickViewQuantity})</span>
+                      <span>Add to Quote List ({quickViewQuantity})</span>
                     </button>
 
                     <a
@@ -865,7 +865,7 @@ export function MasterStorefront({
                       className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-black/40 py-3 text-xs font-bold uppercase tracking-wider text-white hover:border-[#A8FF00] hover:text-[#A8FF00] transition"
                     >
                       <MessageCircle className="size-4" />
-                      <span>Order Directly on WhatsApp</span>
+                      <span>Enquire on WhatsApp</span>
                     </a>
                   </div>
                 </div>

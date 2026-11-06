@@ -123,12 +123,12 @@ export function CartDrawer({ whatsappNumber = CANONICAL_WHATSAPP_NUMBER }: { wha
               {items.map((item) => (
                 <li key={item.slug} className="flex gap-4 py-4">
                   {/* Thumbnail */}
-                  <div className="relative size-20 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#121612]">
+                  <div className="relative size-20 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#0B0F0B]">
                     {item.image_url ? (
                       <img
                         src={item.image_url}
                         alt={item.name}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-contain p-1.5"
                       />
                     ) : (
                       <div className="grid h-full place-items-center text-xs font-semibold text-stone-500">
@@ -184,9 +184,9 @@ export function CartDrawer({ whatsappNumber = CANONICAL_WHATSAPP_NUMBER }: { wha
                       </div>
 
                       <div className="text-right">
-                        <p className="font-display text-sm font-semibold text-[#A8FF00]">
-                          {item.price ? formatKes(String(Number(item.price) * item.quantity)) : "On request"}
-                        </p>
+                        <span className="inline-flex items-center rounded-full border border-[#A8FF00]/30 bg-[#A8FF00]/10 px-2 py-0.5 text-[10px] font-semibold text-[#A8FF00]">
+                          Qty: {item.quantity}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -201,17 +201,15 @@ export function CartDrawer({ whatsappNumber = CANONICAL_WHATSAPP_NUMBER }: { wha
           <div className="border-t border-[#A8FF00]/15 bg-black/60 p-6 backdrop-blur-xl">
             <div className="flex items-baseline justify-between">
               <span className="text-xs uppercase tracking-[0.16em] text-stone-400">
-                Estimated Total
+                Quotation Items
               </span>
               <div className="text-right">
-                <span className="font-display text-2xl font-bold tracking-tight text-white">
-                  KSh {new Intl.NumberFormat("en-KE").format(totalPrice)}
+                <span className="font-display text-xl font-bold tracking-tight text-white">
+                  {itemCount} {itemCount === 1 ? "Unit" : "Units"}
                 </span>
-                {hasUnpricedItems && (
-                  <p className="text-[0.65rem] text-stone-400">
-                    + Items with price on request
-                  </p>
-                )}
+                <p className="text-[0.65rem] text-[#A8FF00]">
+                  Official Quote via WhatsApp
+                </p>
               </div>
             </div>
 

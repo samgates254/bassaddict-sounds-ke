@@ -68,7 +68,7 @@ export function ProductPurchaseActions({
           </button>
         </div>
 
-        {/* Add to Cart button */}
+        {/* Add to Quote List button */}
         <button
           type="button"
           onClick={handleAddToCart}
@@ -79,18 +79,18 @@ export function ProductPurchaseActions({
           {added ? (
             <>
               <Check className="size-4" aria-hidden="true" />
-              <span>Added to Cart ({quantity})</span>
+              <span>In Quote List ({quantity})</span>
             </>
           ) : (
             <>
               <ShoppingBag className="size-4" aria-hidden="true" />
-              <span>Add to Cart</span>
+              <span>Add to Quote List</span>
             </>
           )}
         </button>
       </div>
 
-      {/* WhatsApp Order Action */}
+      {/* WhatsApp Enquiry Action */}
       <div className="flex flex-col sm:flex-row gap-3 pt-1">
         <a
           href={enquiryLink}
@@ -99,7 +99,7 @@ export function ProductPurchaseActions({
           className="btn btn-wa flex-1 gap-2 text-center"
         >
           <MessageCircle className="size-4" aria-hidden="true" />
-          <span>Order / Inquire on WhatsApp</span>
+          <span>Enquire on WhatsApp</span>
         </a>
 
         <a

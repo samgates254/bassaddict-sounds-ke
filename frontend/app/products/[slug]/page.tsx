@@ -167,30 +167,23 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
               <p className="mt-2 text-sm text-stone-400">Model: {product.model_number}</p>
             )}
 
-            {/* Price Section */}
+            {/* Availability & Inquiry Section */}
             <div className="mt-6 border-y border-[#A8FF00]/15 py-5">
-              <p className="text-[0.68rem] uppercase tracking-[0.2em] text-stone-400">
-                Showroom Public Price
+              <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#A8FF00] font-semibold">
+                Equipment Availability
               </p>
-              <p className="num mt-1 font-display text-4xl sm:text-5xl font-bold tracking-tight text-[#A8FF00]">
-                {publicPriceLabel(product)}
-              </p>
-              <p className="mt-2 text-xs text-stone-400">
-                Installation and tuning quoted separately based on vehicle model.
+              <div className="mt-2 flex items-center gap-3">
+                <span className="inline-flex items-center rounded-full border border-[#A8FF00]/40 bg-[#A8FF00]/10 px-3.5 py-1 text-sm font-semibold uppercase tracking-wider text-[#A8FF00]">
+                  Available on Request · Price on Inquiry
+                </span>
+                <span className="rounded bg-white/10 px-2.5 py-1 text-xs font-bold text-stone-300">
+                  {stockLabel(product.stock_status)}
+                </span>
+              </div>
+              <p className="mt-3 text-xs text-stone-400">
+                Installation, custom enclosure fabrication, and DSP tuning quoted based on vehicle model.
               </p>
             </div>
-
-            {/* Signed-in Customer Price */}
-            {mine && (
-              <div className="mt-6 rounded-2xl border border-ember/40 bg-[#A8FF00]/10 p-4">
-                <p className="label text-[#A8FF00]">Your Bassaddict Account Price</p>
-                <p className="num mt-1 font-display text-3xl font-bold text-white">{formatKes(mine.price)}</p>
-                {mine.note && <p className="mt-1 text-xs text-stone-300">{mine.note}</p>}
-                <p className="mt-2 text-[0.65rem] text-stone-400">
-                  This exclusive negotiated price is tied specifically to your customer profile.
-                </p>
-              </div>
-            )}
 
             {/* Interactive Purchase Controls */}
             <ProductPurchaseActions

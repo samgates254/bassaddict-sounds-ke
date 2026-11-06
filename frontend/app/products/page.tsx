@@ -35,7 +35,7 @@ export default async function ProductsPage() {
           Sound Equipment Catalog
         </h1>
         <p className="mt-4 text-base leading-relaxed text-stone-300 sm:text-lg">
-          Genuine Pioneer, Kenwood, Sony, Nakamichi, Boschmann, and audiophile gear. Transparent public prices, verified specifications, live auditioning, and professional installations on Luthuli Avenue, Nairobi.
+          Genuine Pioneer, Kenwood, Sony, Nakamichi, Boschmann, and audiophile gear. Direct showroom consultation, verified specifications, live auditioning, and professional installations on Luthuli Avenue, Nairobi.
         </p>
       </div>
 

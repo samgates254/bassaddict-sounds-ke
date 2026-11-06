@@ -94,25 +94,7 @@ export function CatalogBrowser({
 
   const sortedProducts = useMemo(() => {
     const copy = [...filteredProducts];
-    if (sortBy === "price_asc") {
-      copy.sort((a, b) => {
-        const hasA = a.public_price != null && !isNaN(Number(a.public_price));
-        const hasB = b.public_price != null && !isNaN(Number(b.public_price));
-        if (!hasA && !hasB) return a.name.localeCompare(b.name);
-        if (!hasA) return 1; // unpriced items placed at the end
-        if (!hasB) return -1;
-        return Number(a.public_price) - Number(b.public_price);
-      });
-    } else if (sortBy === "price_desc") {
-      copy.sort((a, b) => {
-        const hasA = a.public_price != null && !isNaN(Number(a.public_price));
-        const hasB = b.public_price != null && !isNaN(Number(b.public_price));
-        if (!hasA && !hasB) return a.name.localeCompare(b.name);
-        if (!hasA) return 1; // unpriced items placed at the end
-        if (!hasB) return -1;
-        return Number(b.public_price) - Number(a.public_price);
-      });
-    } else if (sortBy === "name_asc") {
+    if (sortBy === "name_asc") {
       copy.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === "name_desc") {
       copy.sort((a, b) => b.name.localeCompare(a.name));
@@ -233,8 +215,6 @@ export function CatalogBrowser({
               <option value="featured">Featured First</option>
               <option value="name_asc">Name: A to Z</option>
               <option value="name_desc">Name: Z to A</option>
-              <option value="price_asc">Price: Low to High</option>
-              <option value="price_desc">Price: High to Low</option>
             </select>
 
             {hasActiveFilters && (

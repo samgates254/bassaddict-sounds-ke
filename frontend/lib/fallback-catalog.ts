@@ -288,6 +288,18 @@ export const FALLBACK_PRODUCTS: ProductDetail[] = [
         "alt_text": "DV Pioneer DH 100Wx4 Bluetooth Digital Media Receiver",
         "is_primary": true,
         "sort_order": 0
+      },
+      {
+        "image_url": "/products/pioneer-radio-rear-chassis.jpg",
+        "alt_text": "Pioneer Radio Rear Chassis Heatsink",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/neon-sign-single-din.jpg",
+        "alt_text": "Pioneer Radio in front of BASSADICT Neon Sign",
+        "is_primary": false,
+        "sort_order": 2
       }
     ]
   },
@@ -773,6 +785,18 @@ export const FALLBACK_PRODUCTS: ProductDetail[] = [
         "alt_text": "Pioneer R-Series TS-R6951S 6x9-Inch 3-Way Coaxial Speakers",
         "is_primary": true,
         "sort_order": 0
+      },
+      {
+        "image_url": "/products/pioneer-ts-r6951s-box.jpg",
+        "alt_text": "Pioneer TS-R6951S Box View",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/pioneer-ts-r6951s-pair.jpg",
+        "alt_text": "Pioneer TS-R6951S Speaker Pair",
+        "is_primary": false,
+        "sort_order": 2
       }
     ]
   },
@@ -1211,6 +1235,18 @@ export const FALLBACK_PRODUCTS: ProductDetail[] = [
         "alt_text": "Pioneer GM-E7004 1000W 4-Channel Bridgeable Power Amplifier",
         "is_primary": true,
         "sort_order": 0
+      },
+      {
+        "image_url": "/products/pioneer-gm-e7004-carpet-rig.jpg",
+        "alt_text": "Pioneer GM-E7004 Carpet Rig Mount",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/pioneer-1000w-amp-vertical-mount.jpg",
+        "alt_text": "Pioneer 1000W Amp Vertical Mount",
+        "is_primary": false,
+        "sort_order": 2
       }
     ]
   },
@@ -2423,6 +2459,18 @@ export const FALLBACK_PRODUCTS: ProductDetail[] = [
         "alt_text": "Pioneer TS-S20 20mm 200W Component Dome Tweeters (Pair)",
         "is_primary": true,
         "sort_order": 0
+      },
+      {
+        "image_url": "/products/pioneer-ts-s20-box.jpg",
+        "alt_text": "Pioneer TS-S20 Box View",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/pioneer-ts-s20-stack.jpg",
+        "alt_text": "Pioneer TS-S20 Stock View",
+        "is_primary": false,
+        "sort_order": 2
       }
     ]
   },
@@ -2651,6 +2699,766 @@ export const FALLBACK_PRODUCTS: ProductDetail[] = [
         "alt_text": "STV Dual-Band WiFi 4K 60FPS Android TV Box",
         "is_primary": true,
         "sort_order": 0
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Hifonics Brutus BXIPRO2.0 Digital Bass Enhancement Processor",
+    "slug": "hifonics-bxipro-20",
+    "brand": "Hifonics",
+    "model_number": "BXIPRO2.0",
+    "category": {
+      "name": "Electronics & Power Supplies",
+      "slug": "electronics-power"
+    },
+    "description": "Hifonics Brutus BXIPRO2.0 digital bass enhancement restoration processor. Designed to restore missing low-frequency harmonics to compressed digital music tracks, featuring dash-mount remote level control, illuminated display, and adjustable subsonic filter.",
+    "specifications": {
+      "Product Type": "Digital Bass Restoration Processor",
+      "Series": "Brutus",
+      "Max Output Level": "13.5V Peak",
+      "Frequency Response": "10Hz - 100kHz",
+      "Subsonic Filter": "35Hz - 80Hz Variable",
+      "Remote Control": "Wired Dash-Mount Bass Level Dial Included",
+      "Illumination": "Backlit Blue Controls"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/hifonics-bxipro20.jpg",
+      "alt_text": "Hifonics Brutus BXIPRO2.0 Digital Bass Enhancement Processor - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/hifonics-bxipro20.jpg",
+        "alt_text": "Hifonics Brutus BXIPRO2.0 - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/hifonics-bxipro20-chassis.jpg",
+        "alt_text": "Hifonics Brutus BXIPRO2.0 Chassis - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/hifonics-bxipro20-box-front.jpg",
+        "alt_text": "Hifonics Brutus BXIPRO2.0 Retail Box - View 3",
+        "is_primary": false,
+        "sort_order": 2
+      },
+      {
+        "image_url": "/products/hifonics-bxipro20-street.jpg",
+        "alt_text": "Hifonics Brutus BXIPRO2.0 - View 4",
+        "is_primary": false,
+        "sort_order": 3
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "name": "AudioBank TAB-3DX 2/3-Way Mobile Audio Electronic Crossover",
+    "slug": "audiobank-tab-3dx-crossover",
+    "brand": "Audiobank",
+    "model_number": "TAB-3DX",
+    "category": {
+      "name": "Electronics & Power Supplies",
+      "slug": "electronics-power"
+    },
+    "description": "AudioBank TAB-3DX 2/3-way high-performance mobile audio electronic crossover with dash-mount remote bass control. Provides precise active frequency splitting between subwoofers, midbass, and high-frequency horns with 18dB/octave slope filtering.",
+    "specifications": {
+      "Product Type": "Active 2/3-Way Electronic Crossover",
+      "Channels": "Front / Rear / Subwoofer Outputs",
+      "Filter Slope": "18dB / Octave Asymmetrical",
+      "Subwoofer Low-Pass Filter": "40Hz - 400Hz Continuous",
+      "Mid-Pass / High-Pass": "40Hz - 8kHz Selectable",
+      "Remote Control": "Subwoofer Level Dash Remote Included",
+      "Signal to Noise Ratio": "> 95dB"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/audiobank-tab3dx.jpg",
+      "alt_text": "AudioBank TAB-3DX 2/3-Way Electronic Crossover - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/audiobank-tab3dx.jpg",
+        "alt_text": "AudioBank TAB-3DX - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/audiobank-tab3dx-side.jpg",
+        "alt_text": "AudioBank TAB-3DX Side Profile - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/audiobank-tab3dx-balcony.jpg",
+        "alt_text": "AudioBank TAB-3DX - View 3",
+        "is_primary": false,
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Pioneer TS-6975 V3 6x9-Inch 3-Way Coaxial Speakers (550W Max)",
+    "slug": "pioneer-ts-6975-v3",
+    "brand": "Pioneer",
+    "model_number": "TS-6975 V3",
+    "category": {
+      "name": "Speakers & Coaxials",
+      "slug": "speakers"
+    },
+    "description": "Pioneer Champion Series TS-6975 V3 6x9-inch 3-way high-power coaxial car speakers. Capable of handling 550W Max peak power with rigid multilayer mica matrix cone, high-heat voice coil, and gold-plated terminal blocks for heavy-duty parcel shelf audio builds.",
+    "specifications": {
+      "Speaker Size": "6x9 Inch (163mm x 237mm)",
+      "Max Music Power": "550W Peak",
+      "Nominal Power (RMS)": "80W RMS",
+      "Impedance": "4 Ohms",
+      "Frequency Response": "28Hz - 27kHz",
+      "Sensitivity": "92dB (1W/1m)",
+      "Cone Material": "Multilayer Mica Matrix (MLMM)"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/pioneer-ts-6975v3.jpg",
+      "alt_text": "Pioneer TS-6975 V3 6x9-Inch 3-Way Coaxial Speakers - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/pioneer-ts-6975v3.jpg",
+        "alt_text": "Pioneer TS-6975 V3 - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/pioneer-ts-6975v3-pair.jpg",
+        "alt_text": "Pioneer TS-6975 V3 Speaker Pair - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/pioneer-ts-6975v3-box-upright.jpg",
+        "alt_text": "Pioneer TS-6975 V3 Retail Box - View 3",
+        "is_primary": false,
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Pioneer TS-R1051S 4-Inch (10cm) 3-Way Coaxial Speakers (210W Max)",
+    "slug": "pioneer-ts-r1051s",
+    "brand": "Pioneer",
+    "model_number": "TS-R1051S",
+    "category": {
+      "name": "Speakers & Coaxials",
+      "slug": "speakers"
+    },
+    "description": "Pioneer R-Series TS-R1051S 10cm (4-inch) 3-way coaxial car speakers. Engineered for OEM dashboard and compact door replacements, featuring a shallow mounting basket, Mica-reinforced cone, and Piezoelectric supertweeter for bright, fatigue-free audio.",
+    "specifications": {
+      "Speaker Size": "4 Inch / 10cm",
+      "Max Power Handling": "210W Peak",
+      "Nominal Power (RMS)": "30W RMS",
+      "Impedance": "4 Ohms",
+      "Frequency Range": "34Hz - 27kHz",
+      "Mounting Depth": "43mm Shallow Profile",
+      "Configuration": "3-Way Coaxial System"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/pioneer-ts-r1051s.jpg",
+      "alt_text": "Pioneer TS-R1051S 4-Inch 3-Way Coaxial Speakers - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/pioneer-ts-r1051s.jpg",
+        "alt_text": "Pioneer TS-R1051S - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/pioneer-ts-r1051s-street.jpg",
+        "alt_text": "Pioneer TS-R1051S - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/pioneer-ts-r1051s-balcony.jpg",
+        "alt_text": "Pioneer TS-R1051S - View 3",
+        "is_primary": false,
+        "sort_order": 2
+      },
+      {
+        "image_url": "/products/pioneer-ts-r1051s-spec.jpg",
+        "alt_text": "Pioneer TS-R1051S Specs - View 4",
+        "is_primary": false,
+        "sort_order": 3
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "name": "Kenwood KFC-S1666 Stage Sound Series 6.5-Inch 2-Way Coaxial Speakers (300W Peak)",
+    "slug": "kenwood-kfc-s1666",
+    "brand": "Kenwood",
+    "model_number": "KFC-S1666",
+    "category": {
+      "name": "Speakers & Coaxials",
+      "slug": "speakers"
+    },
+    "description": "Kenwood Stage Sound Series KFC-S1666 16cm (6.5-inch) 2-way coaxial car speakers. Features an electroplated polypropylene woofer cone with diamond array pattern for reduced distortion, paired with a 25mm balanced dome tweeter for balanced in-cabin clarity.",
+    "specifications": {
+      "Speaker Size": "6.5 Inch / 16cm",
+      "Peak Power": "300W Max",
+      "Rated Power (RMS)": "30W RMS",
+      "Impedance": "4 Ohms",
+      "Frequency Response": "35Hz - 22kHz",
+      "Sensitivity": "90dB / W / m",
+      "Mounting Depth": "43.2mm"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/kenwood-kfc-s1666.jpg",
+      "alt_text": "Kenwood KFC-S1666 6.5-Inch 2-Way Coaxial Speakers - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/kenwood-kfc-s1666.jpg",
+        "alt_text": "Kenwood KFC-S1666 - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/kenwood-kfc-s1666-box.jpg",
+        "alt_text": "Kenwood KFC-S1666 Box - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/kenwood-kfc-s1666-balcony.jpg",
+        "alt_text": "Kenwood KFC-S1666 - View 3",
+        "is_primary": false,
+        "sort_order": 2
+      },
+      {
+        "image_url": "/products/kenwood-kfc-s1666-street.jpg",
+        "alt_text": "Kenwood KFC-S1666 - View 4",
+        "is_primary": false,
+        "sort_order": 3
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "name": "Kenwood KFC-T40A 280W High-Performance Component Dome Tweeters",
+    "slug": "kenwood-kfc-t40a",
+    "brand": "Kenwood",
+    "model_number": "KFC-T40A",
+    "category": {
+      "name": "Speakers & Coaxials",
+      "slug": "speakers"
+    },
+    "description": "Kenwood KFC-T40A 280W Peak automotive dome component tweeters. Engineered with a PEI balanced dome diaphragm, high-flux neodymium magnet, and external inline 6dB/octave high-pass crossover network for crisp high-frequency staging.",
+    "specifications": {
+      "Tweeter Type": "Balanced Dome Component Tweeter",
+      "Peak Power Handling": "280W Peak",
+      "RMS Power": "65W RMS",
+      "Frequency Range": "3kHz - 30kHz",
+      "Diaphragm Material": "PEI (Polyetherimide)",
+      "Mounting": "Swivel, Flush & Surface Mounting Pods Included",
+      "Crossover": "In-line Passive High-Pass Filter"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/kenwood-kfc-t40a.jpg",
+      "alt_text": "Kenwood KFC-T40A 280W Component Dome Tweeters - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/kenwood-kfc-t40a.jpg",
+        "alt_text": "Kenwood KFC-T40A - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/kenwood-kfc-t40a-street.jpg",
+        "alt_text": "Kenwood KFC-T40A Street View - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/kenwood-kfc-t40a-balcony.jpg",
+        "alt_text": "Kenwood KFC-T40A Balcony View - View 3",
+        "is_primary": false,
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "name": "NRD Audio NRD-T350 250W High-Efficiency Bullet Tweeters",
+    "slug": "nrd-audio-nrd-t350",
+    "brand": "NRD Audio",
+    "model_number": "NRD-T350",
+    "category": {
+      "name": "Speakers & Coaxials",
+      "slug": "speakers"
+    },
+    "description": "NRD Audio NRD-T350 250W Max high-efficiency aluminum compression bullet tweeters. Built for high-SPL public address and matatu/automotive open-air sound systems, featuring a CNC machined aluminum horn phase plug and high-temp voice coil.",
+    "specifications": {
+      "Driver Type": "Compression Bullet Horn Tweeter",
+      "Max Power": "250W Peak",
+      "Continuous RMS": "120W RMS",
+      "Impedance": "4 Ohms",
+      "Sensitivity": "102dB (1W/1m)",
+      "Chassis": "Die-Cast Aluminum with Electric Lime / Metallic Trim",
+      "Protection": "Bipolar High-Pass Blocking Capacitor Included"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/nrd-audio-nrd-t350.jpg",
+      "alt_text": "NRD Audio NRD-T350 250W High-Efficiency Bullet Tweeters - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/nrd-audio-nrd-t350.jpg",
+        "alt_text": "NRD Audio NRD-T350 - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/nrd-audio-nrd-t350-pair.jpg",
+        "alt_text": "NRD Audio NRD-T350 Tweeter Pair - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/nrd-audio-nrd-t350-box.jpg",
+        "alt_text": "NRD Audio NRD-T350 Box - View 3",
+        "is_primary": false,
+        "sort_order": 2
+      },
+      {
+        "image_url": "/products/nrd-audio-nrd-t350-packaging.jpg",
+        "alt_text": "NRD Audio NRD-T350 Packaging - View 4",
+        "is_primary": false,
+        "sort_order": 3
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "name": "NRD Audio NRD-S20 200W Component Dome Tweeters with Inline Crossovers",
+    "slug": "nrd-audio-nrd-s20",
+    "brand": "NRD Audio",
+    "model_number": "NRD-S20",
+    "category": {
+      "name": "Speakers & Coaxials",
+      "slug": "speakers"
+    },
+    "description": "NRD Audio NRD-S20 20mm 200W component dome tweeters with protective metal honeycomb grilles and dedicated inline passive crossover filters. Delivers smooth, airy high-frequency detail for custom pillar and sail panel installations.",
+    "specifications": {
+      "Tweeter Type": "20mm Silk / Mylar Dome Tweeter",
+      "Max Power": "200W Peak",
+      "RMS Rating": "100W RMS",
+      "Impedance": "4 Ohms",
+      "Frequency Response": "2.5kHz - 22kHz",
+      "Crossover Network": "Dual In-Line 12dB Passive Filters Included",
+      "Grille": "Protective Hex-Mesh Metal Grille with Green Logo"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/nrd-audio-nrd-s20.jpg",
+      "alt_text": "NRD Audio NRD-S20 200W Component Dome Tweeters - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/nrd-audio-nrd-s20.jpg",
+        "alt_text": "NRD Audio NRD-S20 - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/nrd-audio-nrd-s20-box.jpg",
+        "alt_text": "NRD Audio NRD-S20 Box - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/nrd-audio-nrd-s20-grille.jpg",
+        "alt_text": "NRD Audio NRD-S20 Grille - View 3",
+        "is_primary": false,
+        "sort_order": 2
+      },
+      {
+        "image_url": "/products/nrd-audio-nrd-s20-crossovers.jpg",
+        "alt_text": "NRD Audio NRD-S20 Crossovers - View 4",
+        "is_primary": false,
+        "sort_order": 3
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "name": "Pioneer PRO Series Red Horn Compression Bullet Tweeters",
+    "slug": "pioneer-pro-red-bullet",
+    "brand": "Pioneer",
+    "model_number": "TS-B400PRO-RED",
+    "category": {
+      "name": "Speakers & Coaxials",
+      "slug": "speakers"
+    },
+    "description": "Pioneer PRO Series high-efficiency titanium bullet horn compression tweeter with anodized red throat flare. Designed for high SPL competition builds requiring aggressive high-frequency projection, wide soundstage dispersion, and high thermal capacity.",
+    "specifications": {
+      "Product Type": "High-Efficiency Bullet Horn Tweeter",
+      "Diaphragm": "Titanium Compression Diaphragm",
+      "Horn Flare": "CNC Anodized Red Dispersion Phase Plug",
+      "Max Power": "500W Peak",
+      "Continuous RMS": "200W RMS",
+      "Impedance": "4 Ohms",
+      "Sensitivity": "106dB (1W/1m)"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/pioneer-pro-red-bullet.jpg",
+      "alt_text": "Pioneer PRO Series Red Horn Compression Bullet Tweeters - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/pioneer-pro-red-bullet.jpg",
+        "alt_text": "Pioneer PRO Series Red Horn - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/pioneer-pro-red-bullet-front.jpg",
+        "alt_text": "Pioneer PRO Series Red Horn Front Face - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "name": "MISOUND Pro Audio 6.5-Inch High-Output Midrange Driver",
+    "slug": "misound-pro-650m-midrange",
+    "brand": "MISOUND",
+    "model_number": "Pro-650M",
+    "category": {
+      "name": "Speakers & Coaxials",
+      "slug": "speakers"
+    },
+    "description": "MISOUND Pro Audio 6.5-inch high-output pro midrange loudspeaker driver. Engineered with an accordion cloth surround, reinforced composite paper cone, heavy vented motor structure, and high sensitivity for powerful vocal cut and open midrange punch.",
+    "specifications": {
+      "Speaker Type": "High-Output Midrange Loudspeaker",
+      "Diameter": "6.5 Inch / 165mm",
+      "Power Handling": "350W Max / 150W RMS",
+      "Impedance": "4 Ohms",
+      "Surround": "Accordion M-Roll Treated Cloth",
+      "Magnet": "High-Flux Vented Ferrite Motor",
+      "Voice Coil": "1.5 Inch High-Temp Aluminum Voice Coil"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/misound-pro-650m.jpg",
+      "alt_text": "MISOUND Pro Audio 6.5-Inch Midrange Driver - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/misound-pro-650m.jpg",
+        "alt_text": "MISOUND Pro Audio 6.5-Inch Midrange - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/misound-pro-650m-cone.jpg",
+        "alt_text": "MISOUND Pro Audio Cone View - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "name": "Pioneer MVH-S325BT Bluetooth In-Dash Digital Media Receiver",
+    "slug": "pioneer-mvh-s325bt",
+    "brand": "Pioneer",
+    "model_number": "MVH-S325BT",
+    "category": {
+      "name": "Car Radios & Receivers",
+      "slug": "car-radios"
+    },
+    "description": "Pioneer MVH-S325BT single-DIN digital media receiver featuring Pioneer Smart Sync app control, dual-phone Bluetooth hands-free and audio streaming, front USB, Spotify control, FLAC lossless playback, and 13-band graphic equalizer.",
+    "specifications": {
+      "Chassis Size": "Single-DIN (1-DIN)",
+      "Power Output": "MOSFET 50W x 4 Channels",
+      "Connectivity": "Bluetooth 4.2 / Front USB 1.5A / Front 3.5mm AUX",
+      "Audio Formats": "FLAC, WAV, MP3, WMA, AAC",
+      "Audio Tuning": "13-Band Graphic EQ, Dynamic Bass Boost",
+      "Pre-Outs": "2 Pairs RCA Pre-Outs (2V Front, Rear/Sub)",
+      "Display": "VA LCD with Wide Viewing Angle"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/pioneer-mvh-s325bt.jpg",
+      "alt_text": "Pioneer MVH-S325BT Bluetooth In-Dash Receiver - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/pioneer-mvh-s325bt.jpg",
+        "alt_text": "Pioneer MVH-S325BT Receiver - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "name": "Nakamichi NQ711B Single-DIN Bluetooth Car Stereo Receiver",
+    "slug": "nakamichi-nq711b",
+    "brand": "Nakamichi",
+    "model_number": "NQ711B",
+    "category": {
+      "name": "Car Radios & Receivers",
+      "slug": "car-radios"
+    },
+    "description": "Nakamichi NQ711B single-DIN in-dash car audio receiver. Offers Bluetooth wireless music streaming and hands-free calling, USB MP3/WMA playback, front 3.5mm AUX input, AM/FM radio with 30 presets, and high-visibility LCD display with multi-color lighting.",
+    "specifications": {
+      "Chassis": "Standard 1-DIN",
+      "Max Power Output": "50W x 4 Channels",
+      "Connectivity": "Bluetooth, Front USB Port, 3.5mm AUX Input",
+      "Media Support": "MP3, WMA, FLAC, Lossless Audio",
+      "Equalizer Presets": "Pop, Rock, Classic, Flat, User Custom",
+      "RCA Outputs": "2 Channels RCA Audio Pre-Out",
+      "Accessories": "IR Remote Control and Wiring Harness Included"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/nakamichi-nq711b.jpg",
+      "alt_text": "Nakamichi NQ711B Single-DIN Bluetooth Receiver - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/nakamichi-nq711b.jpg",
+        "alt_text": "Nakamichi NQ711B Receiver - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/nakamichi-nq711b-unboxed.jpg",
+        "alt_text": "Nakamichi NQ711B Unboxed Top View - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "name": "Nakamichi N-T20 420W Component Dome Tweeters (Pair)",
+    "slug": "nakamichi-n-t20",
+    "brand": "Nakamichi",
+    "model_number": "N-T20",
+    "category": {
+      "name": "Speakers & Coaxials",
+      "slug": "speakers"
+    },
+    "description": "Nakamichi N-Series N-T20 420W Peak component dome tweeters. Precision engineered with a 25mm silk dome neodymium motor and external inline crossovers to provide smooth, high-resolution musical sound reproduction without harshness.",
+    "specifications": {
+      "Tweeter Diaphragm": "25mm Silk Dome",
+      "Peak Music Power": "420W Peak",
+      "Nominal Power (RMS)": "30W RMS",
+      "Frequency Response": "1,200Hz - 20,000Hz",
+      "Sensitivity": "90dB \u00b1 3dB",
+      "Mounting": "Flush, Surface & Angled Pod Adapters Included",
+      "Crossover": "External Inline 6dB Passive Filter"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/nakamichi-n-t20.jpg",
+      "alt_text": "Nakamichi N-T20 420W Component Dome Tweeters - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/nakamichi-n-t20.jpg",
+        "alt_text": "Nakamichi N-T20 - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/nakamichi-n-t20-spec.jpg",
+        "alt_text": "Nakamichi N-T20 Specs - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/nakamichi-n-t20-barcode.jpg",
+        "alt_text": "Nakamichi N-T20 Retail Box - View 3",
+        "is_primary": false,
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "name": "Pioneer GM-D Series Class-D Mono Subwoofer Power Amplifier (1600W Max)",
+    "slug": "pioneer-gm-d-mono-amplifier",
+    "brand": "Pioneer",
+    "model_number": "GM-D8701",
+    "category": {
+      "name": "Power Amplifiers",
+      "slug": "amplifiers"
+    },
+    "description": "Pioneer GM-D Series Class-D monoblock car subwoofer amplifier. Delivers up to 1600W Max peak power with 1-Ohm load stability, compact aluminum chassis for versatile underseat or boot mounting, and adjustable low-pass / bass boost controls.",
+    "specifications": {
+      "Amplifier Class": "Class-D Monoblock",
+      "Max Power Output": "1600W Max",
+      "RMS Power (1 Ohm)": "800W RMS x 1",
+      "RMS Power (2 Ohms)": "500W RMS x 1",
+      "RMS Power (4 Ohms)": "300W RMS x 1",
+      "Frequency Response": "10Hz - 240Hz",
+      "Low-Pass Filter": "40Hz - 240Hz (-12dB/oct)",
+      "Bass Boost Remote": "Wired Remote Bass Level Knob Included"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/pioneer-gm-d-mono.jpg",
+      "alt_text": "Pioneer GM-D Mono Subwoofer Amplifier - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/pioneer-gm-d-mono.jpg",
+        "alt_text": "Pioneer GM-D Mono Amplifier - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "name": "BASSADICT 4-Way Fused High-Current Power Distribution Block",
+    "slug": "bassaddict-power-distribution-block",
+    "brand": "BASSADICT Workshop Custom",
+    "model_number": "DB-4WAY-ANL",
+    "category": {
+      "name": "Cables & Connectors",
+      "slug": "cables-connectors"
+    },
+    "description": "BASSADICT heavy-duty multi-way fused power and ground distribution block with high-temperature clear polycarbonate cover. Accepts 0-gauge or 4-gauge primary inputs and distributes to multiple 4-gauge or 8-gauge amplifier power feeds with individual fuse protection.",
+    "specifications": {
+      "Product Type": "Fused Audio Power Distribution Block",
+      "Input Ports": "1 x 0/2/4 Gauge Input",
+      "Output Ports": "4 x 4/8 Gauge Fused Outputs",
+      "Fuse Compatibility": "Mini-ANL / AFS Glass & Solid Blade Fuses",
+      "Terminal Material": "High-Conductivity Solid Brass with Nickel Finish",
+      "Cover": "Clear Smoke Impact-Resistant Polycarbonate Protective Shield",
+      "Application": "Multi-Amplifier Systems & High-Current Dual-Battery Builds"
+    },
+    "public_price": null,
+    "price_type": "ON_REQUEST",
+    "stock_status": "IN_STOCK",
+    "featured": true,
+    "primary_image": {
+      "image_url": "/products/bassaddict-power-distribution-block.jpg",
+      "alt_text": "BASSADICT 4-Way Fused Power Distribution Block - View 1",
+      "is_primary": true,
+      "sort_order": 0
+    },
+    "images": [
+      {
+        "image_url": "/products/bassaddict-power-distribution-block.jpg",
+        "alt_text": "BASSADICT 4-Way Fused Power Block - View 1",
+        "is_primary": true,
+        "sort_order": 0
+      },
+      {
+        "image_url": "/products/bassaddict-anl-fuse-holder.jpg",
+        "alt_text": "BASSADICT ANL Fuse Holder - View 2",
+        "is_primary": false,
+        "sort_order": 1
+      },
+      {
+        "image_url": "/products/bassaddict-4way-fused-block.jpg",
+        "alt_text": "BASSADICT 4-Way Block - View 3",
+        "is_primary": false,
+        "sort_order": 2
+      },
+      {
+        "image_url": "/products/bassaddict-power-distribution-module.jpg",
+        "alt_text": "BASSADICT Distribution Module - View 4",
+        "is_primary": false,
+        "sort_order": 3
       }
     ]
   }

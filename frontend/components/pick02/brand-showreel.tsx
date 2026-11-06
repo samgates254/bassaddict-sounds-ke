@@ -342,10 +342,10 @@ export function BrandShowreel({
                       </p>
                     </div>
 
-                    {/* Footer Controls: Price, Add to Cart, WhatsApp */}
+                    {/* Footer Controls: Status, Add to Quote, WhatsApp */}
                     <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between gap-2">
-                      <div className="font-impact text-base sm:text-lg font-bold text-white tracking-tight">
-                        {formatKes(prod.public_price) ?? "Ask for price"}
+                      <div className="inline-flex items-center rounded-full border border-[#A8FF00]/30 bg-[#A8FF00]/10 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase text-[#A8FF00]">
+                        In Showroom · Enquire
                       </div>
 
                       <div className="flex items-center gap-1.5">
@@ -357,7 +357,7 @@ export function BrandShowreel({
                               ? "bg-green-500 text-black"
                               : "bg-white/10 hover:bg-white/20 text-white"
                           }`}
-                          title="Add to System Build"
+                          title="Add to Quote List"
                         >
                           {addedItemSlug === prod.slug ? (
                             <Check className="size-3.5" />
@@ -368,7 +368,7 @@ export function BrandShowreel({
 
                         <a
                           href={createWhatsAppHref(
-                            `Hello BASSADICT SOUNDS KE, I would like to inquire about ${prod.name} (Ref: ${prod.slug}, KSh ${prod.public_price ? prod.public_price.toLocaleString() : "Ask Price"}) available at Ground Floor New Loitoktok House.`
+                            `Hello BASSADICT SOUNDS KE, I would like to inquire about ${prod.name} (Ref: ${prod.slug}) available at Ground Floor New Loitoktok House.`
                           )}
                           target="_blank"
                           rel="noopener noreferrer"
