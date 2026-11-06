@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk, Geist, Anton, JetBrains_Mono } from "next/font/google";
 
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -11,6 +11,9 @@ import { siteOrigin } from "@/lib/seo";
 import { CANONICAL_WHATSAPP_NUMBER } from "@/lib/brand";
 
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -22,6 +25,18 @@ const body = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   weight: ["400", "500", "600", "700"],
+});
+
+const anton = Anton({
+  subsets: ["latin"],
+  variable: "--font-impact",
+  weight: "400",
+});
+
+const monoTech = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono-tech",
+  weight: ["400", "500", "700"],
 });
 
 export const dynamic = "force-dynamic";
@@ -49,8 +64,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const whatsappNumber = business.whatsapp_number || CANONICAL_WHATSAPP_NUMBER;
 
   return (
-    <html lang="en">
-      <body className={`${display.variable} ${body.variable} font-sans antialiased text-[#F4F7EF] bg-[#070A07]`}>
+    <html lang="en" className={cn("font-sans", geist.variable)}>
+      <body className={`${display.variable} ${body.variable} ${anton.variable} ${monoTech.variable} font-sans antialiased text-[#F4F7EF] bg-[#070A07]`}>
         {/* Background ambient lighting */}
         <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
           <span className="absolute -left-[22rem] -top-[24rem] size-[48rem] animate-orb-lime-one rounded-full bg-[#A8FF00]/10 blur-[120px]" />

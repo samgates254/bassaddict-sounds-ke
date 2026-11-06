@@ -91,6 +91,14 @@ body::after {
   summary::-webkit-details-marker {
     display: none;
   }
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply font-sans;
+  }
+
 }
 
 @layer components {
@@ -229,4 +237,12 @@ body::after {
     opacity: 0.45;
     transition: none;
   }
+}
+
+/* Isolate preview pages from default layout header/footer when standalone */
+body:has([data-preview-isolated="true"]) > header,
+body:has([data-preview-isolated="true"]) > footer,
+body:has([data-preview-isolated="true"]) aside[aria-label="WhatsApp live assistance"],
+body:has([data-preview-isolated="true"]) > .fixed.bottom-6.right-6 {
+  display: none !important;
 }

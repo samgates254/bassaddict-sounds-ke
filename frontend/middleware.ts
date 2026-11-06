@@ -21,6 +21,16 @@ function tokenExpired(token: string) {
 export async function middleware(request: NextRequest) {
   const access = request.cookies.get(ACCESS_COOKIE)?.value;
   const refresh = request.cookies.get(REFRESH_COOKIE)?.value;
+
+  // Security Hardening: Enforce edge-level auth protection on private account routes
+  if (request.nextUrl.pathname.startsWith("/account")) {
+    if (!access && !refresh) {
+      const loginUrl = new URL("/login", request.url);
+      loginUrl.searchParams.set("next", request.nextUrl.pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
   if (!refresh || (access && !tokenExpired(access))) return NextResponse.next();
 
   try {

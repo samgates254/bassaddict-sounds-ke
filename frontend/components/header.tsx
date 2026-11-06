@@ -1,251 +1,180 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, MessageCircle, ShoppingBag, X, Phone } from "lucide-react";
-import { Mark } from "@/components/mark";
+import {
+  Menu,
+  MessageCircle,
+  ShoppingBag,
+  X,
+  Phone,
+  MapPin,
+  Clock,
+  Sparkles,
+} from "lucide-react";
 import { useCart } from "@/context/cart-context";
 import type { BusinessSettings } from "@/lib/api/types";
-import { telHref } from "@/lib/format";
 import { generalEnquiryMessage, whatsappHref } from "@/lib/whatsapp";
-import { NAV } from "@/lib/brand";
-import { SOCIAL_PLATFORMS } from "@/lib/social";
-import { SocialIcon } from "@/components/social-icons";
+import { CANONICAL_WHATSAPP_NUMBER } from "@/lib/brand";
+
+const MAIN_NAV = [
+  { href: "/products", label: "Catalogue" },
+  { href: "/services", label: "Services & Tuning" },
+  { href: "/build", label: "Custom Builds" },
+  { href: "/gallery", label: "Workshop Gallery" },
+  { href: "/about", label: "About Us" },
+  { href: "/contact", label: "Contact & Bay" },
+] as const;
 
 export function Header({ business }: { business: BusinessSettings }) {
   const { itemCount, openCart } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const whatsappLink = whatsappHref(business.whatsapp_number, generalEnquiryMessage());
+  const whatsappNumber = business.whatsapp_number || CANONICAL_WHATSAPP_NUMBER;
+  const whatsappLink = whatsappHref(whatsappNumber, generalEnquiryMessage());
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#A8FF00]/15 bg-[#070A07]/85 shadow-[0_10px_40px_rgba(0,0,0,0.4)] backdrop-blur-2xl">
-      <div className="site flex min-h-20 items-center justify-between gap-4 py-3">
-        {/* Brand Logo */}
-        <Link href="/" className="shrink-0 py-0.5 focus:outline-none focus:ring-2 focus:ring-[#A8FF00]">
-          <Mark className="h-10 w-auto sm:h-12" priority />
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav aria-label="Primary" className="hidden items-center gap-1 xl:gap-2 lg:flex">
-          {NAV.map((item) => {
-            const active =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={`relative rounded-full px-3.5 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.16em] transition-colors ${
-                  active
-                    ? "bg-[#A8FF00]/15 text-[#c2ff52]"
-                    : "text-stone-300 hover:bg-[#A8FF00]/10 hover:text-[#c2ff52]"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Action Controls */}
-        <div className="flex shrink-0 items-center gap-2.5 sm:gap-3.5">
-          {/* Desktop Compact Social Channels */}
-          <div className="hidden lg:flex items-center gap-1.5 border-r border-white/10 pr-2.5">
-            {SOCIAL_PLATFORMS.map((s) => (
-              <a
-                key={s.id}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={`Follow BASSADICT on ${s.platform} (${s.handle})`}
-                aria-label={`Official ${s.platform} page`}
-                className="group/social flex size-8 items-center justify-center rounded-full border border-white/10 bg-black/40 text-stone-400 transition hover:border-[#A8FF00]/50 hover:bg-[#A8FF00]/10 hover:text-white"
-              >
-                <SocialIcon
-                  id={s.id}
-                  className="size-3.5 transition-transform duration-200 group-hover/social:scale-110 motion-reduce:group-hover/social:scale-100"
-                />
-              </a>
-            ))}
+    <div className="w-full">
+      {/* 1. TOP UTILITY BAR (NATURAL & PROFESSIONAL) */}
+      <div className="border-b border-white/10 bg-[#050705] text-[11px] text-[#A6B0A2]">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1.5 text-stone-300">
+              <MapPin className="size-3 text-[#A8FF00]" />
+              Ground Floor, New Loitoktok House, Luthuli Avenue, Nairobi
+            </span>
+            <span className="hidden sm:inline h-3 w-px bg-white/15" />
+            <span className="hidden sm:flex items-center gap-1 text-stone-400">
+              <Clock className="size-3 text-[#A8FF00]" />
+              Mon — Sat: 8:30 AM — 6:30 PM
+            </span>
           </div>
 
-          {/* Account */}
-          <Link
-            href="/account"
-            className="hidden rounded-full border border-white/10 px-3.5 py-2 text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-stone-300 transition hover:border-[#A8FF00]/40 hover:text-white md:inline"
-          >
-            Account
-          </Link>
-
-          {/* Cart Icon Button with Badge */}
-          <button
-            type="button"
-            onClick={openCart}
-            aria-label={`Open equipment cart with ${itemCount} items`}
-            className="group relative flex size-10 items-center justify-center rounded-full border border-[#A8FF00]/25 bg-black/40 text-stone-200 transition hover:border-[#A8FF00] hover:bg-[#A8FF00]/10 hover:text-[#A8FF00] sm:size-11"
-          >
-            <ShoppingBag className="size-4 sm:size-5 transition-transform group-hover:scale-110" aria-hidden="true" />
-            {itemCount > 0 && (
-              <span className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-[#A8FF00] text-[0.65rem] font-bold text-[#070A07] shadow-[0_0_12px_rgba(168,255,0,0.8)]">
-                {itemCount}
-              </span>
-            )}
-          </button>
-
-          {/* WhatsApp Action */}
-          <a
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Direct WhatsApp assistance"
-            className="btn btn-wa !min-h-10 !px-3.5 hidden sm:inline-flex text-[0.68rem]"
-          >
-            <MessageCircle className="size-4" aria-hidden="true" />
-            <span>WhatsApp</span>
-          </a>
-
-          {/* Mobile Menu Toggle Button */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open navigation menu"
-            className="grid size-10 place-items-center rounded-full border border-white/15 bg-black/40 text-stone-300 hover:text-white lg:hidden"
-          >
-            <Menu className="size-5" aria-hidden="true" />
-          </button>
+          <div className="flex items-center gap-4 font-medium">
+            <a
+              href={`tel:${whatsappNumber}`}
+              className="hidden md:inline-flex items-center gap-1 text-stone-300 hover:text-[#A8FF00] transition"
+            >
+              <Phone className="size-3 text-[#A8FF00]" />
+              Direct Call: {whatsappNumber}
+            </a>
+            <span className="hidden md:inline h-3 w-px bg-white/15" />
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-[#A8FF00] hover:underline"
+            >
+              <MessageCircle className="size-3" />
+              WhatsApp Helpdesk
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Slide-Over Menu */}
-      {mobileMenuOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile Navigation"
-          className="fixed inset-0 z-50 lg:hidden"
-        >
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-black/80 backdrop-blur-md"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
+      {/* 2. MAIN STOREFRONT NAVIGATION WITH OFFICIAL BASSADICT LOGO */}
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#080B08]/95 backdrop-blur-2xl">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          {/* Real BASSADICT Brand Logo */}
+          <Link href="/" className="shrink-0 transition-opacity hover:opacity-90">
+            <Image
+              src="/images/brand/bassaddict-logo.png"
+              alt="Bassaddict Sounds KE"
+              width={220}
+              height={86}
+              priority
+              className="h-11 sm:h-12 w-auto object-contain"
+            />
+          </Link>
 
-          {/* Menu Drawer */}
-          <div className="fixed inset-y-0 right-0 z-10 flex w-full max-w-sm flex-col border-l border-[#A8FF00]/20 bg-[#070A07] p-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-[#A8FF00]/15 pb-4">
-              <Mark className="h-8 w-auto" />
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                aria-label="Close navigation menu"
-                className="rounded-full p-2 text-stone-400 hover:bg-white/10 hover:text-white"
+          {/* Desktop Clean Navigation */}
+          <nav
+            aria-label="Storefront Categories"
+            className="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-stone-200"
+          >
+            {MAIN_NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="hover:text-[#A8FF00] transition-colors"
               >
-                <X className="size-5" aria-hidden="true" />
-              </button>
-            </div>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-            <nav aria-label="Mobile" className="mt-6 flex flex-1 flex-col gap-1 overflow-y-auto">
-              {NAV.map((item) => {
-                const active =
-                  item.href === "/"
-                    ? pathname === "/"
-                    : pathname === item.href || pathname.startsWith(`${item.href}/`);
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`rounded-xl px-4 py-3 font-display text-2xl font-medium tracking-tight transition ${
-                      active
-                        ? "bg-[#A8FF00]/15 text-[#A8FF00]"
-                        : "text-stone-200 hover:bg-white/5 hover:text-white"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
+          {/* Right Action Icons: Cart, WhatsApp, Mobile Toggle */}
+          <div className="flex items-center gap-3">
+            {/* Cart Trigger */}
+            <button
+              type="button"
+              onClick={openCart}
+              className="relative flex size-11 items-center justify-center rounded-xl border border-white/15 bg-black/50 text-white hover:border-[#A8FF00] hover:text-[#A8FF00] transition"
+              aria-label={`Cart with ${itemCount} items`}
+            >
+              <ShoppingBag className="size-4" />
+              {itemCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 flex size-5 items-center justify-center rounded-full bg-[#A8FF00] text-[10px] font-black text-black">
+                  {itemCount}
+                </span>
+              )}
+            </button>
 
-              <div className="mt-4 border-t border-white/10 pt-4">
-                <Link
-                  href="/cart"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between rounded-xl px-4 py-3 font-display text-2xl font-medium text-stone-200 hover:bg-white/5 hover:text-white"
-                >
-                  <span className="flex items-center gap-3">
-                    <ShoppingBag className="size-5 text-[#A8FF00]" aria-hidden="true" />
-                    Equipment Cart
-                  </span>
-                  {itemCount > 0 && (
-                    <span className="rounded-full bg-[#A8FF00] px-2.5 py-0.5 text-xs font-bold text-[#070A07]">
-                      {itemCount}
-                    </span>
-                  )}
-                </Link>
+            {/* Direct WhatsApp Consultation Button */}
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex h-11 items-center gap-2 rounded-xl bg-[#A8FF00] px-5 text-xs font-black uppercase tracking-wider text-[#070A07] shadow-[0_4px_20px_rgba(168,255,0,0.25)] transition hover:bg-[#b8ff26]"
+            >
+              <MessageCircle className="size-4" />
+              <span>WhatsApp Consult</span>
+            </a>
 
-                <Link
-                  href="/account"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block rounded-xl px-4 py-3 font-display text-2xl font-medium text-stone-200 hover:bg-white/5 hover:text-white"
-                >
-                  My Account
-                </Link>
-              </div>
-
-              {/* Mobile Drawer Social Channels */}
-              <div className="mt-4 border-t border-white/10 pt-4">
-                <p className="px-4 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[#A8FF00]">
-                  Follow BASSADICT
-                </p>
-                <div className="mt-2.5 grid grid-cols-2 gap-2 px-1">
-                  {SOCIAL_PLATFORMS.map((platform) => (
-                    <a
-                      key={platform.id}
-                      href={platform.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-black/40 p-2.5 text-xs font-semibold text-stone-200 transition hover:border-[#A8FF00]/60 hover:bg-[#A8FF00]/15 hover:text-[#A8FF00]"
-                      aria-label={`${platform.platform} (${platform.handle})`}
-                    >
-                      <span style={{ color: platform.brandColor }}>
-                        <SocialIcon id={platform.id} className="size-4 shrink-0" />
-                      </span>
-                      <span className="truncate">{platform.platform}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </nav>
-
-            <div className="border-t border-[#A8FF00]/15 pt-5 space-y-3">
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-wa w-full gap-2 text-center"
-              >
-                <MessageCircle className="size-4" aria-hidden="true" />
-                WhatsApp {business.phone}
-              </a>
-
-              <a
-                href={telHref(business.phone)}
-                className="flex items-center justify-center gap-2 rounded-full border border-white/10 py-3 text-xs tracking-wider text-stone-300 hover:text-white"
-              >
-                <Phone className="size-3.5" aria-hidden="true" />
-                Call {business.phone}
-              </a>
-            </div>
+            {/* Mobile Hamburger */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden flex size-11 items-center justify-center rounded-xl border border-white/15 text-white"
+              aria-label="Toggle navigation drawer"
+            >
+              {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
           </div>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Navigation Drawer */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-b border-white/10 bg-[#080B08] px-6 py-6">
+            <nav className="flex flex-col gap-4 text-sm font-semibold tracking-wider text-white">
+              {MAIN_NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="hover:text-[#A8FF00]"
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <div className="pt-2">
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#A8FF00] py-3 text-xs font-black uppercase tracking-wider text-[#070A07]"
+                >
+                  <MessageCircle className="size-4" />
+                  Chat on WhatsApp ({whatsappNumber})
+                </a>
+              </div>
+            </nav>
+          </div>
+        )}
+      </header>
+    </div>
   );
 }

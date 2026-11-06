@@ -35,3 +35,12 @@ coverage/
 .idea/
 *.log
 .DS_Store
+
+# Design scratch & temporary screenshots
+docs/screenshots/
+docs/asset_contact_sheets/
+docs/video_previews/
+docs/redesign-v2/
+docs/media-inventory.json
+frontend/design-lab/
+.netlify/
