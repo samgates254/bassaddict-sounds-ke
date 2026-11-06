@@ -79,14 +79,15 @@ test("follow-up messages use only known details", () => {
 });
 
 
-test("cart enquiry message lists items, quantities and price summary", () => {
+test("cart enquiry message lists items and quantities without pricing totals", () => {
   const msg = cartEnquiryMessage([
     { name: "Pioneer TS-6900PRO", quantity: 2, price: "14500.00", slug: "pioneer-ts-6900pro" },
     { name: "KUERL 10-Inch Subwoofer", quantity: 1, price: "16500.00", slug: "kuerl-subwoofer" }
   ]);
-  assert.match(msg, /2x Pioneer TS-6900PRO/);
-  assert.match(msg, /1x KUERL 10-Inch Subwoofer/);
-  assert.match(msg, /Estimated Total: KSh 45,500/);
+  assert.match(msg, /1\. 2x Pioneer TS-6900PRO/);
+  assert.match(msg, /2\. 1x KUERL 10-Inch Subwoofer/);
+  assert.equal(msg.includes("Estimated Total:"), false);
+  assert.equal(msg.includes("KSh"), false);
 });
 
 test("cart enquiry message handles empty or zero-quantity carts safely", () => {
@@ -113,8 +114,8 @@ test("cart enquiry message includes site origin product links and handles specia
   );
   assert.match(msg, /Pioneer 6"x9" High-Efficiency & Bass Speaker/);
   assert.match(msg, /\(https:\/\/bassaddict\.co\.ke\/products\/pioneer-6x9-speaker\)/);
-  assert.match(msg, /Estimated Total: KSh 14,500/);
-  assert.match(msg, /Showroom consultation & quote request; not a prepaid online order/);
+  assert.equal(msg.includes("Estimated Total:"), false);
+  assert.equal(msg.includes("KSh"), false);
 
   // Verify whatsappHref encoding of the message
   const href = whatsappHref("0794069405", msg);
@@ -128,9 +129,10 @@ test("cart enquiry message handles unpriced items without misleading zero totals
   const msg = cartEnquiryMessage([
     { name: "Custom Fiber Enclosure", quantity: 1, price: null, slug: "custom-enclosure" },
   ]);
-  assert.match(msg, /1x Custom Fiber Enclosure — Price on request/);
+  assert.match(msg, /1x Custom Fiber Enclosure/);
   // When no items have prices, no misleading Estimated Total is printed
   assert.equal(msg.includes("Estimated Total:"), false);
+  assert.equal(msg.includes("KSh"), false);
 });
 
 import { stockLabel } from "./format.ts";
@@ -149,9 +151,9 @@ import { FALLBACK_PRODUCTS, FALLBACK_CATEGORIES } from "./fallback-catalog.ts";
 import fs from "node:fs";
 import path from "node:path";
 
-test("fallback catalog has 67 unique products with existing image assets and 8 categories", () => {
+test("fallback catalog has 82 unique products with existing image assets and 8 categories", () => {
   assert.equal(FALLBACK_CATEGORIES.length, 8);
-  assert.equal(FALLBACK_PRODUCTS.length, 67);
+  assert.equal(FALLBACK_PRODUCTS.length, 82);
 
   const slugs = new Set<string>();
   const publicDir = path.resolve(import.meta.dirname, "../public");
@@ -301,9 +303,9 @@ function validateSitemapXmlStructure(xml: string): string[] {
   return locs;
 }
 
-test("sitemap generates valid entries and XML for all public pages and 67 products", () => {
+test("sitemap generates valid entries and XML for all public pages and 82 products", () => {
   const entries = sitemap();
-  assert.equal(entries.length, 74, "Expected 7 core public pages + 67 product detail pages = 74 URLs");
+  assert.equal(entries.length, 89, "Expected 7 core public pages + 82 product detail pages = 89 URLs");
 
   for (const entry of entries) {
     assert.ok(entry.url && typeof entry.url === "string" && entry.url.trim().length > 0);
@@ -312,7 +314,7 @@ test("sitemap generates valid entries and XML for all public pages and 67 produc
 
   const xml = serializeSitemapXml(entries);
   const locs = validateSitemapXmlStructure(xml);
-  assert.equal(locs.length, 74);
+  assert.equal(locs.length, 89);
 
   // Confirm required public pages are present
   const requiredUrls = [

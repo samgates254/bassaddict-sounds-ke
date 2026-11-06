@@ -204,7 +204,7 @@ export default async function RedesignV2PreviewPage({
               <span className="text-white">Authoritative, Clear, Natural Commercial Car Audio</span>
             </p>
             <p className="text-[11px] text-stone-500">
-              Preserved: Authentic catalogue data, real KSh pricing, canonical WhatsApp (0794069405), and Luthuli Avenue address.
+              Preserved: Authentic catalogue data, direct consultation flow, canonical WhatsApp (0794069405), and Luthuli Avenue address.
             </p>
           </div>
           <div className="flex items-center gap-3">

@@ -33,12 +33,11 @@ export function formatKes(value: string | null | undefined) {
   return `KSh ${formatted}`;
 }
 
-export function publicPriceLabel(product: {
+export function publicPriceLabel(product?: {
   public_price: string | null;
   price_type?: string;
 }) {
-  if (product.public_price) return formatKes(product.public_price) ?? "Ask for price";
-  return "Ask for price";
+  return "Price on Inquiry";
 }
 
 export function stockLabel(status: string) {

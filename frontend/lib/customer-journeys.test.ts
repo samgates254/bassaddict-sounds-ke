@@ -126,12 +126,13 @@ test("Customer Journey D: Cart WhatsApp Quotation Script Verification", () => {
 
   // Check structure
   assert.ok(message.includes("Hello Bassaddict Sounds KE,"));
-  assert.ok(message.includes("1. 1x Pioneer TS-W3254 Champion Series 12\" Subwoofer — KSh 9,500"));
-  assert.ok(message.includes("2. 1x Pioneer GM-A6704 4-Channel Power Amplifier — KSh 18,500"));
-  assert.ok(message.includes("3. 1x Programmable Flexible LED Screen (\"Devils' Eye\" Edition) — Price on request"));
-  // Sum: 9,500 + 18,500 = 28,000
-  assert.ok(message.includes("Estimated Total: KSh 28,000"));
-  assert.ok(message.includes("(Showroom consultation & quote request; not a prepaid online order)"));
+  assert.ok(message.includes("1. 1x Pioneer TS-W3254 Champion Series 12\" Subwoofer"));
+  assert.ok(message.includes("2. 1x Pioneer GM-A6704 4-Channel Power Amplifier"));
+  assert.ok(message.includes("3. 1x Programmable Flexible LED Screen (\"Devils' Eye\" Edition)"));
+  assert.ok(message.includes("Please provide pricing, workshop installation options, and availability"));
+  // Zero customer-facing prices in cart enquiry
+  assert.equal(message.includes("Estimated Total:"), false);
+  assert.equal(message.includes("KSh"), false);
 
   const waLink = whatsappHref(CANONICAL_WHATSAPP_NUMBER, message);
   assert.ok(waLink.startsWith("https://wa.me/254794069405?text="));
@@ -140,14 +141,14 @@ test("Customer Journey D: Cart WhatsApp Quotation Script Verification", () => {
 test("Customer Journey E: Custom Build Form Submission & Quotation Generation", () => {
   const buildBrief = {
     vehicle: "Subaru Forester XT",
-    budget: "KSh 45,000 — 70,000",
+    budget: "Stage 2: Balanced SQ & SPL",
     requirements: "Custom ported MDF boot box with dual voice-coil Pioneer subwoofer, 4-channel power amp, and 0-gauge OFC wiring.",
     location: "Nairobi CBD",
   };
 
   const message = buildEnquiryMessage(buildBrief);
   assert.ok(message.includes("Subaru Forester XT"));
-  assert.ok(message.includes("Budget: KSh 45,000 — 70,000"));
+  assert.ok(message.includes("Budget: Stage 2: Balanced SQ & SPL"));
   assert.ok(message.includes("Custom ported MDF boot box"));
   assert.ok(message.includes("Location:\nNairobi CBD"));
 

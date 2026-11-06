@@ -56,7 +56,7 @@ export const DEPARTMENTS: DepartmentConfig[] = [
     accentColor: "#A8FF00",
     keySpecs: ["1500W Max Peak", "400W Continuous RMS", "Dual 4Ω Voice Coils", "Reinforced Mica Cone"],
     featuredProduct: "Pioneer TS-W3254 Champion Series",
-    priceNote: "From KSh 9,500 · Bench-Tested",
+    priceNote: "Bench-Tested · In Showroom",
   },
   {
     slug: "speakers",
@@ -71,7 +71,7 @@ export const DEPARTMENTS: DepartmentConfig[] = [
     accentColor: "#A8FF00",
     keySpecs: ["Titanium Diaphragms", "100dB High Efficiency", "3-Way Coaxial Staging", "Die-Cast Frames"],
     featuredProduct: "Pioneer TS-B350PRO & TS-R6951S",
-    priceNote: "From KSh 4,800 Pair",
+    priceNote: "Precision-Voiced · In Showroom",
   },
   {
     slug: "amplifiers",
@@ -86,7 +86,7 @@ export const DEPARTMENTS: DepartmentConfig[] = [
     accentColor: "#3B82F6",
     keySpecs: ["1000W Bridgeable 4-Ch", "MOSFET Switching", "Active Low/High-Pass Filters"],
     featuredProduct: "Pioneer GM-A6704 & Kenwood KAC",
-    priceNote: "From KSh 14,500",
+    priceNote: "High-Current Class AB & D",
   },
   {
     slug: "car-radios",
@@ -101,7 +101,7 @@ export const DEPARTMENTS: DepartmentConfig[] = [
     accentColor: "#A8FF00",
     keySpecs: ["Bluetooth Handsfree", "FLAC / MP3 / WMA", "Front USB + AUX", "RCA Pre-Outs"],
     featuredProduct: "Pioneer MVH-245BT Digital Receiver",
-    priceNote: "From KSh 8,500",
+    priceNote: "Lossless BT 5.0 & DSP Ready",
   },
   {
     slug: "cables-connectors",
@@ -116,7 +116,7 @@ export const DEPARTMENTS: DepartmentConfig[] = [
     accentColor: "#3B82F6",
     keySpecs: ["4-Gauge & 0-Gauge OFC", "Shielded 2-by-1 RCAs", "High-Current Fuse Holders"],
     featuredProduct: "Heavy-Duty Installation Looms",
-    priceNote: "From KSh 450 / Metre",
+    priceNote: "0 & 4 Gauge OFC Copper",
   },
   {
     slug: "monitors",
@@ -131,7 +131,7 @@ export const DEPARTMENTS: DepartmentConfig[] = [
     accentColor: "#A8FF00",
     keySpecs: ["9\" / 7\" IPS Touchscreens", "Android Auto & CarPlay", "AHD Night Vision Cameras"],
     featuredProduct: "9-Inch Universal Android In-Dash",
-    priceNote: "From KSh 12,000",
+    priceNote: "IPS Touch & Camera Ready",
   },
   {
     slug: "lighting-accessories",
@@ -161,7 +161,7 @@ export const DEPARTMENTS: DepartmentConfig[] = [
     accentColor: "#3B82F6",
     keySpecs: ["7-Band Parametric Control", "Subwoofer Gain & Freq Dial", "12V 30A Stabilized PSU"],
     featuredProduct: "Boschmann EQX-75 & Bench Units",
-    priceNote: "From KSh 4,500",
+    priceNote: "7-Band Tuning & Regulated PSUs",
   },
 ];
 

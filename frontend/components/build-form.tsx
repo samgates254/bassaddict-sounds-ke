@@ -91,8 +91,8 @@ export function BuildForm({
           <input name="year" inputMode="numeric" />
         </FormField>
       </div>
-      <FormField label="Budget">
-        <input name="budget" placeholder="KSh" />
+      <FormField label="Build Tier / Budget Expectation">
+        <input name="budget" placeholder="e.g. Daily Driver, SQ Clarity, SPL Bass, Show Build" />
       </FormField>
       <div className="grid gap-4 sm:grid-cols-2">
         <FormField label="Radio now">

@@ -54,7 +54,7 @@ const FEATURED_PRODUCTS = [
   {
     name: "Pioneer TS-W3254 12\" Subwoofer",
     category: "Subwoofers",
-    price: "KSh 9,500",
+    price: "Price on Inquiry",
     specs: "1500W Peak · 400W RMS · Dual Voice Coil",
     image: "/images/products/pioneer-ts-w3254.jpg",
     slug: "pioneer-ts-w3254",
@@ -62,7 +62,7 @@ const FEATURED_PRODUCTS = [
   {
     name: "Pioneer GM-E7004 4-Channel Amplifier",
     category: "Amplifiers",
-    price: "KSh 14,500",
+    price: "Price on Inquiry",
     specs: "1000W Bridgeable · Class-AB High Output",
     image: "/images/products/pioneer-gm-e7004.jpg",
     slug: "pioneer-gm-e7004",
@@ -70,7 +70,7 @@ const FEATURED_PRODUCTS = [
   {
     name: "Pioneer TS-R6951S 3-Way 6x9s",
     category: "Coaxial Speakers",
-    price: "KSh 6,500",
+    price: "Price on Inquiry",
     specs: "400W Max · 92dB Sensitivity · Multilayer Mica",
     image: "/images/products/pioneer-ts-r6951s.jpg",
     slug: "pioneer-ts-r6951s",
@@ -78,7 +78,7 @@ const FEATURED_PRODUCTS = [
   {
     name: "Kuerl Active Underseat Subwoofer",
     category: "Active Bass",
-    price: "KSh 12,000",
+    price: "Price on Inquiry",
     specs: "Built-in Amp · Compact Aluminum Die-Cast Enclosure",
     image: "/images/products/kuerl-subwoofer.jpg",
     slug: "kuerl-subwoofer",
@@ -86,7 +86,7 @@ const FEATURED_PRODUCTS = [
   {
     name: "Boschmann 1500W Monoblock Amp",
     category: "Monoblock Amplifiers",
-    price: "KSh 13,800",
+    price: "Price on Inquiry",
     specs: "1500W Class-D · Low-Pass Filter · Remote Bass Dial",
     image: "/images/products/boschmann-1500.jpg",
     slug: "boschmann-1500",
@@ -468,7 +468,7 @@ export function NaturalStorefront({ whatsappNumber = CANONICAL_WHATSAPP_NUMBER }
             href="/products"
             className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#A8FF00] hover:underline"
           >
-            <span>View All 67 Products</span>
+            <span>View All 82 Products</span>
             <ArrowRight className="size-4" />
           </Link>
         </div>

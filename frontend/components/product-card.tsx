@@ -59,7 +59,7 @@ export function ProductCard({
           className="relative block overflow-hidden rounded-[22px] [transform:translateZ(14px)]"
         >
           <div
-            className={`relative overflow-hidden bg-[#10101a] ${
+            className={`relative overflow-hidden bg-[#0B0F0B] ${
               large ? "aspect-[4/5] sm:aspect-[5/4]" : "aspect-[4/5]"
             }`}
           >
@@ -67,7 +67,7 @@ export function ProductCard({
               <img
                 src={image.image_url}
                 alt={image.alt_text || title}
-                className="h-full w-full object-contain p-2 transition duration-700 group-hover:scale-[1.04]"
+                className="h-full w-full object-contain p-3 transition duration-700 group-hover:scale-[1.04]"
                 decoding="async"
               />
             ) : (
@@ -132,9 +132,9 @@ export function ProductCard({
             </div>
 
             <div className="text-right shrink-0">
-              <p className="font-display text-xl font-bold tracking-tight text-[#A8FF00]">
-                {publicPriceLabel(product)}
-              </p>
+              <span className="inline-flex items-center rounded-full border border-[#A8FF00]/30 bg-[#A8FF00]/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-wider text-[#A8FF00]">
+                Price on Inquiry
+              </span>
             </div>
           </div>
         </div>
@@ -154,12 +154,12 @@ export function ProductCard({
           {added ? (
             <>
               <Check className="size-4" aria-hidden="true" />
-              <span>Added</span>
+              <span>In Quote</span>
             </>
           ) : (
             <>
               <ShoppingBag className="size-4" aria-hidden="true" />
-              <span>Add to Cart</span>
+              <span>Add to Quote</span>
             </>
           )}
         </button>
